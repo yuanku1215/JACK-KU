@@ -3,54 +3,134 @@
 <head>
   <meta charset="UTF-8">
   <title>TSUN-YUAN KU</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                   Roboto, Arial, sans-serif;
+      margin: 0;
+      background: #f9fafb;
+      color: #1f2937;
+      line-height: 1.65;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 20px 80px;
+    }
+
+    h1 {
+      font-size: 40px;
+      margin-bottom: 10px;
+      letter-spacing: 0.5px;
+    }
+
+    .subtitle {
+      font-size: 18px;
+      color: #4b5563;
+      margin-bottom: 40px;
+    }
+
+    h2 {
+      font-size: 26px;
+      margin-top: 50px;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #e5e7eb;
+      padding-bottom: 8px;
+    }
+
+    p {
+      font-size: 16px;
+      margin-bottom: 18px;
+    }
+
+    .themes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .theme-card {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 22px 20px;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .theme-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+
+    .theme-card b {
+      font-size: 17px;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .theme-card span {
+      color: #4b5563;
+      font-size: 15px;
+    }
+
+    footer {
+      margin-top: 80px;
+      font-size: 14px;
+      color: #6b7280;
+      text-align: center;
+    }
+  </style>
 </head>
+
 <body>
+  <div class="container">
 
-  <h1>TSUN-YUAN KU</h1>
+    <h1>TSUN-YUAN KU</h1>
 
-  <p>
-    Optimization · GIS · Spatial Analytics · Quantum-inspired Methods
-  </p>
+    <div class="subtitle">
+      Optimization · GIS · Spatial Analytics · Quantum-inspired Methods
+    </div>
 
-  <hr>
+    <h2>About Me</h2>
 
-  <h2>About Me</h2>
+    <p>
+      I am an undergraduate student with a background in spatial information science,
+      optimization, and computational modeling. My interests focus on GIS-based
+      network analysis, pedestrian routing optimization, and quantum-inspired
+      heuristics for large-scale decision problems.
+    </p>
 
-  <p>
-    I am an undergraduate student with a background in spatial information science,
-    optimization, and computational modeling. My interests focus on GIS-based
-    network analysis, pedestrian routing optimization, and quantum-inspired
-    heuristics for large-scale decision problems.
-  </p>
+    <h2>Research Themes</h2>
 
-  <hr>
+    <div class="themes">
 
-  <h2>Research Themes</h2>
-
-  <ul>
-    <li>
-      <a href="capstone.html">
-        <b>Undergraduate Research Project</b><br>
-        Pedestrian Routing Optimization Using GIS
+      <a class="theme-card" href="capstone.html">
+        <b>Undergraduate Research Project</b>
+        <span>Pedestrian Routing Optimization Using GIS</span>
       </a>
-    </li>
-    <br>
 
-    <li>
-      <a href="internship.html">
-        <b>Senior Internship</b><br>
-        Applied Optimization and Spatial Analysis
+      <a class="theme-card" href="internship.html">
+        <b>Senior Internship</b>
+        <span>Applied Optimization and Spatial Analysis</span>
       </a>
-    </li>
-    <br>
 
-    <li>
-      <a href="supplychain.html">
-        <b>Course Project</b><br>
-        Supply Chain Optimization
+      <a class="theme-card" href="supplychain.html">
+        <b>Course Project</b>
+        <span>Supply Chain Optimization</span>
       </a>
-    </li>
-  </ul>
 
+    </div>
+
+    <footer>
+      © 2025 TSUN-YUAN KU
+    </footer>
+
+  </div>
 </body>
 </html>
