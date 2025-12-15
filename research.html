@@ -82,7 +82,7 @@
 
     .meta b {
       display: inline-block;
-      width: 140px;
+      width: 160px;
       color: var(--muted);
     }
 
@@ -102,83 +102,88 @@
 
     <h1>Undergraduate Research</h1>
     <div class="subtitle">
-      Pedestrian Routing Optimization Using GIS
+      Multi-objective Spatial Facility Location for Levee Crossing Planning
     </div>
 
     <div class="meta">
       <p><b>Role:</b> Undergraduate Researcher</p>
-      <p><b>Research Area:</b> Pedestrian routing, spatial network analysis</p>
-      <p><b>Methods:</b> Multi-objective optimization, GIS-based modeling</p>
-      <p><b>Tools:</b> Python, GIS software, spatial network libraries</p>
+      <p><b>Study Area:</b> Sanchong & Luzhou, New Taipei City, Taiwan</p>
+      <p><b>Research Topic:</b> Levee crossing facility location</p>
+      <p><b>Methods:</b> NSGA-III, Simulated Quantum Annealing (SQA)</p>
+      <p><b>Tools:</b> Python, GIS, spatial network & population data</p>
     </div>
 
-    <h2>Research Motivation</h2>
     <h2>Abstract</h2>
 
     <p>
-    Levee systems protect cities from flooding but often act as barriers that hinder
-    local mobility. This research proposes an integrated multi-objective optimization
-    and spatial analysis framework for selecting levee crossing facilities in
-    riverfront districts of New Taipei City, Taiwan.
+      Levee systems safeguard cities from floods but often function as barriers
+      that disrupt local mobility. In riverfront districts such as Sanchong and
+      Luzhou in New Taipei City, Taiwan, residents face limited access to services
+      due to insufficient levee crossings. This research develops an integrated
+      multi-objective optimization and spatial analysis framework for selecting
+      levee crossing facilities.
     </p>
 
     <p>
-    The framework simultaneously considers construction and sidewalk improvement
-    costs, population coverage, spatial equity, and traffic safety by incorporating
-    GIS data, population distributions, and crash records. Candidate locations are
-    evaluated using both NSGA-III and simulated quantum annealing (SQA) implemented
-    on dedicated hardware.
+      The framework simultaneously considers construction and sidewalk improvement
+      costs, population coverage, spatial equity, and traffic safety by
+      incorporating GIS data, population distributions, and crash records.
+      Candidate locations are generated from spatial datasets and evaluated using
+      two optimization approaches: the Non-dominated Sorting Genetic Algorithm III
+      (NSGA-III) and simulated quantum annealing (SQA) executed on dedicated
+      hardware.
     </p>
 
     <p>
-    Results reveal explicit trade-offs among cost, accessibility, equity, and safety,
-    while highlighting underserved and high-risk areas. The comparative analysis
-    demonstrates that SQA achieves performance comparable to NSGA-III and shows
-    promise for scaling complex infrastructure siting problems in urban planning.
+      Results reveal explicit trade-offs among cost, accessibility, equity, and
+      safety, highlighting underserved and high-risk areas along levee systems.
+      Comparative analysis shows that SQA achieves performance comparable to
+      NSGA-III while demonstrating potential advantages in scaling complex spatial
+      infrastructure siting problems.
     </p>
+
+    <h2>Problem Definition</h2>
 
     <p>
-      Pedestrian routing plays a critical role in urban mobility, accessibility,
-      and safety analysis. Conventional routing approaches often prioritize shortest
-      paths or minimum travel time, which may fail to capture pedestrian-specific
-      considerations such as perceived safety, walkability, and accessibility.
-      This research aims to develop a routing framework that better reflects
-      pedestrian decision-making in urban environments.
+      The placement of levee crossing facilities can be formulated as a spatial
+      facility location problem. Given a set of candidate locations along levees,
+      the objective is to select an appropriate subset that balances multiple,
+      often conflicting, planning goals under spatial and budgetary constraints.
     </p>
 
-    <h2>Research Objectives</h2>
+    <h2>Optimization Framework</h2>
 
     <ul>
-      <li>To represent pedestrian networks using GIS-based spatial graph models.</li>
-      <li>To incorporate multiple routing criteria beyond distance and time.</li>
-      <li>To analyze trade-offs among competing routing objectives.</li>
+      <li>Candidate facility locations are generated using GIS-based spatial
+          analysis of levee geometry and surrounding road networks.</li>
+      <li>Population coverage and equity metrics are derived from spatial
+          population distributions.</li>
+      <li>Traffic crash records are incorporated to explicitly account for safety
+          considerations.</li>
+      <li>NSGA-III is used to approximate the Pareto front of multi-objective
+          solutions.</li>
+      <li>Simulated quantum annealing (SQA) is applied via QUBO encoding to explore
+          large-scale combinatorial solution spaces.</li>
     </ul>
 
-    <h2>Methodology</h2>
-
-    <p>
-      The pedestrian routing problem is formulated as a multi-objective optimization
-      problem on a spatial network. Each network segment is associated with multiple
-      attributes, such as geometric distance, safety indicators, and accessibility
-      measures. Optimization techniques are applied to identify efficient routes
-      under different preference scenarios.
-    </p>
-
-    <h2>Research Contributions</h2>
+    <h2>Key Findings</h2>
 
     <ul>
-      <li>A GIS-based framework for multi-criteria pedestrian routing analysis.</li>
-      <li>Integration of spatial data and optimization models for decision support.</li>
-      <li>Systematic evaluation of routing outcomes under varying objective weights.</li>
+      <li>Clear trade-offs exist between cost efficiency and spatial equity.</li>
+      <li>High-population areas are not always optimally served under cost-driven
+          solutions.</li>
+      <li>Quantum-inspired optimization exhibits competitive performance relative
+          to evolutionary algorithms.</li>
     </ul>
 
-    <h2>Ongoing and Future Directions</h2>
+    <h2>Research Significance and Future Work</h2>
 
     <p>
-      Ongoing work explores extensions to dynamic routing under congestion and
-      uncertainty, as well as the application of advanced optimization approaches,
-      including heuristic and quantum-inspired methods, to large-scale pedestrian
-      networks.
+      This research demonstrates how advanced multi-objective optimization and
+      quantum-inspired methods can support people-centered and resilient urban
+      infrastructure planning. Future work will extend the framework to dynamic
+      demand scenarios, stochastic risk modeling, and GPU-accelerated optimization
+      for city-scale applications.
     </p>
 
     <footer>
