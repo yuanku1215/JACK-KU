@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Workshop | TSUN-YUAN KU</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --text: #0f172a;
+      --muted: #475569;
+      --border: #e2e8f0;
+      --accent: #1e3a8a;
+      --accent-2: #0b5cab;
+      --card-bg: #ffffff;
+      --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+      --radius: 18px;
+      --radius-sm: 14px;
+      --maxw: 980px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+    }
+
+    .container {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 56px 22px 96px;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Top */
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:14px; margin-bottom:18px;
+    }
+    .backlink{
+      display:inline-flex; align-items:center; gap:8px; font-weight:600;
+    }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px; border:1px solid var(--border);
+      background: rgba(255,255,255,0.65);
+      backdrop-filter: blur(6px);
+      border-radius:999px; color:var(--muted);
+      font-size:13px; white-space:nowrap;
+    }
+    .dot{
+      width:8px; height:8px; border-radius:999px;
+      background: var(--accent-2); display:inline-block;
+    }
+
+    /* Hero */
+    .hero{
+      background: radial-gradient(1200px 260px at 0% 0%, rgba(30, 58, 138, 0.10), transparent 60%),
+                  radial-gradient(900px 240px at 100% 20%, rgba(11, 92, 171, 0.10), transparent 60%),
+                  linear-gradient(to bottom, rgba(255,255,255,0.7), rgba(255,255,255,0.35));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 26px 26px 22px;
+      margin-bottom: 22px;
+    }
+
+    h1{
+      font-size: 38px;
+      letter-spacing: -0.5px;
+      margin: 8px 0 6px;
+      line-height: 1.2;
+    }
+
+    .subtitle{
+      font-size: 18px;
+      color: var(--muted);
+      margin-bottom: 14px;
+      max-width: 920px;
+    }
+
+    .oneLiner{
+      font-size: 16px;
+      color: var(--text);
+      margin: 10px 0 16px;
+      max-width: 920px;
+    }
+
+    .chips{
+      display:flex; flex-wrap:wrap; gap:10px; margin-top:14px;
+    }
+    .chip{
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.72);
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 13px;
+    }
+
+    /* Sections */
+    h2{
+      font-size: 24px;
+      margin-top: 56px;
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--border);
+      letter-spacing: -0.2px;
+    }
+    p{ font-size: 16px; margin-bottom: 16px; }
+    ul{ padding-left: 20px; margin-bottom: 16px; }
+    li{ margin-bottom: 8px; }
+    .muted{ color: var(--muted); }
+
+    /* Stats */
+    .stats{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+      margin-top: 14px;
+    }
+    .stat{
+      grid-column: span 3;
+      background: rgba(255,255,255,0.8);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 16px;
+    }
+    .stat .k{
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .stat .v{
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.2px;
+    }
+    .stat .s{
+      margin-top: 6px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* Grid + cards */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+      margin-top: 14px;
+    }
+    .card{
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.05);
+      padding: 18px 18px;
+    }
+    .card h3{
+      margin: 0 0 8px;
+      font-size: 16px;
+      letter-spacing: -0.2px;
+    }
+    .card p{ margin: 0; color: var(--muted); font-size: 14px; }
+
+    .span-12{ grid-column: span 12; }
+    .span-8{ grid-column: span 8; }
+    .span-6{ grid-column: span 6; }
+    .span-4{ grid-column: span 4; }
+
+    /* Callout */
+    .callout{
+      border: 1px solid rgba(30,58,138,0.25);
+      background: rgba(30,58,138,0.05);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+      margin-top: 14px;
+    }
+    .callout b{ color: var(--accent); }
+
+    /* Buttons */
+    .btnRow{
+      display:flex; flex-wrap:wrap; gap:10px; margin-top:12px;
+    }
+    .btn{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:10px 14px; border-radius:12px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,0.85);
+      color: var(--text);
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .btn.primary{
+      background: linear-gradient(180deg, rgba(30,58,138,0.12), rgba(30,58,138,0.06));
+      border-color: rgba(30,58,138,0.25);
+    }
+    .btn:hover{
+      text-decoration:none;
+      transform: translateY(-1px);
+      box-shadow: 0 10px 18px rgba(15,23,42,0.08);
+    }
+
+    /* Code block */
+    .code{
+      font-family: var(--mono);
+      font-size: 12.5px;
+      color: #0f172a;
+      background: rgba(15, 23, 42, 0.04);
+      border: 1px solid rgba(15, 23, 42, 0.10);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      overflow-x: auto;
+      margin-top: 10px;
+    }
+
+    /* Details */
+    details{
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,0.8);
+      padding: 14px 16px;
+      margin-top: 14px;
+    }
+    summary{
+      cursor:pointer;
+      font-weight:700;
+      color: var(--text);
+      letter-spacing:-0.2px;
+    }
+    details > div{
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .miniList{ margin: 10px 0 0; padding-left: 18px; }
+    .miniList li{ color: var(--muted); }
+
+    /* Footer */
+    footer{
+      margin-top: 96px;
+      font-size: 14px;
+      color: #64748b;
+      text-align: center;
+    }
+    .footLinks{
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 900px){
+      .span-8, .span-6, .span-4 { grid-column: span 12; }
+      .stat { grid-column: span 6; }
+      h1 { font-size: 34px; }
+    }
+    @media (max-width: 520px){
+      .stat { grid-column: span 12; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <div class="topbar">
+      <a class="backlink" href="index.html">← Back to Home</a>
+      <div class="pill"><span class="dot"></span> Workshop Instructor</div>
+    </div>
+
+    <!-- HERO -->
+    <div class="hero">
+      <h1>Workshop Instructor</h1>
+      <div class="subtitle">
+        4-hour Workshop: Quantum Algorithms & Quantum Annealing for Optimization (with QUBO + demos)
+      </div>
+
+      <div class="oneLiner">
+        <b>One-line summary:</b> I delivered a ~4-hour workshop to master’s/PhD students in my department and
+        cross-department participants, introducing quantum algorithms through an optimization-first learning path —
+        from classical annealing to simulated annealing to quantum annealing — and ending with hands-on Colab exercises.
+      </div>
+
+      <div class="chips" aria-label="keywords">
+        <div class="chip">Classical → Quantum Annealing</div>
+        <div class="chip">QUBO Formulation</div>
+        <div class="chip">Hands-on Demos</div>
+        <div class="chip">Google Colab</div>
+        <div class="chip">Teaching & Materials Design</div>
+        <div class="chip">Optimization Mindset</div>
+      </div>
+
+      <div class="stats" aria-label="workshop snapshot">
+        <div class="stat">
+          <div class="k">Audience</div>
+          <div class="v">MS / PhD + Seniors</div>
+          <div class="s">Interdisciplinary group</div>
+        </div>
+        <div class="stat">
+          <div class="k">Duration</div>
+          <div class="v">~4 Hours</div>
+          <div class="s">Lecture + demos</div>
+        </div>
+        <div class="stat">
+          <div class="k">Materials</div>
+          <div class="v">Full Slide Deck</div>
+          <div class="s">Learning narrative</div>
+        </div>
+        <div class="stat">
+          <div class="k">Hands-on</div>
+          <div class="v">3 Colab Labs</div>
+          <div class="s">Fill-in coding tasks</div>
+        </div>
+      </div>
+
+      <div class="btnRow" aria-label="quick links">
+        <!-- TODO: replace href with your actual links -->
+        <a class="btn primary" href="#" target="_blank" rel="noopener">🖥️ Slides (PPT/PDF)</a>
+        <a class="btn" href="#" target="_blank" rel="noopener">📓 Colab Labs</a>
+        <a class="btn" href="#" target="_blank" rel="noopener">🧪 Demo Code</a>
+      </div>
+    </div>
+
+    <!-- OVERVIEW -->
+    <h2>Overview</h2>
+
+    <p>
+      The goal of this workshop was to give participants a practical and structured entry point into quantum algorithms,
+      especially for optimization. Instead of starting from physics-heavy concepts, I organized the content around
+      a familiar optimization narrative: <b>energy landscapes</b>, <b>local minima</b>, and <b>search strategies</b>.
+    </p>
+
+    <p>
+      The workshop progresses from classical annealing ideas to simulated annealing, then to quantum annealing,
+      highlighting what changes (and what stays the same) when we reformulate optimization problems as QUBO.
+      I also addressed common implementation challenges — such as encoding constraints, scaling penalties, and debugging
+      energy functions — and concluded with demos and hands-on coding exercises.
+    </p>
+
+    <div class="callout">
+      <b>Teaching design choice:</b> build intuition first (optimization viewpoint), then introduce quantum concepts as
+      extensions — so participants can immediately connect the ideas to their own research problems.
+    </div>
+
+    <!-- WHO IT WAS FOR -->
+    <h2>Audience & Learning Goals</h2>
+
+    <div class="grid">
+      <div class="card span-4">
+        <h3>Target Audience</h3>
+        <p>Geomatics MS/PhD students and cross-department learners who want an applied view of quantum optimization.</p>
+      </div>
+      <div class="card span-4">
+        <h3>Learning Goal</h3>
+        <p>Understand how optimization problems can be reformulated into QUBO and solved via annealing-based methods.</p>
+      </div>
+      <div class="card span-4">
+        <h3>Outcome</h3>
+        <p>Participants can interpret QUBO energy terms, implement a basic solver pipeline, and debug formulations.</p>
+      </div>
+    </div>
+
+    <!-- CONTENT STRUCTURE -->
+    <h2>Workshop Structure</h2>
+
+    <p class="muted">
+      The slide deck follows my own learning path — designed to minimize “quantum intimidation” and maximize transfer
+      to real optimization tasks.
+    </p>
+
+    <div class="grid">
+      <div class="card span-6">
+        <h3>Part 1 — Optimization Intuition</h3>
+        <p>Energy landscapes, local minima, exploration vs exploitation, and why annealing works as a search principle.</p>
+      </div>
+      <div class="card span-6">
+        <h3>Part 2 — Simulated Annealing (SA)</h3>
+        <p>Temperature schedules, acceptance probability, neighborhood design, and practical pitfalls when coding SA.</p>
+      </div>
+      <div class="card span-6">
+        <h3>Part 3 — Quantum Annealing (QA)</h3>
+        <p>From classical states to quantum fluctuations, tunneling intuition, and mapping optimization to Ising/QUBO.</p>
+      </div>
+      <div class="card span-6">
+        <h3>Part 4 — QUBO Modeling & Practice</h3>
+        <p>How to build QUBO from basic math, encode constraints, choose penalties, and validate energy correctness.</p>
+      </div>
+    </div>
+
+    <details>
+      <summary>Common implementation issues I explicitly taught</summary>
+      <div>
+        <ul class="miniList">
+          <li><b>Penalty tuning:</b> too small → infeasible solutions; too large → numerical dominance and poor exploration.</li>
+          <li><b>Constraint encoding:</b> equality constraints need careful quadratic expansion and scaling.</li>
+          <li><b>Energy debugging:</b> verify that “better solutions” truly reduce energy; test with known feasible cases.</li>
+          <li><b>Variable indexing:</b> wrong mapping between (i, j, t) and bit indices can silently break the model.</li>
+          <li><b>Interpretability:</b> always explain what each QUBO term means in the original problem context.</li>
+        </ul>
+      </div>
+    </details>
+
+    <!-- QUBO SECTION -->
+    <h2>QUBO: From Basic Math to an Executable Model</h2>
+
+    <p>
+      A key part of the workshop focused on making QUBO feel “constructible” rather than mysterious.
+      I showed how to start from simple binary variables, build objectives, and then add constraints as quadratic penalties.
+      This gives a systematic recipe that participants can reuse.
+    </p>
+
+    <div class="callout">
+      <b>Core message:</b> QUBO is not magic — it is a disciplined way to express a problem as
+      <span style="font-family: var(--mono);">min xᵀQx</span> with binary decisions, where every term has a clear meaning.
+    </div>
+
+    <div class="code">
+Goal: minimize  xᵀ Q x  ,  where x ∈ {0,1}ⁿ<br><br>
+1) Write objective in binary variables<br>
+2) Convert constraints into penalties (quadratic)<br>
+3) Combine:  E(x) = objective(x) + λ · penalty(x)<br>
+4) Validate: feasible solutions have low penalty; improvements reduce E(x)
+    </div>
+
+    <!-- DEMOS & LABS -->
+    <h2>Demos & Hands-on Labs</h2>
+
+    <p>
+      The workshop concluded with demos and three Colab exercises. Each lab is designed as a short, story-driven problem
+      where participants fill in key missing steps (QUBO construction, penalty terms, or solver loop) to complete the solution.
+    </p>
+
+    <div class="grid">
+      <div class="card span-4">
+        <h3>Demo</h3>
+        <p>Live walkthrough: how a small QUBO changes when constraints are added, and how the solution behavior shifts.</p>
+      </div>
+      <div class="card span-4">
+        <h3>Lab 1</h3>
+        <p>Build a basic QUBO from a simple objective; verify energy by brute force on small n.</p>
+      </div>
+      <div class="card span-4">
+        <h3>Lab 2 & 3</h3>
+        <p>Story-driven NP-hard mini-problems with fill-in code, ending with solution interpretation and sanity checks.</p>
+      </div>
+    </div>
+
+    <div class="btnRow">
+      <!-- TODO: replace with your actual links -->
+      <a class="btn primary" href="#" target="_blank" rel="noopener">📓 Colab Lab 1</a>
+      <a class="btn" href="#" target="_blank" rel="noopener">📓 Colab Lab 2</a>
+      <a class="btn" href="#" target="_blank" rel="noopener">📓 Colab Lab 3</a>
+    </div>
+
+    <!-- MY CONTRIBUTIONS -->
+    <h2>My Contributions</h2>
+
+    <div class="grid">
+      <div class="card span-6">
+        <h3>Instructional Design</h3>
+        <p>
+          Designed a narrative learning path that connects classical optimization intuition to quantum annealing,
+          making the topic accessible to interdisciplinary learners.
+        </p>
+      </div>
+      <div class="card span-6">
+        <h3>Materials & Exercises</h3>
+        <p>
+          Built a complete PPT deck, prepared demo scripts, and created Colab exercises with fill-in coding tasks
+          to encourage active learning.
+        </p>
+      </div>
+      <div class="card span-6">
+        <h3>QUBO Modeling Guidance</h3>
+        <p>
+          Provided practical templates and debugging methods for constructing and validating QUBO models.
+        </p>
+      </div>
+      <div class="card span-6">
+        <h3>Community Impact</h3>
+        <p>
+          Supported participants from different backgrounds, helping them translate quantum optimization concepts into
+          their own research contexts.
+        </p>
+      </div>
+    </div>
+
+    <!-- WHY IT MATTERS -->
+    <h2>Why This Matters</h2>
+
+    <p>
+      Teaching this workshop strengthened my ability to communicate complex technical ideas with clarity,
+      while also reinforcing my own understanding of optimization foundations. The process of turning abstract
+      concepts into demos and exercises is the same skill needed for research: identify the core idea, formalize it,
+      implement it, then explain it.
+    </p>
+
+    <div class="callout">
+      <b>IEOR relevance:</b> this experience demonstrates not only technical knowledge (QUBO / annealing),
+      but also the ability to design reproducible experiments, explain modeling choices, and teach others — all critical
+      skills in graduate research and collaborative engineering.
+    </div>
+
+    <footer>
+      © 2025 TSUN-YUAN KU
+      <div class="footLinks">
+        <a href="index.html">Home</a>
+        <a href="research.html">Research</a>
+        <a href="internship.html">Internship</a>
+        <a href="supplychain.html">Course Project</a>
+        <a href="mailto:yourname@email.com">Email</a>
+      </div>
+    </footer>
+
+  </div>
+</body>
+</html>
