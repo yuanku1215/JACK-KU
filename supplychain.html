@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Course Project | TSUN-YUAN KU</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --text: #0f172a;
+      --muted: #475569;
+      --border: #e2e8f0;
+      --accent: #1e3a8a;
+      --accent-2: #0b5cab;
+      --card-bg: #ffffff;
+      --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+      --radius: 18px;
+      --radius-sm: 14px;
+      --maxw: 980px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+    }
+
+    .container {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 56px 22px 96px;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Top */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+    .backlink {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(6px);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+    .dot {
+      width: 8px; height: 8px; border-radius: 999px;
+      background: var(--accent-2);
+      display: inline-block;
+    }
+
+    /* Hero */
+    .hero {
+      background: radial-gradient(1200px 260px at 0% 0%, rgba(30, 58, 138, 0.10), transparent 60%),
+                  radial-gradient(900px 240px at 100% 20%, rgba(11, 92, 171, 0.10), transparent 60%),
+                  linear-gradient(to bottom, rgba(255,255,255,0.7), rgba(255,255,255,0.35));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 26px 26px 22px;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      font-size: 38px;
+      letter-spacing: -0.5px;
+      margin: 8px 0 6px;
+      line-height: 1.2;
+    }
+
+    .subtitle {
+      font-size: 18px;
+      color: var(--muted);
+      margin-bottom: 14px;
+      max-width: 920px;
+    }
+
+    .oneLiner {
+      font-size: 16px;
+      color: var(--text);
+      margin: 10px 0 16px;
+      max-width: 920px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .chip {
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.72);
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 13px;
+    }
+
+    /* Sections */
+    h2 {
+      font-size: 24px;
+      margin-top: 56px;
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--border);
+      letter-spacing: -0.2px;
+    }
+    p { font-size: 16px; margin-bottom: 16px; }
+    ul { padding-left: 20px; margin-bottom: 16px; }
+    li { margin-bottom: 8px; }
+
+    .muted { color: var(--muted); }
+
+    /* Stats */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+      margin-top: 14px;
+    }
+    .stat {
+      grid-column: span 3;
+      background: rgba(255,255,255,0.8);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 16px;
+    }
+    .stat .k {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .stat .v {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.2px;
+    }
+    .stat .s {
+      margin-top: 6px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* Grid cards */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+      margin-top: 14px;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.05);
+      padding: 18px 18px;
+    }
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+      letter-spacing: -0.2px;
+    }
+    .card p { margin: 0; color: var(--muted); font-size: 14px; }
+
+    .span-12 { grid-column: span 12; }
+    .span-8  { grid-column: span 8; }
+    .span-6  { grid-column: span 6; }
+    .span-4  { grid-column: span 4; }
+
+    /* Callout */
+    .callout {
+      border: 1px solid rgba(30,58,138,0.25);
+      background: rgba(30,58,138,0.05);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+      margin-top: 14px;
+    }
+    .callout b { color: var(--accent); }
+
+    /* Buttons */
+    .btnRow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.85);
+      color: var(--text);
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .btn.primary {
+      background: linear-gradient(180deg, rgba(30,58,138,0.12), rgba(30,58,138,0.06));
+      border-color: rgba(30,58,138,0.25);
+    }
+    .btn:hover {
+      text-decoration: none;
+      transform: translateY(-1px);
+      box-shadow: 0 10px 18px rgba(15,23,42,0.08);
+    }
+
+    /* Details */
+    details {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,0.8);
+      padding: 14px 16px;
+      margin-top: 14px;
+    }
+    summary {
+      cursor: pointer;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.2px;
+    }
+    details > div {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .miniList { margin: 10px 0 0; padding-left: 18px; }
+    .miniList li { color: var(--muted); }
+
+    /* Code block */
+    .code {
+      font-family: var(--mono);
+      font-size: 12.5px;
+      color: #0f172a;
+      background: rgba(15, 23, 42, 0.04);
+      border: 1px solid rgba(15, 23, 42, 0.10);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      overflow-x: auto;
+      margin-top: 10px;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 96px;
+      font-size: 14px;
+      color: #64748b;
+      text-align: center;
+    }
+    .footLinks {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 900px) {
+      .span-8, .span-6, .span-4 { grid-column: span 12; }
+      .stat { grid-column: span 6; }
+      h1 { font-size: 34px; }
+    }
+    @media (max-width: 520px) {
+      .stat { grid-column: span 12; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <div class="topbar">
+      <a class="backlink" href="index.html">← Back to Home</a>
+      <div class="pill"><span class="dot"></span> Course Project</div>
+    </div>
+
+    <!-- HERO -->
+    <div class="hero">
+      <h1>Course Project</h1>
+      <div class="subtitle">
+        Supply Chain Optimization — Mathematical Modeling Practice with LINGO (and transferable solver thinking)
+      </div>
+
+      <div class="oneLiner">
+        <b>One-line summary:</b> Through intensive modeling practice in a Supply Chain Optimization course,
+        I developed a solid and systematic ability to translate real-world logistics decisions into formal
+        optimization models — primarily using <b>LINGO</b>, while also strengthening my multi-language problem-solving
+        mindset beyond Python.
+      </div>
+
+      <div class="chips" aria-label="keywords">
+        <div class="chip">Linear / Integer Programming</div>
+        <div class="chip">Network Flow</div>
+        <div class="chip">Facility Location</div>
+        <div class="chip">Production Planning</div>
+        <div class="chip">LINGO Modeling</div>
+        <div class="chip">Solver Thinking</div>
+      </div>
+
+      <div class="stats" aria-label="course snapshot">
+        <div class="stat">
+          <div class="k">Course</div>
+          <div class="v">Supply Chain Optimization</div>
+          <div class="s">Modeling-focused training</div>
+        </div>
+        <div class="stat">
+          <div class="k">Primary Tool</div>
+          <div class="v">LINGO</div>
+          <div class="s">Formulation + solving</div>
+        </div>
+        <div class="stat">
+          <div class="k">Outputs</div>
+          <div class="v">Model Library</div>
+          <div class="s">Dozens of LINGO files</div>
+        </div>
+        <div class="stat">
+          <div class="k">Transfer</div>
+          <div class="v">Python-ready</div>
+          <div class="s">PuLP / Pyomo mindset</div>
+        </div>
+      </div>
+
+      <div class="btnRow" aria-label="quick links">
+        <!-- TODO: replace href with your actual links -->
+        <a class="btn primary" href="#" target="_blank" rel="noopener">📄 Course Summary (PDF)</a>
+        <a class="btn" href="#" target="_blank" rel="noopener">🧠 Model Index</a>
+        <a class="btn" href="#" target="_blank" rel="noopener">💻 Code / Files</a>
+      </div>
+    </div>
+
+    <!-- OVERVIEW -->
+    <h2>Overview</h2>
+
+    <p>
+      In this course, I practiced modeling repeatedly across many supply chain problem types.
+      Each exercise followed the same professional workflow: define decision variables, write a clean objective function,
+      express operational constraints, run the solver, and then interpret results in managerial terms.
+    </p>
+
+    <p>
+      Although each individual problem was not “hard” by itself, the volume and variety of tasks built something more valuable:
+      a <b>complete modeling foundation</b>. I learned how small formulation choices can silently change feasibility, optimality,
+      and interpretation — and how to debug models by inspecting constraints and objective behavior.
+    </p>
+
+    <div class="callout">
+      <b>Core outcome:</b> I can quickly move from a story-like description (business decision) to a formal optimization model —
+      and I understand that multiple mathematically equivalent forms can behave differently in implementation.
+    </div>
+
+    <!-- WHAT I BUILT -->
+    <h2>What I Built (Skills & Habits)</h2>
+
+    <div class="grid">
+      <div class="card span-4">
+        <h3>Model Formulation Literacy</h3>
+        <p>
+          Comfortable writing LP / ILP / MILP structure: variables, objective, constraints, indexing, and units consistency.
+        </p>
+      </div>
+      <div class="card span-4">
+        <h3>Constraint Debugging</h3>
+        <p>
+          Learned to detect hidden traps: missing bounds, wrong indexing, big-M misuse, and constraint redundancy/infeasibility.
+        </p>
+      </div>
+      <div class="card span-4">
+        <h3>Multi-language Thinking</h3>
+        <p>
+          Beyond Python, I developed solver-oriented thinking through LINGO syntax—transferable to Pyomo/PuLP/OR-Tools.
+        </p>
+      </div>
+    </div>
+
+    <details>
+      <summary>Example: why “equivalent math” can produce different results in code</summary>
+      <div>
+        In practice, I found that two formulations can look mathematically similar but behave differently due to:
+        <ul class="miniList">
+          <li>implicit bounds vs explicit bounds</li>
+          <li>indexing mistakes (missing subset constraints)</li>
+          <li>big-M values that are too large or too small</li>
+          <li>objective scaling that affects numerical stability</li>
+        </ul>
+        This course trained me to verify formulations systematically before trusting solver outputs.
+      </div>
+    </details>
+
+    <!-- MODEL PATTERNS LIBRARY -->
+    <h2>Model Patterns Library</h2>
+
+    <p class="muted">
+      I treat my collection of LINGO models as a “pattern library.” Even with dozens of exercises, most fall into a small set of reusable modeling templates.
+      This is the exact skill that helps in IEOR graduate work: recognizing structure and adapting it to new contexts.
+    </p>
+
+    <div class="grid">
+      <div class="card span-6">
+        <h3>1) Transportation / Transshipment</h3>
+        <p>Min-cost flow with supply/demand constraints, capacity limits, and multi-stage shipping decisions.</p>
+      </div>
+      <div class="card span-6">
+        <h3>2) Facility Location</h3>
+        <p>Binary open/close decisions with assignment, fixed costs, and service constraints.</p>
+      </div>
+      <div class="card span-6">
+        <h3>3) Production Planning</h3>
+        <p>Multi-period decisions with inventory balance, production capacity, and backorder/holding costs.</p>
+      </div>
+      <div class="card span-6">
+        <h3>4) Workforce / Resource Allocation</h3>
+        <p>Shift coverage and assignment models; feasibility-first constraints with cost minimization.</p>
+      </div>
+      <div class="card span-6">
+        <h3>5) Blending / Mixing</h3>
+        <p>Quality constraints, ratio constraints, and cost minimization under composition limits.</p>
+      </div>
+      <div class="card span-6">
+        <h3>6) Scheduling (Intro-level)</h3>
+        <p>Start-time / precedence constraints and simplified machine capacity decisions.</p>
+      </div>
+    </div>
+
+    <!-- REPRESENTATIVE PROBLEMS -->
+    <h2>Representative Problems (Selected)</h2>
+
+    <p>
+      On this page, I highlight a small number of representative models that best demonstrate my modeling completeness.
+      Once I整理/上傳檔案後，I will link each example to its corresponding LINGO file and a short problem description.
+    </p>
+
+    <div class="grid">
+      <div class="card span-4">
+        <h3>Transportation Model</h3>
+        <p>Minimize shipping cost under supply/demand and capacity constraints; interpret shadow prices and bottlenecks.</p>
+      </div>
+      <div class="card span-4">
+        <h3>Facility Location Model</h3>
+        <p>Open warehouses and assign customers with fixed + variable cost trade-offs; analyze service coverage implications.</p>
+      </div>
+      <div class="card span-4">
+        <h3>Multi-period Planning</h3>
+        <p>Production + inventory balance with capacity limits; explore how cost parameters change optimal policy.</p>
+      </div>
+    </div>
+
+    <details>
+      <summary>Optional: a tiny LINGO-style pseudo-template I frequently used</summary>
+      <div>
+        <div class="code">
+SETS:<br>
+&nbsp;&nbsp;I /.../: supply;<br>
+&nbsp;&nbsp;J /.../: demand;<br>
+&nbsp;&nbsp;IJ(I,J): x, cost;<br>
+ENDSETS<br><br>
+MIN = @SUM(IJ: cost(IJ) * x(IJ));<br>
+@FOR(I: @SUM(J: x(I,J)) &lt;= supply(I));<br>
+@FOR(J: @SUM(I: x(I,J)) &gt;= demand(J));<br>
+@FOR(IJ: x(IJ) &gt;= 0);
+        </div>
+        This kind of structure made me fast at building clean models and debugging constraint logic.
+      </div>
+    </details>
+
+    <!-- LINGO → PYTHON -->
+    <h2>From LINGO to Python (Transferable Skills)</h2>
+
+    <p>
+      Working with LINGO strengthened my ability to express optimization problems in a solver-friendly form.
+      This directly transfers to Python-based modeling stacks such as <b>PuLP</b>, <b>Pyomo</b>, or <b>OR-Tools</b>,
+      because the core logic is identical: indices, sets, constraints, and objective composition.
+    </p>
+
+    <ul>
+      <li><b>Same math, different syntax:</b> modeling is the invariant; languages are interchangeable tools.</li>
+      <li><b>Cleaner structure:</b> sets/indexing discipline helps avoid bugs in large Python models.</li>
+      <li><b>IEOR readiness:</b> the repeated practice builds intuition for MILP, decomposition, and heuristics later.</li>
+    </ul>
+
+    <!-- FILE INDEX -->
+    <h2>Artifacts & File Index</h2>
+
+    <p class="muted">
+      I have around <b>~50</b> LINGO model files from this course. Some file names may not preserve the original problem statements,
+      so I am building an index that reconstructs each model’s original task and modeling type.
+    </p>
+
+    <div class="callout">
+      <b>Planned index fields:</b> File name → Problem type → Decision variables → Objective → Key constraints → Notes (common pitfalls / interpretation).
+    </div>
+
+    <div class="btnRow">
+      <!-- TODO: replace with your links later -->
+      <a class="btn primary" href="#" target="_blank" rel="noopener">📁 LINGO Files (Download)</a>
+      <a class="btn" href="#" target="_blank" rel="noopener">🧾 Model Index (Table)</a>
+      <a class="btn" href="#" target="_blank" rel="noopener">📝 Notes (What I learned)</a>
+    </div>
+
+    <!-- WHY IEOR -->
+    <h2>Why This Prepares Me for an IEOR Master’s Program</h2>
+
+    <p>
+      This course built the modeling “muscle” that IEOR graduate study demands.
+      I can formulate problems rigorously, check feasibility and interpretation, and communicate results beyond code.
+      With this foundation, I’m ready to move toward advanced topics such as stochastic optimization,
+      large-scale integer programming, and data-driven decision-making — where modeling clarity becomes even more critical.
+    </p>
+
+    <footer>
+      © 2025 TSUN-YUAN KU
+      <div class="footLinks">
+        <a href="index.html">Home</a>
+        <a href="research.html">Research</a>
+        <a href="internship.html">Internship</a>
+        <a href="mailto:yourname@email.com">Email</a>
+      </div>
+    </footer>
+
+  </div>
+</body>
+</html>
