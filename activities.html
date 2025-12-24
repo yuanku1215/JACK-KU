@@ -34,16 +34,9 @@
       padding: 56px 22px 96px;
     }
 
-    a {
-      color: var(--accent);
-      text-decoration: none;
-    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
 
-    a:hover {
-      text-decoration: underline;
-    }
-
-    /* Top */
     .topbar {
       display: flex;
       justify-content: space-between;
@@ -60,7 +53,6 @@
       background: #ffffffcc;
     }
 
-    /* Hero */
     .hero {
       border: 1px solid var(--border);
       border-radius: var(--radius);
@@ -70,18 +62,9 @@
       margin-bottom: 42px;
     }
 
-    h1 {
-      font-size: 38px;
-      margin: 0 0 10px;
-    }
+    h1 { font-size: 38px; margin: 0 0 10px; }
+    .subtitle { font-size: 18px; color: var(--muted); }
 
-    .subtitle {
-      font-size: 18px;
-      color: var(--muted);
-      margin-bottom: 12px;
-    }
-
-    /* Section */
     h2 {
       font-size: 24px;
       margin: 56px 0 18px;
@@ -89,7 +72,6 @@
       padding-bottom: 8px;
     }
 
-    /* Timeline */
     .timeline {
       border-left: 2px solid var(--border);
       padding-left: 18px;
@@ -116,21 +98,15 @@
       margin-bottom: 10px;
     }
 
-    ul {
-      padding-left: 18px;
-      margin-top: 10px;
-    }
+    ul { padding-left: 18px; }
+    li { margin-bottom: 6px; }
 
-    li {
-      margin-bottom: 6px;
-    }
-
-    /* Image block – equal width, auto height */
+    /* Image block */
     .eventImages {
-      margin-top: 16px;
+      margin-top: 18px;
       display: grid;
       grid-template-columns: 1fr;
-      gap: 14px;
+      gap: 16px;
     }
 
     .eventImages img {
@@ -187,8 +163,10 @@
         <li><b>Topic:</b> Spatial optimization & facility planning</li>
       </ul>
       <div class="eventImages">
-        <img src="images/present.jpeg" alt="TGIS Conference Presentation">
-        <img src="images/award.jpeg" alt="TGIS Award">
+        <img src="images/present.jpeg" alt="TGIS Presentation"
+             onerror="this.style.display='none'">
+        <img src="images/award.jpeg" alt="TGIS Award"
+             onerror="this.style.display='none'">
       </div>
     </div>
 
@@ -207,9 +185,9 @@
         <li><b>Focus:</b> Pedestrian safety & accessibility</li>
       </ul>
       <div class="eventImages">
-        <img src="images/hackathon/IMG_001.jpg" alt="Hackathon teamwork">
-        <img src="images/hackathon/IMG_002.jpg" alt="Hackathon discussion">
-        <img src="images/hackathon/IMG_003.jpg" alt="Hackathon presentation">
+        <img src="images/hackathon/IMG_001.jpg" onerror="this.style.display='none'">
+        <img src="images/hackathon/IMG_002.jpg" onerror="this.style.display='none'">
+        <img src="images/hackathon/IMG_003.jpg" onerror="this.style.display='none'">
       </div>
     </div>
 
@@ -226,36 +204,8 @@
         <li><b>Theme:</b> Optimization & spatial decision-making</li>
       </ul>
       <div class="eventImages">
-        <img src="images/informs.jpg" alt="INFORMS Annual Meeting">
+        <img src="images/informs.jpg" onerror="this.style.display='none'">
       </div>
-    </div>
-
-    <!-- WCTR -->
-    <div class="event">
-      <div class="eventTitle">WCTR Paper Submission (In Progress)</div>
-      <div class="eventMeta">Target: 2026</div>
-      <p>
-        Preparing a research paper on people-centered infrastructure planning using
-        spatial analysis and optimization methodologies.
-      </p>
-      <ul>
-        <li><b>Status:</b> Drafting</li>
-        <li><b>Focus:</b> Transportation & accessibility</li>
-      </ul>
-    </div>
-
-    <!-- Forum -->
-    <div class="event">
-      <div class="eventTitle">Co-organizer — Great South Forum (大南方論壇)</div>
-      <div class="eventMeta">Taiwan · Year</div>
-      <p>
-        Assisted in organizing and coordinating a regional forum, supporting logistics,
-        communication, and on-site operations.
-      </p>
-      <ul>
-        <li><b>Role:</b> Co-organizer</li>
-        <li><b>Responsibility:</b> Event coordination</li>
-      </ul>
     </div>
 
   </div>
