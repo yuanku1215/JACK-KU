@@ -12,20 +12,17 @@
       --muted: #475569;
       --border: #e2e8f0;
       --accent: #1e3a8a;
-      --accent-2: #0b5cab;
       --card-bg: #ffffff;
-      --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+      --shadow: 0 10px 26px rgba(15, 23, 42, 0.08);
       --radius: 18px;
-      --radius-sm: 14px;
       --maxw: 980px;
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     }
 
     * { box-sizing: border-box; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
       margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.75;
@@ -37,417 +34,236 @@
       padding: 56px 22px 96px;
     }
 
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
 
     /* Top */
     .topbar {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 14px;
-      margin-bottom: 18px;
-    }
-    .backlink {
-      display: inline-flex;
       align-items: center;
-      gap: 8px;
-      font-weight: 600;
+      margin-bottom: 20px;
     }
+
     .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 12px;
+      padding: 8px 14px;
+      border-radius: 999px;
       border: 1px solid var(--border);
-      background: rgba(255,255,255,0.65);
-      backdrop-filter: blur(6px);
-      border-radius: 999px;
-      color: var(--muted);
       font-size: 13px;
-      white-space: nowrap;
-    }
-    .dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: var(--accent-2);
-      display: inline-block;
+      color: var(--muted);
+      background: #ffffffcc;
     }
 
     /* Hero */
     .hero {
-      background: radial-gradient(1200px 260px at 0% 0%, rgba(30, 58, 138, 0.10), transparent 60%),
-                  radial-gradient(900px 240px at 100% 20%, rgba(11, 92, 171, 0.10), transparent 60%),
-                  linear-gradient(to bottom, rgba(255,255,255,0.7), rgba(255,255,255,0.35));
       border: 1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding: 26px 26px 22px;
-      margin-bottom: 22px;
+      padding: 28px;
+      background: linear-gradient(to bottom, #ffffffee, #ffffffaa);
+      margin-bottom: 42px;
     }
 
     h1 {
       font-size: 38px;
-      letter-spacing: -0.5px;
-      margin: 8px 0 6px;
-      line-height: 1.2;
+      margin: 0 0 10px;
     }
 
     .subtitle {
       font-size: 18px;
       color: var(--muted);
-      margin-bottom: 14px;
-      max-width: 920px;
+      margin-bottom: 12px;
     }
 
-    .oneLiner {
-      font-size: 16px;
-      color: var(--text);
-      margin: 10px 0 16px;
-      max-width: 920px;
-    }
-
-    .chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 14px;
-    }
-
-    .chip {
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.72);
-      color: var(--muted);
-      border-radius: 999px;
-      padding: 8px 12px;
-      font-size: 13px;
-    }
-
-    /* Sections */
+    /* Section */
     h2 {
       font-size: 24px;
-      margin-top: 56px;
-      margin-bottom: 14px;
-      padding-bottom: 8px;
+      margin: 56px 0 18px;
       border-bottom: 2px solid var(--border);
-      letter-spacing: -0.2px;
-    }
-
-    p { font-size: 16px; margin-bottom: 16px; }
-    .muted { color: var(--muted); }
-
-    /* Buttons */
-    .btnRow {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 12px;
-    }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 14px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.85);
-      color: var(--text);
-      font-weight: 600;
-      font-size: 14px;
-    }
-    .btn.primary {
-      background: linear-gradient(180deg, rgba(30,58,138,0.12), rgba(30,58,138,0.06));
-      border-color: rgba(30,58,138,0.25);
-    }
-    .btn:hover {
-      text-decoration: none;
-      transform: translateY(-1px);
-      box-shadow: 0 10px 18px rgba(15,23,42,0.08);
+      padding-bottom: 8px;
     }
 
     /* Timeline */
     .timeline {
-      position: relative;
-      margin-top: 18px;
+      border-left: 2px solid var(--border);
       padding-left: 18px;
-    }
-    .timeline:before {
-      content: "";
-      position: absolute;
-      left: 6px;
-      top: 4px;
-      bottom: 4px;
-      width: 2px;
-      background: var(--border);
     }
 
     .event {
-      position: relative;
       background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.05);
-      padding: 16px 16px;
-      margin: 14px 0;
-    }
-    .event:before {
-      content: "";
-      position: absolute;
-      left: -18px;
-      top: 20px;
-      width: 12px;
-      height: 12px;
-      border-radius: 999px;
-      background: rgba(11,92,171,0.25);
-      border: 2px solid rgba(11,92,171,0.55);
-    }
-
-    .eventTop {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 10px;
-      margin-bottom: 6px;
+      padding: 20px;
+      margin-bottom: 32px;
+      box-shadow: 0 8px 20px rgba(15,23,42,0.06);
     }
 
     .eventTitle {
-      font-weight: 800;
-      letter-spacing: -0.2px;
       font-size: 16px;
+      font-weight: 800;
+      margin-bottom: 4px;
     }
 
     .eventMeta {
-      color: var(--muted);
       font-size: 13px;
-      white-space: nowrap;
-    }
-
-    .badgeRow {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin: 10px 0 0;
-    }
-
-    .badge {
-      font-size: 12px;
       color: var(--muted);
-      border: 1px solid rgba(71, 85, 105, 0.22);
-      background: rgba(255,255,255,0.75);
-      border-radius: 999px;
-      padding: 6px 10px;
+      margin-bottom: 10px;
     }
 
     ul {
       padding-left: 18px;
-      margin: 10px 0 0;
-    }
-
-    li { margin-bottom: 7px; }
-
-    /* Footer */
-    footer {
-      margin-top: 96px;
-      font-size: 14px;
-      color: #64748b;
-      text-align: center;
-    }
-    .footLinks {
       margin-top: 10px;
-      display: flex;
-      justify-content: center;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    /* Image block – equal width, auto height */
+    .eventImages {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: 1fr;
       gap: 14px;
-      flex-wrap: wrap;
+    }
+
+    .eventImages img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: #fff;
+    }
+
+    footer {
+      margin-top: 90px;
+      text-align: center;
+      font-size: 14px;
+      color: var(--muted);
     }
   </style>
 </head>
 
 <body>
-  <div class="container">
+<div class="container">
 
-    <div class="topbar">
-      <a class="backlink" href="index.html">← Back to Home</a>
-      <div class="pill"><span class="dot"></span> Activities & Awards</div>
+  <div class="topbar">
+    <a href="index.html">← Back to Home</a>
+    <div class="pill">Activities & Awards</div>
+  </div>
+
+  <div class="hero">
+    <h1>Activities & Awards</h1>
+    <div class="subtitle">
+      Conferences · Hackathons · Research Submissions · Community Engagement
     </div>
-
-    <!-- HERO -->
-    <div class="hero">
-      <h1>Activities & Awards</h1>
-      <div class="subtitle">
-        Conferences · Hackathons · Submissions · Community Engagement
-      </div>
-
-      <div class="oneLiner">
-        I actively participate in academic conferences, competitions, and community initiatives related to
-        GIS, optimization, and people-centered urban infrastructure. This page highlights selected presentations,
-        ongoing submissions, and organizing experiences.
-      </div>
-
-      <div class="chips" aria-label="keywords">
-        <div class="chip">Conference Presentation</div>
-        <div class="chip">Hackathon / Competition</div>
-        <div class="chip">Paper Submission</div>
-        <div class="chip">Event Organization</div>
-        <div class="chip">GIS & Optimization</div>
-      </div>
-
-      <div class="btnRow" aria-label="quick links">
-        <!-- TODO: replace href with your actual links -->
-        <a class="btn primary" href="#" target="_blank" rel="noopener">📄 CV (PDF)</a>
-        <a class="btn" href="#" target="_blank" rel="noopener">🖼️ Posters / Slides</a>
-        <a class="btn" href="#" target="_blank" rel="noopener">🔗 LinkedIn</a>
-      </div>
-    </div>
-
-    <!-- HIGHLIGHTS -->
-    <h2>Highlights</h2>
-
-    <p class="muted">
-      Selected items below include conference presentations (TGIS, INFORMS), competition participation (NLMA hackathon),
-      an ongoing paper submission (WCTR), and community involvement (Co-organizing a regional forum).
-      Replace placeholders (year/location/title) with your exact details.
+    <p>
+      Selected academic presentations, competitions, and community activities related to
+      GIS, optimization, and people-centered urban infrastructure.
     </p>
+  </div>
 
-    <!-- TIMELINE -->
-    <h2>Timeline</h2>
+  <h2>Timeline</h2>
 
-    <div class="timeline" aria-label="activities timeline">
+  <div class="timeline">
 
-      <!-- TGIS -->
-      <div class="event">
-        <div class="eventTop">
-          <div class="eventTitle">TGIS Conference Presentation</div>
-          <div class="eventMeta">Year · Location</div>
-        </div>
-        <div class="muted">
-          Presented work related to GIS-based spatial analysis and optimization. Shared methods and results,
-          and received feedback from researchers in geoinformatics and urban applications.
-        </div>
-        <ul>
-          <li><b>Role:</b> Presenter</li>
-          <li><b>Topic:</b> Spatial optimization / facility planning / network analysis</li>
-          <li><b>Outcome:</b> Improved framing and future research directions based on Q&A discussions</li>
-        </ul>
-        <div class="badgeRow">
-          <span class="badge">Conference</span>
-          <span class="badge">Presentation</span>
-          <span class="badge">GIS</span>
-        </div>
+    <!-- TGIS -->
+    <div class="event">
+      <div class="eventTitle">TGIS Conference Presentation</div>
+      <div class="eventMeta">Taiwan · Year</div>
+      <p>
+        Presented GIS-based spatial analysis and optimization research with an emphasis on
+        infrastructure planning and spatial decision support.
+      </p>
+      <ul>
+        <li><b>Role:</b> Presenter</li>
+        <li><b>Topic:</b> Spatial optimization & facility planning</li>
+      </ul>
+      <div class="eventImages">
+        <img src="images/present.jpeg" alt="TGIS Conference Presentation">
+        <img src="images/award.jpeg" alt="TGIS Award">
       </div>
-
-      <!-- NLMA Hackathon -->
-      <div class="event">
-        <div class="eventTop">
-          <div class="eventTitle">National Land Management Agency — People-Centered Street Hackathon</div>
-          <div class="eventMeta">Year · Taiwan</div>
-        </div>
-        <div class="muted">
-          Participated in a human-centered street design hackathon, contributing GIS analysis, spatial data integration,
-          and evidence-driven insights to support safer and more accessible street environments.
-        </div>
-        <ul>
-          <li><b>Role:</b> Team member (GIS / analysis)</li>
-          <li><b>Work:</b> Data preparation, mapping, spatial indicators, and solution storytelling</li>
-          <li><b>Result:</b> Award / finalist / participation (update with your outcome)</li>
-        </ul>
-        <div class="badgeRow">
-          <span class="badge">Hackathon</span>
-          <span class="badge">Human-centered</span>
-          <span class="badge">Urban Design</span>
-        </div>
-      </div>
-
-      <!-- INFORMS -->
-      <div class="event">
-        <div class="eventTop">
-          <div class="eventTitle">INFORMS Annual Meeting</div>
-          <div class="eventMeta">Year · City, Country</div>
-        </div>
-        <div class="muted">
-          Engaged with the operations research community and presented/participated in sessions related to optimization,
-          computational methods, and real-world decision support. This experience strengthened my understanding of
-          research communication and evaluation standards.
-        </div>
-        <ul>
-          <li><b>Role:</b> Presenter / attendee (choose one)</li>
-          <li><b>Topic:</b> Multi-objective optimization / quantum-inspired methods / spatial decision problems</li>
-          <li><b>Outcome:</b> Networking and feedback for refining research direction</li>
-        </ul>
-        <div class="badgeRow">
-          <span class="badge">OR / IE</span>
-          <span class="badge">Conference</span>
-          <span class="badge">Optimization</span>
-        </div>
-      </div>
-
-      <!-- WCTR submission -->
-      <div class="event">
-        <div class="eventTop">
-          <div class="eventTitle">WCTR Paper Submission (In Progress)</div>
-          <div class="eventMeta">Target: 2026</div>
-        </div>
-        <div class="muted">
-          Preparing a paper submission for WCTR, focusing on optimization and spatial analysis for people-centered
-          infrastructure planning. The work emphasizes methodological clarity, reproducibility, and policy relevance.
-        </div>
-        <ul>
-          <li><b>Status:</b> Drafting / extended abstract / under review (update)</li>
-          <li><b>Theme:</b> Transportation / accessibility / infrastructure optimization</li>
-          <li><b>Next step:</b> Experiments + paper polishing + submission</li>
-        </ul>
-        <div class="badgeRow">
-          <span class="badge">Submission</span>
-          <span class="badge">Transportation</span>
-          <span class="badge">Research writing</span>
-        </div>
-      </div>
-
-      <!-- Great South Forum -->
-      <div class="event">
-        <div class="eventTop">
-          <div class="eventTitle">Co-organizer: Great South Forum (大南方論壇)</div>
-          <div class="eventMeta">Year · Taiwan</div>
-        </div>
-        <div class="muted">
-          Supported the organization and on-site coordination of a regional forum, assisting in event operations,
-          guest reception, and communication. This experience strengthened my teamwork, responsibility, and
-          real-world event execution skills.
-        </div>
-        <ul>
-          <li><b>Role:</b> Co-organizer / staff support</li>
-          <li><b>Tasks:</b> Logistics, coordination, and on-site execution</li>
-          <li><b>Impact:</b> Ensured smooth event flow and participant experience</li>
-        </ul>
-        <div class="badgeRow">
-          <span class="badge">Community</span>
-          <span class="badge">Organization</span>
-          <span class="badge">Operations</span>
-        </div>
-      </div>
-
     </div>
 
-    <!-- OPTIONAL: NEXT -->
-    <h2>Next Updates</h2>
-
-    <p class="muted">
-      I will keep this page updated with final acceptance results, awards, and links to posters/slides as they become public.
-    </p>
-
-    <footer>
-      © 2025 TSUN-YUAN KU
-      <div class="footLinks">
-        <a href="index.html">Home</a>
-        <a href="research.html">Research</a>
-        <a href="internship.html">Internship</a>
-        <a href="supplychain.html">Course Project</a>
-        <a href="workshops.html">Workshop</a>
-        <a href="mailto:yourname@email.com">Email</a>
+    <!-- Hackathon -->
+    <div class="event">
+      <div class="eventTitle">
+        National Land Management Agency — People-Centered Street Hackathon
       </div>
-    </footer>
+      <div class="eventMeta">Taiwan · Year</div>
+      <p>
+        Participated in a human-centered street design hackathon, contributing GIS analysis,
+        spatial indicators, and evidence-based urban design insights.
+      </p>
+      <ul>
+        <li><b>Role:</b> GIS & Spatial Analysis</li>
+        <li><b>Focus:</b> Pedestrian safety & accessibility</li>
+      </ul>
+      <div class="eventImages">
+        <img src="images/hackathon/IMG_001.jpg" alt="Hackathon teamwork">
+        <img src="images/hackathon/IMG_002.jpg" alt="Hackathon discussion">
+        <img src="images/hackathon/IMG_003.jpg" alt="Hackathon presentation">
+      </div>
+    </div>
+
+    <!-- INFORMS -->
+    <div class="event">
+      <div class="eventTitle">INFORMS Annual Meeting</div>
+      <div class="eventMeta">City · Country · Year</div>
+      <p>
+        Engaged with the operations research community, exchanging ideas on optimization,
+        computational methods, and real-world decision-making problems.
+      </p>
+      <ul>
+        <li><b>Role:</b> Attendee / Presenter</li>
+        <li><b>Theme:</b> Optimization & spatial decision-making</li>
+      </ul>
+      <div class="eventImages">
+        <img src="images/informs.jpg" alt="INFORMS Annual Meeting">
+      </div>
+    </div>
+
+    <!-- WCTR -->
+    <div class="event">
+      <div class="eventTitle">WCTR Paper Submission (In Progress)</div>
+      <div class="eventMeta">Target: 2026</div>
+      <p>
+        Preparing a research paper on people-centered infrastructure planning using
+        spatial analysis and optimization methodologies.
+      </p>
+      <ul>
+        <li><b>Status:</b> Drafting</li>
+        <li><b>Focus:</b> Transportation & accessibility</li>
+      </ul>
+    </div>
+
+    <!-- Forum -->
+    <div class="event">
+      <div class="eventTitle">Co-organizer — Great South Forum (大南方論壇)</div>
+      <div class="eventMeta">Taiwan · Year</div>
+      <p>
+        Assisted in organizing and coordinating a regional forum, supporting logistics,
+        communication, and on-site operations.
+      </p>
+      <ul>
+        <li><b>Role:</b> Co-organizer</li>
+        <li><b>Responsibility:</b> Event coordination</li>
+      </ul>
+    </div>
 
   </div>
+
+  <footer>
+    © 2025 TSUN-YUAN KU
+  </footer>
+
+</div>
 </body>
 </html>
