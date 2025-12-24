@@ -101,17 +101,17 @@
     ul { padding-left: 18px; }
     li { margin-bottom: 6px; }
 
-    /* Image block */
     .eventImages {
       margin-top: 18px;
       display: grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 16px;
     }
 
     .eventImages img {
       width: 100%;
-      height: auto;
+      height: 250px;
+      object-fit: cover; /* 讓不同比例的照片整齊排列 */
       display: block;
       border-radius: 14px;
       border: 1px solid var(--border);
@@ -150,10 +150,9 @@
 
   <div class="timeline">
 
-    <!-- TGIS -->
     <div class="event">
       <div class="eventTitle">TGIS Conference Presentation</div>
-      <div class="eventMeta">Taiwan · Year</div>
+      <div class="eventMeta">Taiwan · 2024</div>
       <p>
         Presented GIS-based spatial analysis and optimization research with an emphasis on
         infrastructure planning and spatial decision support.
@@ -163,19 +162,16 @@
         <li><b>Topic:</b> Spatial optimization & facility planning</li>
       </ul>
       <div class="eventImages">
-        <img src="images/present.jpeg" alt="TGIS Presentation"
-             onerror="this.style.display='none'">
-        <img src="images/award.jpeg" alt="TGIS Award"
-             onerror="this.style.display='none'">
+        <img src="images/present.jpeg" alt="TGIS Presentation">
+        <img src="images/award.jpeg" alt="TGIS Award">
       </div>
     </div>
 
-    <!-- Hackathon -->
     <div class="event">
       <div class="eventTitle">
         National Land Management Agency — People-Centered Street Hackathon
       </div>
-      <div class="eventMeta">Taiwan · Year</div>
+      <div class="eventMeta">Taiwan · 2024</div>
       <p>
         Participated in a human-centered street design hackathon, contributing GIS analysis,
         spatial indicators, and evidence-based urban design insights.
@@ -185,26 +181,23 @@
         <li><b>Focus:</b> Pedestrian safety & accessibility</li>
       </ul>
       <div class="eventImages">
-        <img src="images/hackathon/IMG_001.jpg" onerror="this.style.display='none'">
-        <img src="images/hackathon/IMG_002.jpg" onerror="this.style.display='none'">
-        <img src="images/hackathon/IMG_003.jpg" onerror="this.style.display='none'">
+        <img src="images/hackathon" alt="Hackathon Event">
       </div>
     </div>
 
-    <!-- INFORMS -->
     <div class="event">
       <div class="eventTitle">INFORMS Annual Meeting</div>
-      <div class="eventMeta">City · Country · Year</div>
+      <div class="eventMeta">USA · 2024</div>
       <p>
         Engaged with the operations research community, exchanging ideas on optimization,
         computational methods, and real-world decision-making problems.
       </p>
       <ul>
-        <li><b>Role:</b> Attendee / Presenter</li>
+        <li><b>Role:</b> Attendee</li>
         <li><b>Theme:</b> Optimization & spatial decision-making</li>
       </ul>
       <div class="eventImages">
-        <img src="images/informs.jpg" onerror="this.style.display='none'">
+        <img src="images/informs.HEIC" alt="INFORMS Meeting">
       </div>
     </div>
 
