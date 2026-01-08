@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Management Page</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="icon" href="assets/icons8-map-64.png" type="image/png">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@turf/turf/turf.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        #topBar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background-color: #420A15;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        #titleContainer {
+            display: flex;
+            align-items: center;
+        }
+
+        #title {
+            font-size: 17px;
+            font-weight: 600;
+            white-space: nowrap;
+            margin-right: 15px;
+        }
+
+        #subtitle {
+            font-size: 15px;
+            font-weight: 400;
+            white-space: nowrap;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        #subtitle:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 20px;
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        #backButton {
+            background-color: transparent;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 4px;
+            padding: 4px 10px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-right: 15px;
+        }
+
+        #backButton:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        #map { 
+            height: calc(100vh - 50px); 
+            margin-top: 50px;
+            width: 100%;
+            z-index: 1;
+            flex: 1;
+        }
+
+        .popup-content { 
+            max-width: 250px; 
+        }
+
+        .legend {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.5);
+            z-index: 1000;
+            min-width: 140px;
+            max-width: 160px;
+            font-size: 13px;
+        }
+
+        .legend h4 {
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #333;
+            padding-bottom: 3px;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .legend div {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+            width: 100%;
+        }
+
+        .legend span {
+            width: 12px;
+            height: 12px;
+            display: inline-block;
+            margin-right: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .legend #legendContent {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .legend #legendContent div {
+            flex-wrap: nowrap;
+            white-space: normal;
+            word-break: break-word;
+        }
+
+        .statistics-panel {
+            position: absolute;
+            top: 60px;
+            right: 10px;
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.5);
+            z-index: 1000;
+            min-width: 200px;
+            max-width: 300px;
+        }
+
+        .statistics-panel h3 {
+            margin-bottom: 10px;
+            color: #420A15;
+            border-bottom: 1px solid rgba(66, 10, 21, 0.2);
+            padding-bottom: 5px;
+            font-size: 16px;
+        }
+
+        .statistics-section {
+            margin-bottom: 15px;
+        }
+
+        .statistics-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .statistics-section h4 {
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            padding: 3px 0;
+        }
+
+        .stat-item .count {
+            font-weight: 600;
+        }
+
+        .stat-color {
+            width: 12px;
+            height: 12px;
+            display: inline-block;
+            margin-right: 8px;
+            border-radius: 50%;
+        }
+
+        /* Display mode toggle styles */
+        .display-toggle {
+            position: absolute;
+            top: 60px;
+            left: 60px;
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.5);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .display-toggle h4 {
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .toggle-buttons {
+            display: flex;
+            gap: 5px;
+        }
+
+        .toggle-button {
+            padding: 6px 10px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s ease;
+        }
+
+        .toggle-button.active {
+            background: #420A15;
+            color: white;
+            border-color: #420A15;
+        }
+
+        /* Form and popup styles matching main platform */
+        .leaflet-popup-content-wrapper {
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .leaflet-popup-content {
+            margin: 10px;
+            max-width: 280px;
+            min-width: 250px;
+            font-size: 13px;
+        }
+
+        .leaflet-popup-content form {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .leaflet-popup-content label {
+            display: block;
+            margin-bottom: 3px;
+            color: #333;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        /* Style for required fields - use span.required instead of label::after */
+        .leaflet-popup-content label:has(select[required]):after,
+        .leaflet-popup-content label:has(input[required]):after {
+            display: none; /* Remove the current method */
+        }
+
+        .required:after {
+            content: "*";
+            color: #420A15;
+            display: inline;
+            margin-left: 2px;
+        }
+
+        /* File input styling */
+        .leaflet-popup-content input[type="file"] {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 0;
+            font-size: 13px;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9f9f9;
+        }
+
+        .leaflet-popup-content input[type="file"]::-webkit-file-upload-button {
+            background-color: #420A15;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 5px 10px;
+            margin-right: 10px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-size: 12px;
+        }
+
+        .leaflet-popup-content select,
+        .leaflet-popup-content input[type="datetime-local"],
+        .leaflet-popup-content textarea {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 0;
+            font-size: 13px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .leaflet-popup-content textarea {
+            height: 60px;
+            min-height: unset;
+            resize: vertical;
+        }
+
+        .leaflet-popup-content select:focus,
+        .leaflet-popup-content input:focus, 
+        .leaflet-popup-content textarea:focus {
+            border-color: #420A15;
+            outline: none;
+            box-shadow: 0 0 3px rgba(66, 10, 21, 0.3);
+        }
+
+        .report-details {
+            padding: 5px;
+            color: #333;
+        }
+
+        .report-details .detail-item {
+            margin-bottom: 6px;
+        }
+
+        .report-details strong {
+            color: #420A15;
+            display: block;
+            margin-bottom: 2px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .report-details .detail-value {
+            font-size: 13px;
+            padding-left: 3px;
+            font-weight: 400;
+        }
+
+        .report-details img {
+            max-width: 100%;
+            max-height: 150px;
+            height: auto;
+            margin: 8px 0;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        .report-actions {
+            display: flex;
+            gap: 6px;
+            margin-top: 10px;
+        }
+
+        .report-actions button,
+        .action-button {
+            flex: 1;
+            padding: 8px 12px;
+            min-height: 36px;
+            font-size: 14px;
+            border: none;
+            border-radius: 4px;
+            background-color: #420A15;
+            color: white;
+            cursor: pointer;
+            position: relative;
+            z-index: 10;
+            transition: background-color 0.2s, transform 0.1s;
+            font-weight: 500;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .report-actions button:hover,
+        .action-button:hover {
+            background-color: #5a1e2a;
+            transform: translateY(-2px);
+        }
+
+        .delete-button {
+            background-color: #D32F2F !important;
+        }
+
+        .delete-button:hover {
+            background-color: #B71C1C !important;
+        }
+
+        /* Responsive design styles */
+        @media screen and (max-width: 768px) {
+            #topBar {
+                padding: 0 10px;
+            }
+            
+            #title {
+                font-size: 15px;
+                margin-right: 10px;
+            }
+            
+            #subtitle {
+                font-size: 13px;
+                padding-left: 10px;
+            }
+            
+            #subtitle:before {
+                height: 16px;
+            }
+            
+            .display-toggle {
+                top: 130px;
+                left: 10px;
+                padding: 8px;
+            }
+            
+            .toggle-buttons {
+                flex-direction: column;
+            }
+            
+            .statistics-panel {
+                top: 60px;
+                right: 10px;
+                padding: 10px;
+                min-width: 0;
+                max-width: 180px;
+                font-size: 12px;
+            }
+            
+            .statistics-panel h3 {
+                font-size: 14px;
+            }
+            
+            .statistics-section h4 {
+                font-size: 13px;
+            }
+            
+            .stat-item {
+                font-size: 12px;
+            }
+            
+            /* Adjust map markers for smaller screens */
+            .leaflet-marker-icon {
+                transform: scale(0.8);
+            }
+        }
+        
+        /* Further adjustments for even smaller screens */
+        @media screen and (max-width: 570px) {
+            #topBar {
+                height: 45px;
+                padding: 0 8px;
+            }
+            
+            #map {
+                margin-top: 45px;
+                height: calc(100vh - 45px);
+            }
+            
+            #title {
+                font-size: 13px;
+                margin-right: 5px;
+            }
+            
+            #subtitle {
+                font-size: 12px;
+                padding-left: 5px;
+            }
+            
+            #subtitle:before {
+                height: 12px;
+            }
+            
+            #backButton {
+                font-size: 12px;
+                padding: 3px 6px;
+                margin-right: 5px;
+                min-width: 60px;
+                flex-shrink: 0;
+            }
+            
+            .display-toggle {
+                top: 130px;
+                padding: 5px;
+                left: 10px;
+            }
+            
+            .toggle-button {
+                padding: 4px 6px;
+                font-size: 11px;
+            }
+            
+            .statistics-panel {
+                top: 45px;
+                max-width: 150px;
+            }
+            
+            /* Show the mobile title only on small screens */
+            #fullTitle {
+                display: none;
+            }
+            
+            #mobileTitle {
+                display: block;
+            }
+        }
+
+        @media screen and (min-width: 571px) {
+            /* Show the full title on larger screens */
+            #fullTitle {
+                display: block;
+            }
+            
+            #mobileTitle {
+                display: none;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            #topBar {
+                height: 40px;
+                padding: 0 5px;
+            }
+            
+            #map {
+                margin-top: 40px;
+                height: calc(100vh - 40px);
+            }
+        }
+
+        /* Marker hover effect */
+        .marker-point {
+            transition: all 0.2s ease;
+        }
+
+        /* Simple circular marker design */
+        .simple-circle-marker {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 0 4px rgba(0,0,0,0.3);
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .simple-circle-marker:hover {
+            transform: scale(1.2);
+        }
+
+        /* Fix for zoom control buttons font weight */
+        .leaflet-control-zoom a {
+            font-weight: normal !important;
+        }
+
+        /* Layer control styling to match main platform */
+        .leaflet-control-layers {
+            border-radius: 6px !important;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3) !important;
+            border: none !important;
+            font-family: 'Poppins', sans-serif !important;
+        }
+
+        .leaflet-control-layers-toggle {
+            width: 36px !important;
+            height: 36px !important;
+            background-size: 20px 20px !important;
+        }
+
+        .leaflet-control-layers-expanded {
+            padding: 10px !important;
+            background-color: white !important;
+            color: #333 !important;
+            min-width: 160px !important;
+        }
+
+        .leaflet-control-layers-selector {
+            margin-right: 6px !important;
+        }
+
+        .leaflet-control-layers-separator {
+            margin: 8px 0 !important;
+            border-top: 1px solid rgba(0, 0, 0, 0.1) !important;
+        }
+
+        .leaflet-control-layers-base label,
+        .leaflet-control-layers-overlays label {
+            font-size: 13px !important;
+            font-weight: 500 !important;
+            margin-bottom: 4px !important;
+            display: flex !important;
+            align-items: center !important;
+        }
+
+        .leaflet-control-layers-base label:hover,
+        .leaflet-control-layers-overlays label:hover {
+            background-color: rgba(66, 10, 21, 0.05) !important;
+            border-radius: 4px !important;
+        }
+
+        .leaflet-control-layers-base label span,
+        .leaflet-control-layers-overlays label span {
+            padding: 2px 0 !important;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="topBar">
+        <div style="display: flex; align-items: center;">
+            <button id="backButton" onclick="window.location.href='index.html'">← Back</button>
+            <div id="titleContainer">
+                <div id="title">
+                    <span id="fullTitle">NCKU Campus Safety Reporting Platform</span>
+                    <span id="mobileTitle">NCKU Safety Reporting Platform</span>
+                </div>
+                <div id="subtitle">
+                    <span id="fullTitle">Staff Management</span>
+                    <span id="mobileTitle">Staff Manage</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="map"></div>
+    
+    <div class="display-toggle">
+        <h4>Display Mode</h4>
+        <div class="toggle-buttons">
+            <button id="urgencyModeBtn" class="toggle-button active" onclick="changeDisplayMode('urgency')">By Urgency</button>
+            <button id="typeModeBtn" class="toggle-button" onclick="changeDisplayMode('type')">By Type</button>
+        </div>
+    </div>
+    
+    <div class="legend" id="legend">
+        <h4 id="legendTitle">Urgency</h4>
+        <div id="legendContent">
+            <div><span style="background: red;"></span> High</div>
+            <div><span style="background: yellow;"></span> Medium</div>
+            <div><span style="background: green;"></span> Low</div>
+        </div>
+    </div>
+    
+    <div class="statistics-panel" id="statisticsPanel">
+        <h3>Report Statistics</h3>
+        
+        <div class="statistics-section">
+            <h4>Total Reports</h4>
+            <div class="stat-item">
+                <div>Total Points:</div>
+                <div class="count" id="totalPoints">0</div>
+            </div>
+        </div>
+        
+        <div class="statistics-section">
+            <h4>By Urgency Level</h4>
+            <div class="stat-item">
+                <div><span class="stat-color" style="background: red;"></span>High:</div>
+                <div class="count" id="highCount">0</div>
+            </div>
+            <div class="stat-item">
+                <div><span class="stat-color" style="background: yellow;"></span>Medium:</div>
+                <div class="count" id="mediumCount">0</div>
+            </div>
+            <div class="stat-item">
+                <div><span class="stat-color" style="background: green;"></span>Low:</div>
+                <div class="count" id="lowCount">0</div>
+            </div>
+        </div>
+        
+        <div class="statistics-section">
+            <h4>By Type</h4>
+            <div id="typeStats">
+                <!-- Type statistics will be dynamically added here -->
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Global variables
+        var map = L.map('map');
+        var reports = [];
+        var currentDisplayMode = 'urgency';
+        var API_URL = window.location.hostname === 'localhost' 
+            ? 'http://localhost:3002' 
+            : window.location.origin;
+        
+        // Color definitions
+        var urgencyColors = {
+            'High': 'red',
+            'Medium': 'yellow',
+            'Low': 'green'
+        };
+        
+        var typeColors = {
+            'Road': '#4CAF50',                // Vibrant green
+            'Accessible Ramp': '#2196F3',     // Bright blue
+            'Street Light': '#FF9800',        // Orange
+            'Other': '#9E9E9E'                // Medium gray
+        };
+        
+        // ===== INITIALIZATION FUNCTIONS =====
+        
+        // Map initialization
+        function initializeMap() {
+            map.setView([22.9972, 120.2194], 16);
+            
+            const osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap contributors'
+            });
+            
+            const satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+                attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+            });
+            
+            const baseMaps = {
+                "Standard Map": osmLayer,
+                "Satellite Imagery": satelliteLayer
+            };
+            
+            osmLayer.addTo(map);
+            
+            L.control.layers(baseMaps, null, {
+                position: 'bottomright',
+                collapsed: false
+            }).addTo(map);
+            
+            loadCampusBoundary();
+        }
+        
+        // Load GeoJSON boundary
+        function loadCampusBoundary() {
+            fetch('ncku_campus_region.geojson')
+                .then(response => {
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    return response.json();
+                })
+                .then(data => {
+                    const geoJsonLayer = L.geoJSON(data, {
+                        style: {
+                            color: '#420A15',
+                            weight: 2,
+                            fillColor: '#420A15',
+                            fillOpacity: 0.1
+                        }
+                    }).addTo(map);
+
+                    geoJsonLayer.bringToFront();
+                    map.fitBounds(geoJsonLayer.getBounds());
+                })
+                .catch(error => console.error('Error loading GeoJSON:', error));
+        }
+
+        // ===== DATA MANAGEMENT FUNCTIONS =====
+        
+        // Fetch all reports from the API
+        function fetchReports() {
+            fetch(`${API_URL}/reports`)
+                .then(response => response.json())
+                .then(data => {
+                    reports = data;
+                    updateMarkers();
+                    updateStatistics();
+                })
+                .catch(error => {
+                    console.error('Error fetching reports:', error);
+                    alert('Failed to fetch reports. Please try again later.');
+                });
+        }
+
+        // Update map markers based on reports data
+        function updateMarkers() {
+            map.eachLayer(function(layer) {
+                if (layer instanceof L.CircleMarker || layer instanceof L.Marker) {
+                    map.removeLayer(layer);
+                }
+            });
+            
+            reports.forEach(report => {
+                // Select color based on current display mode
+                var markerColor;
+                if (currentDisplayMode === 'urgency') {
+                    markerColor = urgencyColors[report.urgency] || 'gray';
+                } else {
+                    const standardTypes = ['Road', 'Accessible Ramp', 'Street Light'];
+                    if (standardTypes.includes(report.type)) {
+                        markerColor = typeColors[report.type];
+                    } else {
+                        markerColor = typeColors['Other'];
+                    }
+                }
+                
+                const markerIcon = L.divIcon({
+                    className: 'custom-div-icon',
+                    html: `<div style="background-color:${markerColor};" class="simple-circle-marker"></div>`,
+                    iconSize: [12, 12],
+                    iconAnchor: [6, 6],
+                    popupAnchor: [0, -6]
+                });
+                
+                var marker = L.marker([report.lat, report.lng], {
+                    icon: markerIcon,
+                    riseOnHover: true,
+                    title: report.type || 'Report'
+                }).addTo(map).bindPopup(createPopupContent(report));
+                
+                report.marker = marker;
+            });
+            
+            adjustForScreenSize();
+        }
+        
+        // Create popup content for a report marker
+        function createPopupContent(report) {
+            let timeStr = 'N/A';
+            try {
+                timeStr = new Date(report.time).toLocaleString();
+            } catch (err) {
+                console.warn('Error formatting date:', err);
+            }
+            
+            return `
+                <div class="report-details">
+                    <div class="detail-item">
+                        <strong>Type:</strong>
+                        <div class="detail-value">${report.type || 'Unknown'}</div>
+                    </div>
+                    <div class="detail-item">
+                        <strong>Time:</strong>
+                        <div class="detail-value">${timeStr}</div>
+                    </div>
+                    <div class="detail-item">
+                        <strong>Status:</strong>
+                        <div class="detail-value">${report.status || 'N/A'}</div>
+                    </div>
+                    <div class="detail-item">
+                        <strong>Urgency:</strong>
+                        <div class="detail-value">${report.urgency || 'N/A'}</div>
+                    </div>
+                    <div class="detail-item">
+                        <strong>Description:</strong>
+                        <div class="detail-value">${report.description || 'N/A'}</div>
+                    </div>
+                    ${report.photo ? `
+                        <div class="detail-item">
+                            <img src="${report.photo.startsWith('/') ? API_URL + report.photo : report.photo}" alt="Photo">
+                        </div>
+                    ` : ''}
+                    <div class="report-actions">
+                        <button class="action-button" onclick='editReport(${report.lat}, ${report.lng}, "${report._id}")'>Edit</button>
+                        <button class="action-button delete-button" onclick='deleteReport("${report._id}")'>Delete</button>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Update statistics panel with current report data
+        function updateStatistics() {
+            document.getElementById('totalPoints').innerText = reports.length;
+            
+            const urgencyCounts = {
+                'High': 0,
+                'Medium': 0,
+                'Low': 0
+            };
+            
+            const typeCounts = {
+                'Road': 0,
+                'Accessible Ramp': 0,
+                'Street Light': 0,
+                'Other': 0
+            };
+            
+            const standardTypes = ['Road', 'Accessible Ramp', 'Street Light'];
+            
+            reports.forEach(report => {
+                if (report.urgency && urgencyCounts.hasOwnProperty(report.urgency)) {
+                    urgencyCounts[report.urgency]++;
+                }
+                
+                if (report.type) {
+                    if (standardTypes.includes(report.type)) {
+                        typeCounts[report.type]++;
+                    } else {
+                        typeCounts['Other']++;
+                    }
+                }
+            });
+            
+            document.getElementById('highCount').innerText = urgencyCounts['High'];
+            document.getElementById('mediumCount').innerText = urgencyCounts['Medium'];
+            document.getElementById('lowCount').innerText = urgencyCounts['Low'];
+            
+            const typeStatsContainer = document.getElementById('typeStats');
+            typeStatsContainer.innerHTML = '';
+            
+            const sortedTypes = Object.entries(typeCounts)
+                .filter(([_, count]) => count > 0)
+                .sort((a, b) => {
+                    if (standardTypes.includes(a[0]) && standardTypes.includes(b[0])) {
+                        return standardTypes.indexOf(a[0]) - standardTypes.indexOf(b[0]);
+                    }
+                    if (a[0] === 'Other') return 1;
+                    if (b[0] === 'Other') return -1;
+                    return b[1] - a[1];
+                });
+            
+            sortedTypes.forEach(([type, count]) => {
+                typeStatsContainer.innerHTML += `
+                    <div class="stat-item">
+                        <div>${type}:</div>
+                        <div class="count">${count}</div>
+                    </div>
+                `;
+            });
+        }
+
+        // ===== CRUD OPERATIONS =====
+        
+        // Delete a report
+        function deleteReport(id) {
+            if (!confirm('Are you sure you want to delete this report?')) {
+                return;
+            }
+            
+            fetch(`${API_URL}/reports/${id}`, {
+                method: 'DELETE'
+            })
+            .then(response => response.json())
+            .then(data => {
+                reports = reports.filter(r => r._id !== id);
+                updateMarkers();
+                updateStatistics();
+                map.closePopup();
+            })
+            .catch(error => {
+                console.error('Error deleting report:', error);
+                alert('Error deleting report. Please try again.');
+            });
+        }
+
+        // Show edit form for a report
+        function editReport(lat, lng, id) {
+            const report = reports.find(r => r._id === id);
+            if (!report) return;
+            
+            const formattedTime = new Date(report.time).toISOString().slice(0, 16);
+            
+            const standardTypes = ['Road', 'Accessible Ramp', 'Street Light'];
+            const isStandardType = standardTypes.includes(report.type);
+            
+            const popupContent = `
+                <form id="editForm">
+                    <label>Type <span class="required"></span>
+                        <select id="editType" onchange="updateEditStatusOptions(this)" required>
+                            <option value="">Please select</option>
+                            <option value="Road" ${report.type === 'Road' ? 'selected' : ''}>Road</option>
+                            <option value="Accessible Ramp" ${report.type === 'Accessible Ramp' ? 'selected' : ''}>Accessible Ramp</option>
+                            <option value="Street Light" ${report.type === 'Street Light' ? 'selected' : ''}>Street Light</option>
+                            <option value="Other" ${!isStandardType ? 'selected' : ''}>Other</option>
+                        </select>
+                    </label>
+                    <label id="editOtherTypeLabel" style="display:${!isStandardType ? 'block' : 'none'};">
+                        Other Type <input type="text" id="editOtherType" value="${!isStandardType ? report.type : ''}">
+                    </label>
+                    <label>Time <span class="required"></span>
+                        <input type="datetime-local" id="editTime" value="${formattedTime}" required>
+                    </label>
+                    <label>Status <span class="required"></span>
+                        <select id="editStatus" required>
+                            <option value="">Please select</option>
+                            <option value="Pending" ${report.status === 'Pending' ? 'selected' : ''}>Pending</option>
+                            <option value="In Progress" ${report.status === 'In Progress' ? 'selected' : ''}>In Progress</option>
+                            <option value="Resolved" ${report.status === 'Resolved' ? 'selected' : ''}>Resolved</option>
+                        </select>
+                    </label>
+                    <label>Description
+                        <textarea id="editDescription">${report.description || ''}</textarea>
+                    </label>
+                    <label>Urgency <span class="required"></span>
+                        <select id="editUrgency" required>
+                            <option value="">Please select</option>
+                            <option value="Low" ${report.urgency === 'Low' ? 'selected' : ''}>Low</option>
+                            <option value="Medium" ${report.urgency === 'Medium' ? 'selected' : ''}>Medium</option>
+                            <option value="High" ${report.urgency === 'High' ? 'selected' : ''}>High</option>
+                        </select>
+                    </label>
+                    <label>Photo
+                        <input type="file" id="editPhoto" accept="image/*" onchange="previewEditPhoto(this)">
+                        ${report.photo ? `<img id="editPhotoPreview" style="display:block; max-width:100%; max-height:120px; margin:6px 0; border-radius:4px;" src="${report.photo.startsWith('/') ? API_URL + report.photo : report.photo}">` : 
+                        `<img id="editPhotoPreview" style="display:none; max-width:100%; max-height:120px; margin:6px 0; border-radius:4px;">`}
+                    </label>
+                    <div class="report-actions">
+                        <button type="button" onclick="updateReport('${id}')" class="action-button">Update</button>
+                        <button type="button" onclick="deleteReport('${id}')" class="action-button delete-button">Delete</button>
+                    </div>
+                </form>
+            `;
+            
+            L.popup()
+                .setLatLng([report.lat, report.lng])
+                .setContent(popupContent)
+                .openOn(map);
+            
+            setTimeout(() => {
+                const typeSelect = document.getElementById('editType');
+                const otherTypeLabel = document.getElementById('editOtherTypeLabel');
+                
+                if (typeSelect && otherTypeLabel) {
+                    typeSelect.addEventListener('change', function() {
+                        otherTypeLabel.style.display = typeSelect.value === 'Other' ? 'block' : 'none';
+                    });
+                }
+                
+                // Initialize status options based on selected type
+                updateEditStatusOptions(typeSelect);
+            }, 100);
+        }
+
+        // Preview photo in edit form
+        function previewEditPhoto(input) {
+            const preview = document.getElementById('editPhotoPreview');
+            if (!preview) return;
+            
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                };
+                
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                preview.style.display = 'none';
+            }
+        }
+
+        // Update a report with new data
+        function updateReport(id) {
+            const report = reports.find(r => r._id === id);
+            if (!report) return;
+
+            const editForm = document.getElementById('editForm');
+            const typeSelect = document.getElementById('editType');
+            
+            // Validate required fields
+            if (typeSelect.value === '') {
+                alert('Please select a report type');
+                return;
+            }
+            
+            const timeInput = document.getElementById('editTime');
+            if (!timeInput.value) {
+                alert('Please select a time');
+                return;
+            }
+            
+            const statusSelect = document.getElementById('editStatus');
+            if (statusSelect.value === '') {
+                alert('Please select a status');
+                return;
+            }
+            
+            const urgencySelect = document.getElementById('editUrgency');
+            if (urgencySelect.value === '') {
+                alert('Please select an urgency level');
+                return;
+            }
+            
+            let finalType = typeSelect.value;
+            if (finalType === 'Other') {
+                const otherTypeInput = document.getElementById('editOtherType');
+                if (otherTypeInput && otherTypeInput.value.trim()) {
+                    finalType = otherTypeInput.value.trim();
+                }
+            }
+            
+            const formData = new FormData();
+            formData.append('lat', report.lat);
+            formData.append('lng', report.lng);
+            formData.append('type', finalType);
+            formData.append('time', timeInput.value);
+            formData.append('status', statusSelect.value);
+            formData.append('description', document.getElementById('editDescription').value || '');
+            formData.append('urgency', urgencySelect.value);
+            
+            // Handle photo upload
+            const photoInput = document.getElementById('editPhoto');
+            if (photoInput && photoInput.files && photoInput.files[0]) {
+                const photoFile = photoInput.files[0];
+                
+                if (!photoFile.type.match('image.*')) {
+                    alert('Please select an image file (JPEG, PNG, GIF)');
+                    return;
+                }
+                
+                if (photoFile.size > 5 * 1024 * 1024) {
+                    alert('The photo is too large. Please select an image under 5MB.');
+                    return;
+                }
+                
+                formData.append('photo', photoFile);
+            } else if (report.photo) {
+                formData.append('existingPhoto', report.photo);
+            }
+            
+            const updateButton = editForm.querySelector('button[onclick^="updateReport"]');
+            if (updateButton) {
+                updateButton.disabled = true;
+                updateButton.textContent = 'Updating...';
+            }
+            
+            fetch(`${API_URL}/reports/${id}`, {
+                method: 'PUT',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(updatedReport => {
+                const index = reports.findIndex(r => r._id === id);
+                if (index !== -1) {
+                    reports[index] = updatedReport;
+                }
+                
+                updateMarkers();
+                updateStatistics();
+                map.closePopup();
+                alert('Report updated successfully');
+            })
+            .catch(error => {
+                console.error('Error updating report:', error);
+                alert('Error updating report: ' + error.message);
+                
+                if (updateButton) {
+                    updateButton.disabled = false;
+                    updateButton.textContent = 'Update';
+                }
+            });
+        }
+
+        // ===== HELPER FUNCTIONS =====
+        
+        // Update status options based on selected type
+        function updateEditStatusOptions(select) {
+            const statusSelect = document.getElementById('editStatus');
+            const otherTypeLabel = document.getElementById('editOtherTypeLabel');
+            
+            if (!statusSelect) return;
+            
+            statusSelect.innerHTML = '';
+            
+            const defaultOption = document.createElement('option');
+            defaultOption.value = '';
+            defaultOption.textContent = 'Please select';
+            statusSelect.appendChild(defaultOption);
+            
+            if (otherTypeLabel) {
+                otherTypeLabel.style.display = (select.value === 'Other') ? 'block' : 'none';
+            }
+            
+            switch(select.value) {
+                case 'Road':
+                    addOptions(statusSelect, [
+                        'Uneven surface',
+                        'Slippery pavement',
+                        'Narrow width',
+                        'Insufficient accessibility features',
+                        'Prone to water accumulation',
+                        'Others (please specify in the Description)'
+                    ]);
+                    break;
+                case 'Accessible Ramp':
+                    addOptions(statusSelect, [
+                        'Uneven surface',
+                        'Slippery pavement',
+                        'Narrow width',
+                        'Excessively steep slope',
+                        'Prone to water accumulation',
+                        'Others (please specify in the Description)'
+                    ]);
+                    break;
+                case 'Street Light':
+                    addOptions(statusSelect, [
+                        'Not working (malfunction/offline)',
+                        'Dim lighting',
+                        'Flickering light',
+                        'Others (please specify in the Description)'
+                    ]);
+                    break;
+                case 'Other':
+                    addOptions(statusSelect, ['Please specify in the Description']);
+                    break;
+            }
+            
+            statusSelect.selectedIndex = 0;
+        }
+
+        // Add options to a select element
+        function addOptions(selectElement, options) {
+            options.forEach(option => {
+                const optionElement = document.createElement('option');
+                optionElement.value = option;
+                optionElement.textContent = option;
+                selectElement.appendChild(optionElement);
+            });
+        }
+        
+        // Change display mode between urgency and type
+        function changeDisplayMode(mode) {
+            if (mode === currentDisplayMode) return;
+            
+            currentDisplayMode = mode;
+            
+            document.getElementById('urgencyModeBtn').classList.toggle('active', mode === 'urgency');
+            document.getElementById('typeModeBtn').classList.toggle('active', mode === 'type');
+            
+            updateLegend();
+            updateMarkers();
+        }
+        
+        // Update the legend based on current display mode
+        function updateLegend() {
+            const legendTitle = document.getElementById('legendTitle');
+            const legendContent = document.getElementById('legendContent');
+            
+            if (currentDisplayMode === 'urgency') {
+                legendTitle.textContent = 'Urgency';
+                legendContent.innerHTML = `
+                    <div><span style="background: red;"></span> High</div>
+                    <div><span style="background: yellow;"></span> Medium</div>
+                    <div><span style="background: green;"></span> Low</div>
+                `;
+            } else {
+                legendTitle.textContent = 'Type';
+                legendContent.innerHTML = `
+                    <div><span style="background: #4CAF50;"></span> Road</div>
+                    <div><span style="background: #2196F3;"></span> Accessible Ramp</div>
+                    <div><span style="background: #FF9800;"></span> Street Light</div>
+                    <div><span style="background: #9E9E9E;"></span> Other</div>
+                `;
+            }
+        }
+        
+        // Adjust UI elements based on screen size
+        function adjustForScreenSize() {
+            const width = window.innerWidth;
+            
+            if (width < 380) {
+                document.querySelector('.display-toggle h4').style.display = 'none';
+            } else {
+                document.querySelector('.display-toggle h4').style.display = 'block';
+            }
+        }
+
+        // Initialize the application when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeMap();
+            fetchReports();
+            
+            window.addEventListener('resize', adjustForScreenSize);
+            adjustForScreenSize();
+        });
+    </script>
+</body>
+</html>

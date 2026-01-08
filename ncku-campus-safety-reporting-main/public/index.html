@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NCKU Campus Safety Reporting Platform</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="assets/icons8-map-64.png" type="image/png">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@turf/turf/turf.min.js"></script>
+    <style>
+        /* Add responsive styles directly in HTML for title changes */
+        @media screen and (max-width: 570px) {
+            #title:before {
+                content: "NCKU Safety Reporting Platform";
+                display: block;
+            }
+            #title > span {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar -->
+    <div id="topBar">
+        <div id="title"><span>NCKU Campus Safety Reporting Platform</span></div>
+        <div id="topBarButtons">
+            <button id="helpButton" onclick="showHelpPopup()">Help</button>
+            <button id="loginButton" onclick="showLoginPopup()">Staff Login</button>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay">
+        <div class="loading-container">
+            <div class="spinner"></div>
+            <div class="loading-text">Loading map and location data...</div>
+        </div>
+    </div>
+
+    <!-- Help Popup -->
+    <div id="helpPopup" class="popup">
+        <h3>About This Platform</h3>
+        <p>
+            The NCKU Campus Safety Reporting Platform is designed to help students, staff, and visitors report safety concerns on campus. 
+            You can use this platform to report issues such as unsafe roads, broken street lights, or other hazards.
+        </p>
+        <h4>How to Use:</h4>
+        <ul>
+            <li>Click on the map to add a new report.</li>
+            <li>Fill in the required details, such as type, time, and status.</li>
+            <li>Submit the report to notify the campus authorities.</li>
+        </ul>
+        <button onclick="hideHelpPopup()">Close</button>
+    </div>
+
+    <!-- Existing Login Popup -->
+    <div id="loginPopup" class="popup">
+        <label>Username: <input type="text" id="username"></label><br>
+        <label>Password: <input type="password" id="password"></label><br>
+        <button onclick="login()">Submit</button>
+        <button onclick="hideLoginPopup()">Cancel</button>
+    </div>
+
+    <div id="map"></div>
+    <div class="legend">
+        <div><span style="background: #4CAF50; border-radius: 50%; border: 1px solid white;"></span> Road</div>
+        <div><span style="background: #2196F3; border-radius: 50%; border: 1px solid white;"></span> Accessible Ramp</div>
+        <div><span style="background: #FF9800; border-radius: 50%; border: 1px solid white;"></span> Street Light</div>
+        <div><span style="background: #9E9E9E; border-radius: 50%; border: 1px solid white;"></span> Other</div>
+        <div><span style="background: rgba(66, 10, 21, 0.5); border: 2px solid #420A15;"></span> NCKU Campus</div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html> 

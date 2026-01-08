@@ -1,0 +1,734 @@
+/* ===================
+   GENERAL STYLES
+=================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    color: #333;
+}
+
+h1, h2, h3, h4, h5, h6, #title, .legend, button {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+}
+
+/* Apply Poppins to all form elements */
+input, select, textarea, button {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Force Poppins on elements that sometimes use system fonts */
+input[type="datetime-local"], select {
+    font-family: 'Poppins', sans-serif !important;
+}
+
+/* ===================
+   LOADING OVERLAY STYLES
+=================== */
+#loadingOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease-out;
+}
+
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.spinner {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 6px solid #f3f3f3;
+    border-top: 6px solid #420A15;
+    animation: spin 1.5s linear infinite;
+}
+
+.loading-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: #420A15;
+    letter-spacing: 0.5px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ===================
+   TOP BAR STYLES
+=================== */
+#topBar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background-color: #420A15;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+#title {
+    font-size: 17px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    letter-spacing: 0.3px;
+}
+
+#topBarButtons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+}
+
+#topBarButtons button {
+    padding: 5px 10px;
+    background-color: white;
+    color: #420A15;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    white-space: nowrap;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+#topBarButtons button:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-1px);
+}
+
+/* ===================
+   RESPONSIVE STYLES
+=================== */
+@media screen and (max-width: 768px) {
+    #topBar {
+        padding: 0 15px;
+    }
+    
+    #title {
+        font-size: 16px;
+    }
+    
+    #topBarButtons button {
+        padding: 4px 8px;
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-width: 570px) {
+    #topBar {
+        height: 50px;
+        padding: 0 8px;
+    }
+    
+    #map {
+        margin-top: 45px;
+        height: calc(100vh - 45px);
+    }
+    
+    #title {
+        font-size: 14px;
+    }
+    
+    #topBarButtons {
+        gap: 5px;
+    }
+    
+    #topBarButtons button {
+        padding: 3px 6px;
+        font-size: 12px;
+    }
+    
+    .legend {
+        bottom: 10px;
+        left: 10px;
+        padding: 8px;
+        font-size: 11px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #topBar {
+        height: 50px;
+    }
+    
+    #map {
+        margin-top: 40px;
+        height: calc(100vh - 40px);
+    }
+    
+    #title {
+        font-size: 13px;
+    }
+}
+
+/* ===================
+   MAP AND LEGEND STYLES
+=================== */
+#map {
+    flex: 1;
+    margin-top: 50px;
+    width: 100%;
+    height: calc(100vh - 50px);
+}
+
+.legend {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: white;
+    padding: 10px;
+    border-radius: 6px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.legend div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.legend span {
+    width: 12px;
+    height: 12px;
+    display: inline-block;
+    margin-right: 8px;
+    border-radius: 50%;
+}
+
+/* ===================
+   POPUP STYLES
+=================== */
+.popup {
+    display: none;
+    position: fixed;
+    top: 60px;
+    right: 20px;
+    background: white;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1001;
+    max-width: 280px;
+    width: 90%;
+}
+
+.popup h3 {
+    margin-bottom: 10px;
+    color: #420A15;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+}
+
+.popup h4 {
+    margin-top: 12px;
+    margin-bottom: 8px;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.popup p, .popup ul {
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.5;
+}
+
+.popup ul {
+    padding-left: 20px;
+}
+
+.popup label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.popup input[type="text"],
+.popup input[type="password"],
+.popup select,
+.popup textarea {
+    width: 100%;
+    padding: 6px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-top: 2px;
+    font-size: 14px;
+}
+
+.popup textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+.popup button {
+    margin-top: 10px;
+    padding: 6px 12px;
+    background-color: #420A15;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.popup button:hover {
+    background-color: #5a1e2a;
+    transform: translateY(-1px);
+}
+
+/* ===================
+   LEAFLET POPUP CUSTOMIZATION
+=================== */
+.leaflet-popup-content-wrapper {
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    font-family: 'Poppins', sans-serif;
+}
+
+.leaflet-popup-content {
+    margin: 10px;
+    max-width: 240px;
+    min-width: 200px;
+    font-size: 13px;
+}
+
+.leaflet-popup-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.leaflet-popup-content label {
+    display: block;
+    margin-bottom: 3px;
+    color: #333;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.required:after {
+    content: "*";
+    color: #420A15;
+    display: inline;
+    margin-left: 2px;
+}
+
+.leaflet-popup-content select,
+.leaflet-popup-content input[type="datetime-local"],
+.leaflet-popup-content textarea {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 0;
+    font-size: 13px;
+}
+
+.leaflet-popup-content textarea {
+    height: 60px;
+    min-height: unset;
+}
+
+.leaflet-popup-content select:focus,
+.leaflet-popup-content input:focus, 
+.leaflet-popup-content textarea:focus {
+    border-color: #420A15;
+    outline: none;
+    box-shadow: 0 0 3px rgba(66, 10, 21, 0.3);
+}
+
+.leaflet-popup-content button {
+    padding: 6px 10px;
+    background-color: #420A15;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 13px;
+    margin-top: 4px;
+    font-weight: 500;
+}
+
+.leaflet-popup-content button:hover {
+    background-color: #5a1e2a;
+}
+
+.button-group {
+    display: flex;
+    gap: 6px;
+    margin-top: 6px;
+}
+
+.button-group button {
+    flex: 1;
+}
+
+/* Report Popup Specific Styles */
+.report-popup {
+    margin-top: -15px;
+}
+
+.report-popup .leaflet-popup-content-wrapper {
+    border-radius: 8px;
+    box-shadow: 0 3px 14px rgba(0,0,0,0.4);
+}
+
+.report-popup .leaflet-popup-content {
+    margin: 12px;
+    min-width: 250px;
+}
+
+.report-popup .leaflet-popup-tip {
+    box-shadow: 0 3px 14px rgba(0,0,0,0.4);
+}
+
+/* Your Location Popup Styles */
+.location-popup-container .leaflet-popup-content-wrapper {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+}
+
+.location-popup-container .leaflet-popup-tip {
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.location-popup {
+    display: flex;
+    align-items: center;
+    padding: 6px 0;
+}
+
+.location-icon {
+    font-size: 22px;
+    margin-right: 10px;
+    color: #005eff;
+}
+
+.location-text {
+    font-weight: 500;
+    font-size: 14px;
+    color: #333;
+}
+
+/* ===================
+   REPORT DETAILS STYLES
+=================== */
+.report-details {
+    padding: 5px;
+    color: #333;
+}
+
+.report-details .detail-item {
+    margin-bottom: 6px;
+}
+
+.report-details strong {
+    color: #420A15;
+    display: block;
+    margin-bottom: 2px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.report-details .detail-value {
+    font-size: 13px;
+    padding-left: 3px;
+    font-weight: 400;
+}
+
+.report-details img {
+    max-width: 100%;
+    max-height: 150px;
+    height: auto;
+    margin: 8px 0;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+/* ===================
+   BUTTON STYLES
+=================== */
+.report-actions {
+    display: flex;
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.report-actions button,
+.action-button {
+    flex: 1;
+    padding: 8px 12px;
+    min-height: 36px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    background-color: #420A15;
+    color: white;
+    cursor: pointer !important;
+    position: relative;
+    z-index: 10;
+    transition: background-color 0.2s, transform 0.1s;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.report-actions button:hover,
+.action-button:hover {
+    background-color: #5a1e2a;
+    transform: translateY(-2px);
+}
+
+.report-actions button:active,
+.action-button:active {
+    transform: translateY(1px);
+}
+
+.delete-button {
+    background-color: #D32F2F !important;
+}
+
+.delete-button:hover {
+    background-color: #B71C1C !important;
+}
+
+/* ===================
+   MARKER STYLES
+=================== */
+.custom-div-icon {
+    background: transparent;
+    border: none;
+}
+
+/* User Location Marker Styles */
+.user-location-marker {
+    position: relative;
+    width: 30px;
+    height: 30px;
+}
+
+.user-location-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 14px;
+    height: 14px;
+    background-color: #005eff;
+    border: 2px solid white;
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(0, 94, 255, 0.8);
+    z-index: 2;
+}
+
+.user-location-pulse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    background-color: rgba(0, 94, 255, 0.2);
+    border-radius: 50%;
+    z-index: 1;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* Simple circular marker design */
+.simple-circle-marker {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: #4CAF50;
+    border: 2px solid white;
+    box-shadow: 0 0 4px rgba(0,0,0,0.3);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.simple-circle-marker:hover {
+    transform: scale(1.2);
+}
+
+/* Fancy marker pin (kept for reference) */
+.marker-pin {
+    width: 24px;
+    height: 24px;
+    border-radius: 50% 50% 50% 0;
+    background: #c30b82;
+    transform: rotate(-45deg);
+    border: 2px solid #FFFFFF;
+    box-shadow: 0 0 4px rgba(0,0,0,0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.marker-pin:before {
+    content: '';
+    width: 16px;
+    height: 16px;
+    margin: 2px 0 0 2px;
+    background: rgba(255,255,255,0.5);
+    position: absolute;
+    border-radius: 50%;
+}
+
+.custom-div-icon:hover .marker-pin {
+    transform: rotate(-45deg) scale(1.2);
+    box-shadow: 0 0 8px rgba(0,0,0,0.4);
+}
+
+/* ===================
+   LEAFLET OVERRIDES & FIXES
+=================== */
+/* Fix for leaflet popups and marker clickability */
+.leaflet-popup-content button {
+    position: relative;
+    z-index: 2;
+    cursor: pointer !important;
+}
+
+/* Make sure events bubble correctly for marker clicks */
+.leaflet-pane {
+    z-index: 400;
+}
+
+.leaflet-marker-pane,
+.leaflet-popup-pane {
+    z-index: 500;
+    pointer-events: auto !important;
+}
+
+.leaflet-popup-pane {
+    z-index: 600;
+}
+
+.leaflet-marker-icon, 
+.leaflet-marker-shadow {
+    pointer-events: auto !important;
+}
+
+/* Improve marker interactivity */
+.interactive-marker {
+    cursor: pointer !important;
+    pointer-events: auto !important;
+}
+
+/* Layer Control Styling */
+.leaflet-control-layers {
+    border-radius: 6px !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3) !important;
+    border: none !important;
+    font-family: 'Poppins', sans-serif !important;
+}
+
+.leaflet-control-layers-toggle {
+    width: 36px !important;
+    height: 36px !important;
+    background-size: 20px 20px !important;
+}
+
+.leaflet-control-layers-expanded {
+    padding: 10px !important;
+    background-color: white !important;
+    color: #333 !important;
+    min-width: 160px !important;
+}
+
+.leaflet-control-layers-selector {
+    margin-right: 6px !important;
+}
+
+.leaflet-control-layers-separator {
+    margin: 8px 0 !important;
+    border-top: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+.leaflet-control-layers-base label,
+.leaflet-control-layers-overlays label {
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    margin-bottom: 4px !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+.leaflet-control-layers-base label:hover,
+.leaflet-control-layers-overlays label:hover {
+    background-color: rgba(66, 10, 21, 0.05) !important;
+    border-radius: 4px !important;
+}
+
+.leaflet-control-layers-base label span,
+.leaflet-control-layers-overlays label span {
+    padding: 2px 0 !important;
+}
