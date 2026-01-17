@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- font:Noto Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap" rel="stylesheet">
+    <title>每日氣象數據</title>
+    <style>
+        body {
+            background-color: rgba(255, 255, 255, 0);
+            font-family: "Noto Sans TC", sans-serif;
+            font-weight: 800;
+            text-align: center;
+            padding: 0px;
+            color: #efa244;
+        }
+
+        .data-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(255, 255, 255);
+            gap: 20px;
+            margin: 0px auto;
+            padding: 0px;
+            border: 0px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .data-item {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="data-container">
+        <div class="data-item">
+            <strong>每日氣象數據</strong>
+        </div>
+        <div class="data-item">
+            <strong>最高溫度：</strong><span id="temperature">-</span>°C
+        </div>
+        <div class="data-item">
+            <strong>濕度：</strong><span id="humidity">-</span>%
+        </div>
+        <div class="data-item">
+            <strong>空氣品質指標 (AQI)：</strong><span id="aqi">-</span>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // 獲取氣象數據
+            fetch('https://opendata.cwa.gov.tw/api/v1/rest/datastore/O-A0001-001?Authorization=CWA-3E5E3578-A537-41E4-A5A4-BADF60679CAA&format=JSON&StationId=C0O990&WeatherElement=Weather,Now,RelativeHumidity,AirPressure,GustInfo,DailyHigh,DailyLow')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data); // 輸出數據到控制台以便檢查
+
+                    // 確保數據結構符合預期
+                    const stationData = data.records.Station[0];
+                    if (stationData) {
+                        const weatherElement = stationData.WeatherElement;
+                        const relativeHumidity = weatherElement.RelativeHumidity;
+                        const airTemperature = weatherElement.DailyExtreme.DailyHigh.TemperatureInfo.AirTemperature;
+
+                        document.getElementById('humidity').textContent = relativeHumidity;
+                        document.getElementById('temperature').textContent = airTemperature;
+                    } else {
+                        document.getElementById('humidity').textContent = '無法獲取濕度數據';
+                        document.getElementById('temperature').textContent = '無法獲取溫度數據';
+                    }
+                })
+                .catch(error => {
+                    console.error('錯誤:', error);
+                    document.getElementById('humidity').textContent = '無法獲取濕度數據';
+                    document.getElementById('temperature').textContent = '無法獲取溫度數據';
+                });
+
+            // 獲取AQI數據
+            fetch('https://data.moenv.gov.tw/api/v2/aqx_p_434?language=zh&api_key=998cbe66-b788-4e5a-b979-efd3ae10368f')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data); // 輸出數據到控制台以便檢查
+                    // 假設API返回的數據結構是{ "records": [...] }
+                    const siteData = data.records.find(item => item.siteid === "46");
+                    if (siteData) {
+                        document.getElementById('aqi').textContent = siteData.aqi;
+                    } else {
+                        document.getElementById('aqi').textContent = '無法獲取AQI數據';
+                    }
+                })
+                .catch(error => {
+                    console.error('錯誤:', error);
+                    document.getElementById('aqi').textContent = '無法獲取AQI數據';
+                });
+        });
+    </script>
+</body>
+
+</html>
