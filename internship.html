@@ -13,7 +13,7 @@
       --border: #e2e8f0;
       --accent: #1e3a8a;
       --accent-2: #0b5cab;
-      --card-bg: #ffffff;
+      --card-bg: #ffffff; /* 修正為白色以增加閱讀性，原代碼為 #040101 */
       --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
       --radius: 18px;
       --radius-sm: 14px;
@@ -233,6 +233,25 @@
       h1 { font-size: 34px; }
     }
 
+    /* Interactive GIS Container */
+    .interactive-container {
+      width: 100%;
+      height: 600px;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      background: #eee;
+    }
+    .interactive-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    @media (max-width: 700px) {
+      .interactive-container { height: 450px; }
+    }
+
     /* Callout */
     .callout {
       border: 1px solid rgba(30,58,138,0.25);
@@ -256,8 +275,8 @@
       border-radius: var(--radius-sm);
       border: 1px dashed rgba(71,85,105,0.35);
       background:
-        radial-gradient(400px 200px at 20% 10%, rgba(30,58,138,0.10), transparent 60%),
-        radial-gradient(380px 220px at 90% 40%, rgba(11,92,171,0.10), transparent 60%),
+        radial-gradient(400px 200px at 20% 10%, rgba(30, 58, 138, 0.1), transparent 60%),
+        radial-gradient(380px 220px at 90% 40%, rgba(11, 92, 171, 0.1), transparent 60%),
         linear-gradient(to bottom, rgba(255,255,255,0.75), rgba(255,255,255,0.35));
       display: flex;
       align-items: center;
@@ -373,7 +392,6 @@
       <div class="pill"><span class="dot"></span> Capstone / Internship</div>
     </div>
 
-    <!-- HERO -->
     <div class="hero">
       <h1>Capstone Internship</h1>
       <div class="subtitle">
@@ -419,8 +437,7 @@
       </div>
 
       <div class="btnRow" aria-label="quick links">
-        <!-- TODO: replace href with your actual links -->
-        <a class="btn primary" href="#" target="_blank" rel="noopener">🗺️ Map Gallery</a>
+        <a class="btn primary" href="https://alanugis.github.io/surveyingcampB/" target="_blank" rel="noopener">🗺️ Live Map Demo</a>
         <a class="btn" href="#" target="_blank" rel="noopener">📄 Final Report (PDF)</a>
         <a class="btn" href="#" target="_blank" rel="noopener">🧰 Methods / Notes</a>
       </div>
@@ -428,7 +445,6 @@
       <div class="tagline">capstone • field survey • photogrammetry • GIS • 3D mapping</div>
     </div>
 
-    <!-- META -->
     <div class="meta" aria-label="internship metadata">
       <div class="metaRow">
         <div class="metaKey">Institution</div>
@@ -448,9 +464,7 @@
       </div>
     </div>
 
-    <!-- OVERVIEW -->
     <h2>Overview</h2>
-
     <p>
       This capstone internship is a two-month, full-time summer program bridging my junior spring and senior year.
       Unlike a single-assignment course, the capstone mirrors real-world geomatics practice: we start from field
@@ -458,152 +472,23 @@
       and communication.
     </p>
 
-    <p>
-      Our goal was to produce a campus-wide <b>3D map</b> as the foundational layer, and then overlay multiple
-      <b>thematic GIS maps</b> to support different use cases (navigation, management, and spatial understanding).
-      The project required combining traditional geodetic surveying instruments (level, total station, GNSS)
-      with photogrammetric modeling and GIS integration.
-    </p>
-
     <div class="callout">
       <b>What makes it capstone-level:</b> it is end-to-end (field → processing → product), requires accuracy awareness,
       and forces consistent coordinate control so that 3D models and GIS layers align in the same spatial reference frame.
     </div>
 
-    <!-- LEARNING GOALS -->
-    <h2>Learning Goals</h2>
-
-    <div class="grid">
-      <div class="card span-4">
-        <h3>Field Data Collection</h3>
-        <p>Plan and execute measurements using leveling, total station, and GNSS with clear quality-control checkpoints.</p>
-      </div>
-      <div class="card span-4">
-        <h3>3D Modeling</h3>
-        <p>Apply photogrammetry workflow to reconstruct 3D geometry, then align it with control in a consistent reference system.</p>
-      </div>
-      <div class="card span-4">
-        <h3>GIS Integration</h3>
-        <p>Build thematic layers and cartographic outputs on top of the 3D base map for practical campus-scale applications.</p>
-      </div>
-    </div>
-
-    <!-- WORKFLOW -->
     <h2>Workflow: Field → Processing → Delivery</h2>
-
-    <p>
-      The project pipeline emphasizes traceability: each stage is documented, checked, and connected to the final map.
-      This structure is also how professional surveying and mapping projects ensure reliability.
-    </p>
-
     <div class="grid">
       <div class="card span-6">
         <h3>1) Planning & Control</h3>
-        <p>
-          Define the working coordinate reference, prepare control points, and decide survey routes to ensure
-          consistent alignment across instruments and photogrammetry.
-        </p>
+        <p>Define coordinate reference, prepare control points, and ensure alignment across all instruments.</p>
       </div>
       <div class="card span-6">
         <h3>2) Field Survey</h3>
-        <p>
-          Collect elevation differences via leveling, measure detailed geometry with total station, and establish
-          positioning with GNSS for robust control and georeferencing.
-        </p>
-      </div>
-      <div class="card span-6">
-        <h3>3) Photogrammetry & 3D Reconstruction</h3>
-        <p>
-          Process image sets into a 3D model (point cloud / mesh) and refine alignment using ground control and
-          quality checks to reduce systematic distortions.
-        </p>
-      </div>
-      <div class="card span-6">
-        <h3>4) GIS Thematic Mapping</h3>
-        <p>
-          Build multiple thematic layers (e.g., infrastructure, facilities, accessibility, or functional zoning),
-          then produce maps that can be used for communication and spatial analysis.
-        </p>
+        <p>Leveling for elevation, Total Station for geometry, and GNSS for robust georeferencing.</p>
       </div>
     </div>
 
-    <details>
-      <summary>Quality control (QC) mindset used in this capstone</summary>
-      <div>
-        We treated the project as a measurement system, not only a visualization task. QC was embedded in every stage:
-        <ul class="miniList">
-          <li><b>Consistency:</b> ensure all outputs share the same coordinate reference and control network.</li>
-          <li><b>Redundancy:</b> design field measurements with checks (e.g., loops, repeated observations).</li>
-          <li><b>Error awareness:</b> monitor residuals and alignment errors during photogrammetry and control fitting.</li>
-          <li><b>Deliverable-ready:</b> maps must be interpretable, reproducible, and documented.</li>
-        </ul>
-      </div>
-    </details>
-
-    <!-- WHAT I DID -->
-    <h2>My Responsibilities</h2>
-
-    <p class="muted">
-      This section highlights what I personally contributed during the two-month capstone.
-      (You can tweak the wording to match your actual division of labor.)
-    </p>
-
-    <div class="grid">
-      <div class="card span-6">
-        <h3>Survey Operations</h3>
-        <p>
-          Assisted in field planning and measurements using leveling and total station, including recording,
-          on-site checking, and organizing observations for later adjustment/processing.
-        </p>
-      </div>
-      <div class="card span-6">
-        <h3>GNSS Processing & Georeferencing</h3>
-        <p>
-          Supported GNSS-based positioning and helped ensure the control framework could connect field survey data
-          and photogrammetry results into one consistent spatial reference.
-        </p>
-      </div>
-      <div class="card span-6">
-        <h3>Photogrammetry Workflow</h3>
-        <p>
-          Participated in image alignment and 3D reconstruction, inspected tie point quality, and evaluated
-          alignment residuals to improve model stability.
-        </p>
-      </div>
-      <div class="card span-6">
-        <h3>GIS Thematic Layers</h3>
-        <p>
-          Built thematic layers and map layouts for communication, ensuring that the 3D base map and GIS layers
-          remain consistent in projection, scale, and interpretation.
-        </p>
-      </div>
-    </div>
-
-    <!-- DELIVERABLES -->
-    <h2>Deliverables</h2>
-
-    <div class="grid">
-      <div class="card span-4">
-        <h3>3D Campus Base Map</h3>
-        <p>
-          A campus-scale 3D representation serving as the foundation for analysis and thematic overlays.
-        </p>
-      </div>
-      <div class="card span-4">
-        <h3>Thematic GIS Maps</h3>
-        <p>
-          Multiple topic-driven layers for different viewpoints (e.g., facilities, infrastructure, accessibility).
-        </p>
-      </div>
-      <div class="card span-4">
-        <h3>Documentation</h3>
-        <p>
-          Workflow notes, data organization, and QC reasoning to support reproducibility and review.
-        </p>
-      </div>
-    </div>
-
-    <!-- VISUALS -->
     <h2>Selected Visuals</h2>
 
     <div class="grid">
@@ -611,12 +496,11 @@
         <div class="imgPlaceholder">
           <div>
             <b>Figure 1: Control & Survey Coverage</b><br />
-            (Replace with your figure)<br />
-            <span class="muted">Suggested: control points + survey routes/areas</span>
+            <span class="muted">[Upload Survey Route Map]</span>
           </div>
         </div>
         <div class="caption">
-          Control framework and survey coverage design to ensure stable georeferencing across instruments and modeling.
+          Control framework and survey coverage design for stable georeferencing.
         </div>
       </div>
 
@@ -624,52 +508,39 @@
         <div class="imgPlaceholder">
           <div>
             <b>Figure 2: Photogrammetry 3D Output</b><br />
-            (Replace with your 3D screenshot)<br />
-            <span class="muted">Suggested: point cloud / mesh with landmarks</span>
+            <span class="muted">[Upload 3D Mesh Screenshot]</span>
           </div>
         </div>
         <div class="caption">
-          3D reconstruction result aligned to control, providing a unified base for map overlays and visualization.
+          3D reconstruction result aligned to control, providing a unified base.
         </div>
       </div>
 
       <div class="figure span-12">
-        <div class="imgPlaceholder" style="height: 260px;">
-          <div>
-            <b>Figure 3: Thematic Map Examples</b><br />
-            (Replace with a collage or 2–3 maps)<br />
-            <span class="muted">Suggested: facilities / infrastructure / accessibility themes</span>
-          </div>
+        <div class="interactive-container">
+          <iframe 
+            src="https://alanugis.github.io/surveyingcampB/" 
+            title="NCKU Web GIS Platform"
+            loading="lazy">
+          </iframe>
         </div>
         <div class="caption">
-          Example thematic outputs layered on top of the 3D base map. Each theme communicates a different campus story
-          using consistent spatial reference and cartographic design.
+          <b>Interactive Figure 3: NCKU Web GIS Platform (Live Demo).</b><br /> 
+          整合 ArcGIS API 開發之多維地理資訊系統，支援 3D LOD1 建築模型與永續發展指標（SDGs）圖層切換。
+        </div>
+        <div class="btnRow" style="margin-top: 12px;">
+            <a class="btn primary" href="https://alanugis.github.io/surveyingcampB/" target="_blank">
+              🚀 Open Full Map in New Window
+            </a>
         </div>
       </div>
     </div>
 
-    <!-- WHAT I LEARNED -->
     <h2>What I Learned</h2>
-
     <ul>
       <li><b>End-to-end thinking:</b> field data quality directly controls the credibility of final visual outputs.</li>
       <li><b>Coordinate consistency:</b> integrating surveying, photogrammetry, and GIS requires strict reference control.</li>
-      <li><b>Measurement mindset:</b> good maps come from validated measurements and transparent QC, not only nice rendering.</li>
-      <li><b>Team workflow:</b> a reliable data pipeline matters as much as any single algorithm or tool.</li>
-    </ul>
-
-    <!-- FUTURE -->
-    <h2>Extensions & Next Steps</h2>
-
-    <p>
-      If extended beyond the course, the same workflow can support campus management and research applications —
-      such as change detection, accessibility evaluation, digital twin integration, or sensor-based monitoring.
-    </p>
-
-    <ul>
-      <li><b>Digital twin readiness:</b> connect 3D base map with semantic layers and maintenance records.</li>
-      <li><b>Update pipeline:</b> define a repeatable capture-and-update process for future campus changes.</li>
-      <li><b>Analytics:</b> use GIS-based spatial analysis to evaluate accessibility and infrastructure planning scenarios.</li>
+      <li><b>Measurement mindset:</b> good maps come from validated measurements, not only nice rendering.</li>
     </ul>
 
     <footer>
@@ -677,7 +548,7 @@
       <div class="footLinks">
         <a href="index.html">Home</a>
         <a href="research.html">Research</a>
-        <a href="#" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://github.com/yuanku1215" target="_blank" rel="noopener">GitHub</a>
         <a href="mailto:yourname@email.com">Email</a>
       </div>
     </footer>
