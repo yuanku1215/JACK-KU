@@ -43,7 +43,7 @@
     }
     a:hover { text-decoration: underline; }
 
-    /* Top row */
+    /* Top Navigation */
     .topbar {
       display: flex;
       align-items: center;
@@ -81,7 +81,7 @@
       display: inline-block;
     }
 
-    /* Hero */
+    /* Hero Section */
     .hero {
       background: radial-gradient(1200px 260px at 0% 0%, rgba(30, 58, 138, 0.10), transparent 60%),
                   radial-gradient(900px 240px at 100% 20%, rgba(11, 92, 171, 0.10), transparent 60%),
@@ -130,10 +130,31 @@
       font-weight: 500;
     }
 
-    /* Interactive GIS Container */
+    /* Stats Grid */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+      margin-top: 24px;
+    }
+    .stat {
+      grid-column: span 3;
+      background: rgba(255,255,255,0.8);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+    .stat .k { font-size: 11px; color: var(--muted); text-transform: uppercase; margin-bottom: 8px; }
+    .stat .v { font-size: 22px; font-weight: 700; }
+    
+    @media (max-width: 900px) {
+      .stat { grid-column: span 6; }
+    }
+
+    /* Interactive Platform Window */
     .interactive-container {
       width: 100%;
-      height: 800px; /* 增加高度 */
+      height: 800px; /* Enhanced height for better visibility */
       border-radius: var(--radius-sm);
       overflow: hidden;
       border: 1px solid var(--border);
@@ -177,31 +198,8 @@
 
     .span-12 { grid-column: span 12; }
     .span-6  { grid-column: span 6; }
-    .span-4  { grid-column: span 4; }
 
-    /* Stats */
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 14px;
-      margin-top: 24px;
-    }
-    .stat {
-      grid-column: span 3;
-      background: rgba(255,255,255,0.8);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 20px;
-    }
-    .stat .k { font-size: 11px; color: var(--muted); text-transform: uppercase; margin-bottom: 8px; }
-    .stat .v { font-size: 22px; font-weight: 700; }
-    
-    @media (max-width: 900px) {
-      .stat { grid-column: span 6; }
-      .span-6, .span-4 { grid-column: span 12; }
-    }
-
-    /* Figure */
+    /* Figure Styling */
     .figure {
       border: 1px solid var(--border);
       border-radius: var(--radius);
@@ -308,9 +306,9 @@
       </div>
 
       <div class="btnRow">
-        <a class="btn primary" href="https://alanugis.github.io/surveyingcampB/" target="_blank">Live Demo</a>
-        <a class="btn" href="#">Project Report</a>
-        <a class="btn" href="#">Technical Notes</a>
+        <a class="btn primary" href="https://github.com/yuanku1215/JACK-KU/tree/main/surveyingcampB-main" target="_blank">View Repository</a>
+        <a class="btn" href="https://github.com/yuanku1215/JACK-KU/tree/main/surveyingcampB-main">Documentation</a>
+        <a class="btn" href="https://github.com/yuanku1215/JACK-KU/tree/main/surveyingcampB-main">Source Code</a>
       </div>
 
       <div class="tagline">Surveying | Photogrammetry | GIS | Spatial Analysis</div>
@@ -318,21 +316,21 @@
 
     <h2>Live Interactive Platform</h2>
     <p>
-      The following interface presents the integrated Web GIS platform. It features LOD1 3D building models 
-      synchronized with SDG thematic layers and campus navigation networks.
+      The integrated Web GIS environment provides a comprehensive view of the campus infrastructure. 
+      It combines LOD1 building geometry with thematic layers focused on sustainable development goals.
     </p>
 
     <div class="interactive-container">
       <iframe 
-        src="https://alanugis.github.io/surveyingcampB/" 
+        src="https://github.com/yuanku1215/JACK-KU/tree/main/surveyingcampB-main" 
         title="NCKU Web GIS Platform"
         loading="lazy">
       </iframe>
     </div>
     
     <div class="btnRow" style="justify-content: center;">
-        <a class="btn" href="https://alanugis.github.io/surveyingcampB/" target="_blank">
-          View Platform in Fullscreen
+        <a class="btn primary" href="https://github.com/yuanku1215/JACK-KU/tree/main/surveyingcampB-main" target="_blank">
+          Open Project in New Window
         </a>
     </div>
 
@@ -355,7 +353,7 @@
           Survey Control Network Map
         </div>
         <div class="caption">
-          Spatial distribution of control points and surveying coverage.
+          Spatial distribution of control points and surveying coverage areas.
         </div>
       </div>
       <div class="figure span-6">
@@ -363,7 +361,7 @@
           3D Model Visualization
         </div>
         <div class="caption">
-          Georeferenced 3D mesh reconstruction of the campus environment.
+          Georeferenced 3D mesh reconstruction of the urban campus environment.
         </div>
       </div>
     </div>
@@ -373,7 +371,7 @@
       <div class="footLinks">
         <a href="index.html">Home</a>
         <a href="research.html">Research</a>
-        <a href="https://github.com/yuanku1215" target="_blank">GitHub</a>
+        <a href="https://github.com/yuanku1215/JACK-KU/tree/main/surveyingcampB-main" target="_blank">GitHub Project</a>
         <a href="mailto:contact@email.com">Email</a>
       </div>
     </footer>
