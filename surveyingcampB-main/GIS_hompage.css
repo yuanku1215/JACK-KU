@@ -1,5 +1,5 @@
 body {
-    font-family: "Noto Sans TC", sans-serif;
+    font-family: "Noto Sans", "Noto Sans TC", sans-serif;
     font-optical-sizing: auto;
     font-weight: 800;
     font-style: normal;
@@ -65,9 +65,9 @@ body.loading #loadingSpinner {
 
 .navbar a {
     flex: 1;
-    display: flex; /* 使用flexbox對齊icon和文本 */
-    align-items: center; /* 垂直居中對齊 */
-    justify-content: center; /* 水平居中對齊 */
+    display: flex; /* align icon and text */
+    align-items: center; /* vertical center */
+    justify-content: center; /* horizontal center */
     color: #474747;
     text-align: center;
     padding: 5px 16px;
@@ -78,23 +78,23 @@ body.loading #loadingSpinner {
 
 .navbar a img {
     margin-right: 8px;
-    width: 20px; /* 調整icon寬度 */
-    height: 20px; /* 調整icon高度 */
-    vertical-align: middle; /* 垂直對齊 */
+    width: 20px; 
+    height: 20px; 
+    vertical-align: middle; 
 }
 
 .navbar a span {
-    line-height: 20px; /* 確保文本垂直居中對齊 */
+    line-height: 20px; /* ensure text alignment */
 }
 
 .navbar a:hover img {
-    opacity: 0; /* hover時隱藏icon */
-    width: 0; /* 將icon的寬度設置為0，確保文本對齊 */
-    margin-right: 0; /* 取消icon的右邊距 */
+    opacity: 0; /* hide icon on hover */
+    width: 0; 
+    margin-right: 0; 
 }
 
 .navbar a::after {
-    content: attr(data-hover); /* 使用data-hover屬性的內容 */
+    content: attr(data-hover); /* use content from data-hover attribute */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -108,8 +108,8 @@ body.loading #loadingSpinner {
     opacity: 0;
     transition: opacity 0.3s ease;
     white-space: nowrap;
-    font-size: 14px; /* 調整字體大小 */
-    width: 100%; /* 確保文本寬度為100% */
+    font-size: 14px; 
+    width: 100%; 
 }
 
 .navbar a:hover::after {
@@ -127,21 +127,21 @@ body.loading #loadingSpinner {
 }
 
 .navbar a:nth-child(3) {
-    flex: 1.5; /* 擴展這個按鈕的寬度 */
+    flex: 1.5; /* expand width for the main title */
 }
 
 .navbar a.large-font {
-    font-size: 18px; /* 增加“永續發展指標之多維地理資訊系統”文字的字體大小 */
+    font-size: 18px; 
 }
 
 .vertical-text {
     display: flex;
-    flex-direction: column; /* 垂直排列 */
-    align-items: center; /* 垂直居中對齊 */
+    flex-direction: column; /* vertical stack */
+    align-items: center; 
 }
 
 .vertical-text .small-text {
-    font-size: 14px; /* “112學年度測量總實習”文字的原字體大小 */
+    font-size: 14px; 
 }
 
 .navbar a:nth-child(4):hover {
@@ -157,6 +157,7 @@ body.loading #loadingSpinner {
     height: 90vh;
 }
 
+/* Mobile responsive styles */
 @media (max-width: 430px) {
     .navbar a img {
         margin-right: 0;
@@ -169,25 +170,25 @@ body.loading #loadingSpinner {
     }
 
     .navbar a span {
-        display: none; /* 隱藏文本 */
+        display: none; /* hide standard text */
     }
 
     .navbar a::after {
-        display: none; /* 隱藏hover時顯示的文本 */
+        display: none; /* hide hover tooltips on mobile */
     }
 
     .navbar a:nth-child(3) .vertical-text div:first-child {
-        display: none; /* 隱藏第一行文字 */
+        display: none; /* hide main title row */
     }
 
     .navbar a:nth-child(3) .vertical-text::after {
-        content: "永續發展指標GIS平台";
+        content: "SDGs GIS Platform"; /* Translated mobile title */
         font-size: 18px;
         display: block;
     }
 
     .navbar a:nth-child(3) .small-text {
-        display: none; /* 隱藏小字 */
+        display: none; /* hide small subtitle */
     }
     #viewDiv {
         height: 86vh;
