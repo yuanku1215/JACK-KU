@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="SDG_Wheel.ico" type="image/x-icon">
+    <!-- font:Noto Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap" rel="stylesheet">
+
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>永續發展指標之多維地理資訊系統</title>
+    <link rel="stylesheet" href="GIS_hompage.css" />
+    <link rel="stylesheet" href="https://js.arcgis.com/4.30/esri/themes/light/main.css" />
+</head>
+
+<body class="loading">
+    <div id="loadingSpinner">
+        <div class="spinner"></div>
+        <div class="progress" id="loadingProgress">0%</div>
+    </div>
+
+    <div class="navbar">
+        <a href="https://experience.arcgis.com/experience/c62c8902c3ac46d0a23f0a0ba2bd1dab/" title="SDG7" data-hover="校園太陽能光電分析"
+            onmouseover="changeText(this, '校園太陽能光電分析')" onmouseout="resetText(this, 'SDG7 可負擔乾淨能源')"><img
+                src="icon/sdg7_icon.png" alt="icon1">SDG7 可負擔乾淨能源</a>
+        <a href="https://experience.arcgis.com/experience/b093fb33464f4aa093fcfcbe80849d24/" title="SDG10" data-hover="無障礙資訊" onmouseover="changeText(this, '無障礙資訊')"
+            onmouseout="resetText(this, 'SDG10 消弭不平等')"><img src="icon/sdg10_icon.png" alt="icon2">SDG10
+            消弭不平等</a>
+        <a href="https://alan-program.github.io/surveyingcampB/" title="永續發展指標之多維地理資訊系統" class="large-font">
+            <div class="vertical-text">
+                <div>永續發展指標之多維地理資訊系統</div>
+                <div class="small-text">112學年度測量總實習</div>
+            </div>
+        </a>
+        <a href="https://experience.arcgis.com/experience/7dc37916f418429fbcf217da40a6bbe9/" title="SDG11" data-hover="校園綠建築與綠化指標"
+            onmouseover="changeText(this, '校園綠建築與綠化指標')" onmouseout="resetText(this, 'SDG11 永續城市與社區')"><img
+                src="icon/sdg11_icon.png" alt="icon3">SDG11 永續城市與社區</a>
+        <a href="https://experience.arcgis.com/experience/161d8e4ab78447a682e35c7c71adaca2/" title="SDG16" data-hover="校園安全回報" onmouseover="changeText(this, '校園安全回報')"
+            onmouseout="resetText(this, 'SDG16 和平與正義制度')"><img src="icon/sdg16_icon.png" alt="icon4">SDG16
+            和平與正義制度</a>
+    </div>
+
+    <script src="https://js.arcgis.com/4.30/"></script>
+    <script>
+        require(["esri/views/SceneView",
+            "esri/WebScene",
+            "esri/widgets/LayerList",
+            "esri/layers/FeatureLayer",
+            "esri/widgets/Search",
+            "esri/symbols/PictureMarkerSymbol"],
+            (SceneView, WebScene, LayerList, FeatureLayer, Search, PictureMarkerSymbol) => {
+
+                const scene = new WebScene({
+                    portalItem: {
+                        // autocasts as new PortalItem()
+                        id: "f37836d014344afd934f7866c487e5c6"
+                    }
+                });
+
+                const view = new SceneView({
+                    map: scene,
+                    container: "viewDiv",
+                    padding: {
+                        top: 40
+                    }
+                });
+
+                let progress = 0;
+                const loadingProgress = document.getElementById('loadingProgress');
+                const updateProgress = () => {
+                    progress += 10;
+                    loadingProgress.textContent = progress + '%';
+                    if (progress >= 100) {
+                        clearInterval(intervalId);
+                        document.body.classList.remove('loading');
+                        document.getElementById('loadingSpinner').style.display = 'none';
+                    }
+                };
+
+                const intervalId = setInterval(updateProgress, 300);
+
+                view.when(function () {
+                    clearInterval(intervalId);
+                    progress = 100;
+                    loadingProgress.textContent = progress + '%';
+                    document.body.classList.remove('loading');
+                    document.getElementById('loadingSpinner').style.display = 'none';
+                });
+
+                view.when(() => {
+                    const layerList = new LayerList({
+                        view: view
+                    });
+                    view.ui.add(layerList, "bottom-right");
+                });
+
+                // 二維建物面圖層+照片
+                const twodBuilding = new FeatureLayer({
+                    url: "https://services5.arcgis.com/yqmzFsAzBUNEIWLw/arcgis/rest/services/2D%E5%BB%BA%E7%89%A9%E6%A1%86%E7%85%A7%E7%89%87/FeatureServer",
+                    elevationInfo: "on-the-ground",
+                    title: "二維建物面",
+                    overwriteActions: true,
+                    popupTemplate: {
+                        title: "{建物名}",
+                        outFields: ["*"],
+                        content: [
+                            {
+                                type: "attachments"
+                            },
+                            {
+                                type: "fields",
+                                fieldInfos: [{
+                                    fieldName: "樓層數",
+                                    label: "樓層數"
+                                }, {
+                                    fieldName: "建物高",
+                                    label: "建物高度"
+                                }]
+                            },
+                            {
+                                type: "text",
+                                text: "科系與處室: <a href={Bd_Link}>{rm_name1}</a>&nbsp; <a href={Bd_Link2}>{rm_name2}</a>&nbsp; <a href={Bd_Link3}>{rm_name3}</a>&nbsp; <a href={Bd_Link4}>{rm_name4}</a>&nbsp; <a href={Bd_Link5}>{rm_name5}</a>&nbsp; <a href={Bd_link6}>{rm_name6}</a>&nbsp; <a href={Bd_link7}>{rm_name7}</a>&nbsp; <a href={Bd_link8}>{rm_name8}</a>&nbsp; <a href={Bd_link9}>{rm_name9}</a>&nbsp; <a href={Bd_link10}>{rm_name10}</a>&nbsp;"
+                            }
+                        ]
+                    }
+                });
+                view.popup.alignment = "top-right";
+                scene.add(twodBuilding);
+
+                //校園景點icon
+                const attractionsIcon = {
+                    "type": "simple",
+                    "symbol": {
+                        "type": "picture-marker",
+                        "url": "https://img.icons8.com/?size=100&id=11958&format=png&color=000000",
+                        "width": "25px",
+                        "height": "25px"
+                    }
+                }
+                // 校園景點點位圖層
+                const campusAttractions = new FeatureLayer({
+                    url: "https://services5.arcgis.com/yqmzFsAzBUNEIWLw/arcgis/rest/services/%E6%88%90%E5%A4%A7%E5%85%89%E5%BE%A9%E6%A0%A1%E5%8D%80B%E6%B8%AC%E5%8D%80_%E6%A0%A1%E5%9C%92%E6%99%AF%E9%BB%9E1/FeatureServer",
+                    elevationInfo: {
+                        mode: "relative-to-ground",
+                        featureExpressionInfo: {
+                            expression: "0"
+                        },
+                        unit: "meters"
+                    },
+                    title: "校園景點",
+                    renderer: attractionsIcon,
+                    popupTemplate: {
+                        title: "{MarkName}",
+                        outFields: ["*"],
+                        overwriteActions: true,
+                        content: [
+                            {
+                                type: "attachments"
+                            },
+                            {
+                                type: "text",
+                                text: "{note}<br><br>照片來源: 112學年度測量總實習、國立成功大學地理資訊系統"
+                            }
+                        ]
+                    }
+                });
+                scene.add(campusAttractions, 0);
+
+                view.when(() => {
+                    const searchWidget = new Search({
+                        view: view,
+                        allPlaceholder: "搜尋科系、處室或景點",
+                        includeDefaultSources: false,
+                        locationEnabled: false,
+                        sources: [
+                            {
+                                layer: twodBuilding,
+                                searchFields: ["建物名", "rm_name1", "rm_name2", "rm_name3", "rm_name4", "rm_name5", "rm_name6", "rm_name7", "rm_name8", "rm_name9", "rm_name10"],
+                                displayField: "Trm_name",
+                                exactMatch: false,
+                                outFields: ["建物名", "rm_name1", "rm_name2", "rm_name3", "rm_name4", "rm_name5", "rm_name6", "rm_name7", "rm_name8", "rm_name9", "rm_name10"],
+                                name: "科系或處室",
+                                placeholder: "例如: 學生事務處"
+                            },
+                            {
+                                layer: campusAttractions,
+                                searchFields: ["MarkName"],
+                                displayField: "MarkName",
+                                exactMatch: false,
+                                outFields: ["MarkName"],
+                                name: "校園景點",
+                                placeholder: "例如: 飛撲"
+                            }
+                        ]
+                    });
+                    view.ui.add(searchWidget, {
+                        position: "top-right"
+                    });
+                });
+            });
+
+        function changeText(element, text) {
+            element.childNodes[1].textContent = text; // 保留圖片，僅更改文本
+        }
+
+        function resetText(element, text) {
+            element.childNodes[1].textContent = text; // 保留圖片，僅更改文本
+        }
+    </script>
+    <div id="viewDiv"></div>
+</body>
+
+</html>
