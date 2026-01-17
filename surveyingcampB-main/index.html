@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <link rel="shortcut icon" href="SDG_Wheel.ico" type="image/x-icon">
-    <!-- font:Noto Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap" rel="stylesheet">
 
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
-    <title>永續發展指標之多維地理資訊系統</title>
+    <title>Multi-Dimensional GIS for Sustainable Development Goals</title>
     <link rel="stylesheet" href="GIS_hompage.css" />
     <link rel="stylesheet" href="https://js.arcgis.com/4.30/esri/themes/light/main.css" />
 </head>
@@ -22,24 +21,40 @@
     </div>
 
     <div class="navbar">
-        <a href="https://experience.arcgis.com/experience/c62c8902c3ac46d0a23f0a0ba2bd1dab/" title="SDG7" data-hover="校園太陽能光電分析"
-            onmouseover="changeText(this, '校園太陽能光電分析')" onmouseout="resetText(this, 'SDG7 可負擔乾淨能源')"><img
-                src="icon/sdg7_icon.png" alt="icon1">SDG7 可負擔乾淨能源</a>
-        <a href="https://experience.arcgis.com/experience/b093fb33464f4aa093fcfcbe80849d24/" title="SDG10" data-hover="無障礙資訊" onmouseover="changeText(this, '無障礙資訊')"
-            onmouseout="resetText(this, 'SDG10 消弭不平等')"><img src="icon/sdg10_icon.png" alt="icon2">SDG10
-            消弭不平等</a>
-        <a href="https://alan-program.github.io/surveyingcampB/" title="永續發展指標之多維地理資訊系統" class="large-font">
+        <a href="https://experience.arcgis.com/experience/c62c8902c3ac46d0a23f0a0ba2bd1dab/" 
+           title="SDG7" 
+           data-hover="Campus Solar PV Analysis"
+           onmouseover="changeText(this, 'Campus Solar PV Analysis')" 
+           onmouseout="resetText(this, 'SDG7 Affordable and Clean Energy')">
+           <img src="icon/sdg7_icon.png" alt="icon1">SDG7 Affordable and Clean Energy</a>
+        
+        <a href="https://experience.arcgis.com/experience/b093fb33464f4aa093fcfcbe80849d24/" 
+           title="SDG10" 
+           data-hover="Accessibility Information" 
+           onmouseover="changeText(this, 'Accessibility Information')"
+           onmouseout="resetText(this, 'SDG10 Reduced Inequalities')">
+           <img src="icon/sdg10_icon.png" alt="icon2">SDG10 Reduced Inequalities</a>
+        
+        <a href="https://alan-program.github.io/surveyingcampB/" title="Multi-Dimensional GIS for SDGs" class="large-font">
             <div class="vertical-text">
-                <div>永續發展指標之多維地理資訊系統</div>
-                <div class="small-text">112學年度測量總實習</div>
+                <div>Multi-Dimensional GIS for SDGs</div>
+                <div class="small-text">2024 NCKU Geomatics Capstone Internship</div>
             </div>
         </a>
-        <a href="https://experience.arcgis.com/experience/7dc37916f418429fbcf217da40a6bbe9/" title="SDG11" data-hover="校園綠建築與綠化指標"
-            onmouseover="changeText(this, '校園綠建築與綠化指標')" onmouseout="resetText(this, 'SDG11 永續城市與社區')"><img
-                src="icon/sdg11_icon.png" alt="icon3">SDG11 永續城市與社區</a>
-        <a href="https://experience.arcgis.com/experience/161d8e4ab78447a682e35c7c71adaca2/" title="SDG16" data-hover="校園安全回報" onmouseover="changeText(this, '校園安全回報')"
-            onmouseout="resetText(this, 'SDG16 和平與正義制度')"><img src="icon/sdg16_icon.png" alt="icon4">SDG16
-            和平與正義制度</a>
+        
+        <a href="https://experience.arcgis.com/experience/7dc37916f418429fbcf217da40a6bbe9/" 
+           title="SDG11" 
+           data-hover="Campus Green Building Indicators"
+           onmouseover="changeText(this, 'Campus Green Building Indicators')" 
+           onmouseout="resetText(this, 'SDG11 Sustainable Cities and Communities')">
+           <img src="icon/sdg11_icon.png" alt="icon3">SDG11 Sustainable Cities and Communities</a>
+        
+        <a href="https://experience.arcgis.com/experience/161d8e4ab78447a682e35c7c71adaca2/" 
+           title="SDG16" 
+           data-hover="Campus Safety Reporting" 
+           onmouseover="changeText(this, 'Campus Safety Reporting')"
+           onmouseout="resetText(this, 'SDG16 Peace, Justice and Strong Institutions')">
+           <img src="icon/sdg16_icon.png" alt="icon4">SDG16 Peace, Justice and Strong Institutions</a>
     </div>
 
     <script src="https://js.arcgis.com/4.30/"></script>
@@ -54,7 +69,6 @@
 
                 const scene = new WebScene({
                     portalItem: {
-                        // autocasts as new PortalItem()
                         id: "f37836d014344afd934f7866c487e5c6"
                     }
                 });
@@ -96,11 +110,11 @@
                     view.ui.add(layerList, "bottom-right");
                 });
 
-                // 二維建物面圖層+照片
+                // 2D Building Layer with Photos
                 const twodBuilding = new FeatureLayer({
                     url: "https://services5.arcgis.com/yqmzFsAzBUNEIWLw/arcgis/rest/services/2D%E5%BB%BA%E7%89%A9%E6%A1%86%E7%85%A7%E7%89%87/FeatureServer",
                     elevationInfo: "on-the-ground",
-                    title: "二維建物面",
+                    title: "2D Building Footprints",
                     overwriteActions: true,
                     popupTemplate: {
                         title: "{建物名}",
@@ -113,15 +127,15 @@
                                 type: "fields",
                                 fieldInfos: [{
                                     fieldName: "樓層數",
-                                    label: "樓層數"
+                                    label: "Floors"
                                 }, {
                                     fieldName: "建物高",
-                                    label: "建物高度"
+                                    label: "Building Height (m)"
                                 }]
                             },
                             {
                                 type: "text",
-                                text: "科系與處室: <a href={Bd_Link}>{rm_name1}</a>&nbsp; <a href={Bd_Link2}>{rm_name2}</a>&nbsp; <a href={Bd_Link3}>{rm_name3}</a>&nbsp; <a href={Bd_Link4}>{rm_name4}</a>&nbsp; <a href={Bd_Link5}>{rm_name5}</a>&nbsp; <a href={Bd_link6}>{rm_name6}</a>&nbsp; <a href={Bd_link7}>{rm_name7}</a>&nbsp; <a href={Bd_link8}>{rm_name8}</a>&nbsp; <a href={Bd_link9}>{rm_name9}</a>&nbsp; <a href={Bd_link10}>{rm_name10}</a>&nbsp;"
+                                text: "Departments and Offices: <a href={Bd_Link}>{rm_name1}</a>&nbsp; <a href={Bd_Link2}>{rm_name2}</a>&nbsp; <a href={Bd_Link3}>{rm_name3}</a>&nbsp; <a href={Bd_Link4}>{rm_name4}</a>&nbsp; <a href={Bd_Link5}>{rm_name5}</a>&nbsp; <a href={Bd_link6}>{rm_name6}</a>&nbsp; <a href={Bd_link7}>{rm_name7}</a>&nbsp; <a href={Bd_link8}>{rm_name8}</a>&nbsp; <a href={Bd_link9}>{rm_name9}</a>&nbsp; <a href={Bd_link10}>{rm_name10}</a>&nbsp;"
                             }
                         ]
                     }
@@ -129,7 +143,7 @@
                 view.popup.alignment = "top-right";
                 scene.add(twodBuilding);
 
-                //校園景點icon
+                // Campus Landmarks Icon
                 const attractionsIcon = {
                     "type": "simple",
                     "symbol": {
@@ -139,7 +153,8 @@
                         "height": "25px"
                     }
                 }
-                // 校園景點點位圖層
+
+                // Campus Landmarks Layer
                 const campusAttractions = new FeatureLayer({
                     url: "https://services5.arcgis.com/yqmzFsAzBUNEIWLw/arcgis/rest/services/%E6%88%90%E5%A4%A7%E5%85%89%E5%BE%A9%E6%A0%A1%E5%8D%80B%E6%B8%AC%E5%8D%80_%E6%A0%A1%E5%9C%92%E6%99%AF%E9%BB%9E1/FeatureServer",
                     elevationInfo: {
@@ -149,7 +164,7 @@
                         },
                         unit: "meters"
                     },
-                    title: "校園景點",
+                    title: "Campus Landmarks",
                     renderer: attractionsIcon,
                     popupTemplate: {
                         title: "{MarkName}",
@@ -161,7 +176,7 @@
                             },
                             {
                                 type: "text",
-                                text: "{note}<br><br>照片來源: 112學年度測量總實習、國立成功大學地理資訊系統"
+                                text: "{note}<br><br>Source: 2024 NCKU Geomatics Capstone, NCKU GIS Center"
                             }
                         ]
                     }
@@ -171,7 +186,7 @@
                 view.when(() => {
                     const searchWidget = new Search({
                         view: view,
-                        allPlaceholder: "搜尋科系、處室或景點",
+                        allPlaceholder: "Search Departments, Offices, or Landmarks",
                         includeDefaultSources: false,
                         locationEnabled: false,
                         sources: [
@@ -181,8 +196,8 @@
                                 displayField: "Trm_name",
                                 exactMatch: false,
                                 outFields: ["建物名", "rm_name1", "rm_name2", "rm_name3", "rm_name4", "rm_name5", "rm_name6", "rm_name7", "rm_name8", "rm_name9", "rm_name10"],
-                                name: "科系或處室",
-                                placeholder: "例如: 學生事務處"
+                                name: "Departments and Offices",
+                                placeholder: "e.g., Office of Student Affairs"
                             },
                             {
                                 layer: campusAttractions,
@@ -190,8 +205,8 @@
                                 displayField: "MarkName",
                                 exactMatch: false,
                                 outFields: ["MarkName"],
-                                name: "校園景點",
-                                placeholder: "例如: 飛撲"
+                                name: "Campus Landmarks",
+                                placeholder: "e.g., Flying Carp"
                             }
                         ]
                     });
@@ -202,11 +217,11 @@
             });
 
         function changeText(element, text) {
-            element.childNodes[1].textContent = text; // 保留圖片，僅更改文本
+            element.childNodes[1].textContent = text; 
         }
 
         function resetText(element, text) {
-            element.childNodes[1].textContent = text; // 保留圖片，僅更改文本
+            element.childNodes[1].textContent = text; 
         }
     </script>
     <div id="viewDiv"></div>
