@@ -13,7 +13,7 @@
       --border: #e2e8f0;
       --accent: #1e3a8a;
       --accent-2: #0b5cab;
-      --card-bg: #ffffff; /* 修正為白色以增加閱讀性，原代碼為 #040101 */
+      --card-bg: #ffffff;
       --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
       --radius: 18px;
       --radius-sm: 14px;
@@ -56,12 +56,15 @@
       align-items: center;
       gap: 8px;
       font-weight: 600;
+      text-transform: uppercase;
+      font-size: 13px;
+      letter-spacing: 0.05em;
     }
     .pill {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 8px 12px;
+      padding: 8px 16px;
       border: 1px solid var(--border);
       background: rgba(255, 255, 255, 0.65);
       backdrop-filter: blur(6px);
@@ -71,8 +74,8 @@
       white-space: nowrap;
     }
     .dot {
-      width: 8px;
-      height: 8px;
+      width: 6px;
+      height: 6px;
       border-radius: 999px;
       background: var(--accent-2);
       display: inline-block;
@@ -86,28 +89,28 @@
       border: 1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding: 26px 26px 22px;
+      padding: 32px 32px 28px;
       margin-bottom: 22px;
     }
 
     h1 {
-      font-size: 38px;
-      letter-spacing: -0.5px;
+      font-size: 42px;
+      letter-spacing: -1px;
       margin: 8px 0 6px;
-      line-height: 1.2;
+      line-height: 1.1;
     }
 
     .subtitle {
-      font-size: 18px;
+      font-size: 19px;
       color: var(--muted);
-      margin-bottom: 14px;
+      margin-bottom: 16px;
       max-width: 920px;
     }
 
     .oneLiner {
       font-size: 16px;
       color: var(--text);
-      margin: 10px 0 16px;
+      margin: 10px 0 20px;
       max-width: 920px;
     }
 
@@ -122,126 +125,21 @@
       background: rgba(255,255,255,0.72);
       color: var(--muted);
       border-radius: 999px;
-      padding: 8px 12px;
-      font-size: 13px;
-    }
-
-    /* Section */
-    h2 {
-      font-size: 24px;
-      margin-top: 56px;
-      margin-bottom: 14px;
-      padding-bottom: 8px;
-      border-bottom: 2px solid var(--border);
-      letter-spacing: -0.2px;
-    }
-
-    p { font-size: 16px; margin-bottom: 16px; }
-    ul { padding-left: 20px; margin-bottom: 16px; }
-    li { margin-bottom: 8px; color: var(--text); }
-
-    .muted { color: var(--muted); }
-
-    /* Meta block */
-    .meta {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 18px 20px;
-      margin: 18px 0 8px;
-    }
-    .metaRow {
-      display: grid;
-      grid-template-columns: 160px 1fr;
-      gap: 10px;
-      padding: 10px 0;
-      border-top: 1px dashed var(--border);
-    }
-    .metaRow:first-child { border-top: none; }
-    .metaKey { color: var(--muted); font-weight: 600; }
-    .metaVal { color: var(--text); }
-    @media (max-width: 700px) {
-      .metaRow { grid-template-columns: 1fr; }
-    }
-
-    /* Stats */
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 14px;
-      margin-top: 14px;
-    }
-    .stat {
-      grid-column: span 3;
-      background: rgba(255,255,255,0.8);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 16px 16px;
-    }
-    .stat .k {
+      padding: 6px 14px;
       font-size: 12px;
-      color: var(--muted);
-      margin-bottom: 6px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-    .stat .v {
-      font-size: 20px;
-      font-weight: 700;
-      letter-spacing: -0.2px;
-    }
-    .stat .s {
-      margin-top: 6px;
-      font-size: 13px;
-      color: var(--muted);
-    }
-    @media (max-width: 900px) {
-      .stat { grid-column: span 6; }
-    }
-    @media (max-width: 520px) {
-      .stat { grid-column: span 12; }
-    }
-
-    /* Grid + Cards */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 14px;
-      margin-top: 14px;
-    }
-    .card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.05);
-      padding: 18px 18px;
-    }
-    .card h3 {
-      margin: 0 0 8px;
-      font-size: 16px;
-      letter-spacing: -0.2px;
-    }
-    .card p { margin: 0; color: var(--muted); font-size: 14px; }
-
-    .span-12 { grid-column: span 12; }
-    .span-8  { grid-column: span 8; }
-    .span-6  { grid-column: span 6; }
-    .span-4  { grid-column: span 4; }
-
-    @media (max-width: 900px) {
-      .span-8, .span-6, .span-4 { grid-column: span 12; }
-      h1 { font-size: 34px; }
+      font-weight: 500;
     }
 
     /* Interactive GIS Container */
     .interactive-container {
       width: 100%;
-      height: 600px;
+      height: 800px; /* 增加高度 */
       border-radius: var(--radius-sm);
       overflow: hidden;
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
-      background: #eee;
+      background: #f1f5f9;
+      margin: 24px 0;
     }
     .interactive-container iframe {
       width: 100%;
@@ -249,137 +147,116 @@
       border: none;
     }
     @media (max-width: 700px) {
-      .interactive-container { height: 450px; }
+      .interactive-container { height: 550px; }
     }
 
-    /* Callout */
-    .callout {
-      border: 1px solid rgba(30,58,138,0.25);
-      background: rgba(30,58,138,0.05);
+    /* Section Styling */
+    h2 {
+      font-size: 26px;
+      margin-top: 64px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      letter-spacing: -0.5px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 16px 18px;
-      margin-top: 14px;
+      padding: 24px;
     }
-    .callout b { color: var(--accent); }
+    .card h3 { margin: 0 0 10px; font-size: 17px; }
+    .card p { margin: 0; color: var(--muted); font-size: 14px; }
 
-    /* Figure placeholders */
+    .span-12 { grid-column: span 12; }
+    .span-6  { grid-column: span 6; }
+    .span-4  { grid-column: span 4; }
+
+    /* Stats */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+      margin-top: 24px;
+    }
+    .stat {
+      grid-column: span 3;
+      background: rgba(255,255,255,0.8);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+    .stat .k { font-size: 11px; color: var(--muted); text-transform: uppercase; margin-bottom: 8px; }
+    .stat .v { font-size: 22px; font-weight: 700; }
+    
+    @media (max-width: 900px) {
+      .stat { grid-column: span 6; }
+      .span-6, .span-4 { grid-column: span 12; }
+    }
+
+    /* Figure */
     .figure {
       border: 1px solid var(--border);
-      background: linear-gradient(135deg, rgba(15,23,42,0.03), rgba(15,23,42,0.01));
       border-radius: var(--radius);
-      padding: 16px;
-      overflow: hidden;
+      padding: 20px;
+      background: #fff;
     }
     .imgPlaceholder {
-      height: 240px;
+      height: 280px;
       border-radius: var(--radius-sm);
-      border: 1px dashed rgba(71,85,105,0.35);
-      background:
-        radial-gradient(400px 200px at 20% 10%, rgba(30, 58, 138, 0.1), transparent 60%),
-        radial-gradient(380px 220px at 90% 40%, rgba(11, 92, 171, 0.1), transparent 60%),
-        linear-gradient(to bottom, rgba(255,255,255,0.75), rgba(255,255,255,0.35));
+      background: #f8fafc;
       display: flex;
       align-items: center;
       justify-content: center;
-      text-align: center;
-      padding: 12px;
+      border: 1px dashed var(--border);
       color: var(--muted);
       font-size: 14px;
-    }
-    .caption {
-      margin-top: 12px;
-      font-size: 13px;
-      color: var(--muted);
-    }
-    .caption code {
-      font-family: var(--mono);
-      font-size: 12px;
-      color: #0f172a;
-      background: rgba(15, 23, 42, 0.04);
-      border: 1px solid rgba(15, 23, 42, 0.08);
-      padding: 2px 6px;
-      border-radius: 8px;
     }
 
     /* Buttons */
-    .btnRow {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 12px;
-    }
+    .btnRow { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
     .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 14px;
-      border-radius: 12px;
+      padding: 12px 20px;
+      border-radius: 10px;
       border: 1px solid var(--border);
-      background: rgba(255,255,255,0.85);
+      background: #fff;
       color: var(--text);
       font-weight: 600;
       font-size: 14px;
+      transition: all 0.2s ease;
     }
     .btn.primary {
-      background: linear-gradient(180deg, rgba(30,58,138,0.12), rgba(30,58,138,0.06));
-      border-color: rgba(30,58,138,0.25);
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
     }
-    .btn:hover {
-      text-decoration: none;
-      transform: translateY(-1px);
-      box-shadow: 0 10px 18px rgba(15,23,42,0.08);
-    }
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
 
-    /* Details */
-    details {
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      background: rgba(255,255,255,0.8);
-      padding: 14px 16px;
-      margin-top: 14px;
-    }
-    summary {
-      cursor: pointer;
-      font-weight: 700;
-      color: var(--text);
-      letter-spacing: -0.2px;
-    }
-    details > div {
-      margin-top: 10px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-    .miniList { margin: 10px 0 0; padding-left: 18px; }
-    .miniList li { color: var(--muted); }
-
-    /* Footer */
     footer {
-      margin-top: 96px;
-      font-size: 14px;
-      color: #64748b;
+      margin-top: 120px;
+      padding-bottom: 60px;
+      font-size: 13px;
+      color: var(--muted);
       text-align: center;
+      border-top: 1px solid var(--border);
+      padding-top: 40px;
     }
-    .footLinks {
-      margin-top: 10px;
-      display: flex;
-      justify-content: center;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
+    .footLinks { display: flex; justify-content: center; gap: 24px; margin-top: 16px; }
 
-    /* Small helper for inline highlight */
     .tagline {
       font-family: var(--mono);
-      font-size: 12px;
+      font-size: 11px;
       color: var(--muted);
-      border: 1px solid rgba(15, 23, 42, 0.10);
-      background: rgba(255,255,255,0.7);
-      padding: 3px 8px;
-      border-radius: 999px;
-      display: inline-flex;
-      gap: 6px;
-      align-items: center;
-      margin-top: 10px;
+      margin-top: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
     }
   </style>
 </head>
@@ -388,168 +265,116 @@
   <div class="container">
 
     <div class="topbar">
-      <a class="backlink" href="index.html">← Back to Home</a>
-      <div class="pill"><span class="dot"></span> Capstone / Internship</div>
+      <a class="backlink" href="index.html">Back to Home</a>
+      <div class="pill"><span class="dot"></span> Capstone Portfolio</div>
     </div>
 
     <div class="hero">
       <h1>Capstone Internship</h1>
       <div class="subtitle">
-        NCKU Geomatics Summer Capstone: Building a 3D Campus Map with Surveying, Photogrammetry, and GIS
+        NCKU Geomatics: Integrated 3D Campus Mapping through Surveying, Photogrammetry, and Web GIS
       </div>
 
       <div class="oneLiner">
-        <b>One-line summary:</b> A two-month, full-time capstone internship at National Cheng Kung University
-        where our team collected field measurements (leveling, total station, GNSS), processed photogrammetry,
-        and integrated GIS layers to produce a multi-theme, campus-scale <b>3D map</b>.
+        A two-month intensive project at National Cheng Kung University focused on multi-sensor data acquisition 
+        and the development of a campus-scale spatial information system.
       </div>
 
-      <div class="chips" aria-label="keywords">
-        <div class="chip">Leveling</div>
+      <div class="chips">
+        <div class="chip">Geodetic Leveling</div>
         <div class="chip">Total Station</div>
-        <div class="chip">GNSS</div>
-        <div class="chip">Photogrammetry</div>
-        <div class="chip">3D Reconstruction</div>
-        <div class="chip">GIS Thematic Mapping</div>
+        <div class="chip">GNSS Positioning</div>
+        <div class="chip">3D Photogrammetry</div>
+        <div class="chip">ArcGIS Integration</div>
       </div>
 
-      <div class="stats" aria-label="internship snapshot">
+      <div class="stats">
         <div class="stat">
           <div class="k">Program</div>
           <div class="v">Capstone</div>
-          <div class="s">NCKU Geomatics Dept.</div>
         </div>
         <div class="stat">
           <div class="k">Duration</div>
           <div class="v">2 Months</div>
-          <div class="s">Summer (Junior → Senior)</div>
         </div>
         <div class="stat">
-          <div class="k">Deliverable</div>
-          <div class="v">3D Campus Map</div>
-          <div class="s">Multi-theme layers</div>
+          <div class="k">Scope</div>
+          <div class="v">Campus Wide</div>
         </div>
         <div class="stat">
-          <div class="k">Skills</div>
-          <div class="v">Survey + GIS</div>
-          <div class="s">End-to-end pipeline</div>
+          <div class="k">Technology</div>
+          <div class="v">Web GIS</div>
         </div>
       </div>
 
-      <div class="btnRow" aria-label="quick links">
-        <a class="btn primary" href="https://alanugis.github.io/surveyingcampB/" target="_blank" rel="noopener">🗺️ Live Map Demo</a>
-        <a class="btn" href="#" target="_blank" rel="noopener">📄 Final Report (PDF)</a>
-        <a class="btn" href="#" target="_blank" rel="noopener">🧰 Methods / Notes</a>
+      <div class="btnRow">
+        <a class="btn primary" href="https://alanugis.github.io/surveyingcampB/" target="_blank">Live Demo</a>
+        <a class="btn" href="#">Project Report</a>
+        <a class="btn" href="#">Technical Notes</a>
       </div>
 
-      <div class="tagline">capstone • field survey • photogrammetry • GIS • 3D mapping</div>
+      <div class="tagline">Surveying | Photogrammetry | GIS | Spatial Analysis</div>
     </div>
 
-    <div class="meta" aria-label="internship metadata">
-      <div class="metaRow">
-        <div class="metaKey">Institution</div>
-        <div class="metaVal">National Cheng Kung University (NCKU), Department of Geomatics</div>
-      </div>
-      <div class="metaRow">
-        <div class="metaKey">Course Type</div>
-        <div class="metaVal">Capstone Internship (Full-time, on-campus)</div>
-      </div>
-      <div class="metaRow">
-        <div class="metaKey">Focus</div>
-        <div class="metaVal">Integrated field surveying + photogrammetry + GIS to build a campus-scale 3D map</div>
-      </div>
-      <div class="metaRow">
-        <div class="metaKey">Outputs</div>
-        <div class="metaVal">3D base map + multiple thematic maps + documentation (workflow + accuracy checks)</div>
-      </div>
-    </div>
-
-    <h2>Overview</h2>
+    <h2>Live Interactive Platform</h2>
     <p>
-      This capstone internship is a two-month, full-time summer program bridging my junior spring and senior year.
-      Unlike a single-assignment course, the capstone mirrors real-world geomatics practice: we start from field
-      data acquisition, ensure quality control, then build a complete mapping product that is usable for analysis
-      and communication.
+      The following interface presents the integrated Web GIS platform. It features LOD1 3D building models 
+      synchronized with SDG thematic layers and campus navigation networks.
     </p>
 
-    <div class="callout">
-      <b>What makes it capstone-level:</b> it is end-to-end (field → processing → product), requires accuracy awareness,
-      and forces consistent coordinate control so that 3D models and GIS layers align in the same spatial reference frame.
+    <div class="interactive-container">
+      <iframe 
+        src="https://alanugis.github.io/surveyingcampB/" 
+        title="NCKU Web GIS Platform"
+        loading="lazy">
+      </iframe>
+    </div>
+    
+    <div class="btnRow" style="justify-content: center;">
+        <a class="btn" href="https://alanugis.github.io/surveyingcampB/" target="_blank">
+          View Platform in Fullscreen
+        </a>
     </div>
 
-    <h2>Workflow: Field → Processing → Delivery</h2>
+    <h2>Technical Workflow</h2>
     <div class="grid">
       <div class="card span-6">
-        <h3>1) Planning & Control</h3>
-        <p>Define coordinate reference, prepare control points, and ensure alignment across all instruments.</p>
+        <h3>Primary Data Acquisition</h3>
+        <p>Execution of high-precision leveling and total station measurements to establish a reliable coordinate control framework.</p>
       </div>
       <div class="card span-6">
-        <h3>2) Field Survey</h3>
-        <p>Leveling for elevation, Total Station for geometry, and GNSS for robust georeferencing.</p>
+        <h3>3D Reconstruction</h3>
+        <p>Conversion of aerial and terrestrial imagery into georeferenced 3D models using advanced photogrammetric pipelines.</p>
       </div>
     </div>
 
-    <h2>Selected Visuals</h2>
-
+    <h2>Data Coverage</h2>
     <div class="grid">
       <div class="figure span-6">
         <div class="imgPlaceholder">
-          <div>
-            <b>Figure 1: Control & Survey Coverage</b><br />
-            <span class="muted">[Upload Survey Route Map]</span>
-          </div>
+          Survey Control Network Map
         </div>
         <div class="caption">
-          Control framework and survey coverage design for stable georeferencing.
+          Spatial distribution of control points and surveying coverage.
         </div>
       </div>
-
       <div class="figure span-6">
         <div class="imgPlaceholder">
-          <div>
-            <b>Figure 2: Photogrammetry 3D Output</b><br />
-            <span class="muted">[Upload 3D Mesh Screenshot]</span>
-          </div>
+          3D Model Visualization
         </div>
         <div class="caption">
-          3D reconstruction result aligned to control, providing a unified base.
-        </div>
-      </div>
-
-      <div class="figure span-12">
-        <div class="interactive-container">
-          <iframe 
-            src="https://alanugis.github.io/surveyingcampB/" 
-            title="NCKU Web GIS Platform"
-            loading="lazy">
-          </iframe>
-        </div>
-        <div class="caption">
-          <b>Interactive Figure 3: NCKU Web GIS Platform (Live Demo).</b><br /> 
-          整合 ArcGIS API 開發之多維地理資訊系統，支援 3D LOD1 建築模型與永續發展指標（SDGs）圖層切換。
-        </div>
-        <div class="btnRow" style="margin-top: 12px;">
-            <a class="btn primary" href="https://alanugis.github.io/surveyingcampB/" target="_blank">
-              🚀 Open Full Map in New Window
-            </a>
+          Georeferenced 3D mesh reconstruction of the campus environment.
         </div>
       </div>
     </div>
-
-    <h2>What I Learned</h2>
-    <ul>
-      <li><b>End-to-end thinking:</b> field data quality directly controls the credibility of final visual outputs.</li>
-      <li><b>Coordinate consistency:</b> integrating surveying, photogrammetry, and GIS requires strict reference control.</li>
-      <li><b>Measurement mindset:</b> good maps come from validated measurements, not only nice rendering.</li>
-    </ul>
 
     <footer>
       © 2025 TSUN-YUAN KU
       <div class="footLinks">
         <a href="index.html">Home</a>
         <a href="research.html">Research</a>
-        <a href="https://github.com/yuanku1215" target="_blank" rel="noopener">GitHub</a>
-        <a href="mailto:yourname@email.com">Email</a>
+        <a href="https://github.com/yuanku1215" target="_blank">GitHub</a>
+        <a href="mailto:contact@email.com">Email</a>
       </div>
     </footer>
 
