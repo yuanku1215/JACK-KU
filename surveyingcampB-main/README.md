@@ -52,7 +52,4 @@ This Web GIS platform is designed to provide users with detailed information abo
 Contributions are welcome! Please submit a pull request or open an issue to discuss any changes.
 
 ## Acknowledgements
-This project includes data collected by the 2024 NCKU Surveying Camp Group B.
-
-## Contact
-For questions or feedback, please contact F64101113@gs.ncku.edu.tw
+This project includes data collected by the 2024 NCKU Surveying Camp.
