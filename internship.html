@@ -17,7 +17,7 @@
       --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
       --radius: 18px;
       --radius-sm: 14px;
-      --maxw: 1100px; /* 已調整為與 Research 頁面相同的 1100px */
+      --maxw: 1100px;
       --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     }
 
@@ -195,31 +195,14 @@
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 24px;
+      transition: transform 0.2s ease;
     }
-    .card h3 { margin: 0 0 10px; font-size: 17px; }
+    .card:hover { transform: translateY(-3px); }
+    .card h3 { margin: 0 0 10px; font-size: 17px; color: var(--accent); }
     .card p { margin: 0; color: var(--muted); font-size: 14px; }
 
     .span-12 { grid-column: span 12; }
     .span-6  { grid-column: span 6; }
-
-    /* Figure Styling */
-    .figure {
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 20px;
-      background: #fff;
-    }
-    .imgPlaceholder {
-      height: 280px;
-      border-radius: var(--radius-sm);
-      background: #f8fafc;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px dashed var(--border);
-      color: var(--muted);
-      font-size: 14px;
-    }
 
     /* Buttons */
     .btnRow { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
@@ -259,6 +242,14 @@
       text-transform: uppercase;
       letter-spacing: 0.1em;
     }
+
+    ul.card-list {
+      margin: 12px 0 0;
+      padding-left: 18px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    ul.card-list li { margin-bottom: 6px; }
   </style>
 </head>
 
@@ -273,54 +264,51 @@
     <div class="hero">
       <h1>Capstone Internship</h1>
       <div class="subtitle">
-        NCKU Geomatics: Integrated 3D Campus Mapping through Surveying, Photogrammetry, and Web GIS
+        Digital Topographic Mapping and Sustainable Campus GIS Development for NCKU Kuang-Fu Campus
       </div>
 
       <div class="oneLiner">
-        A two-month intensive project at National Cheng Kung University focused on multi-sensor data acquisition 
-        and the development of a campus-scale spatial information system.
+        An industry-simulated geomatics project integrating high-precision control surveying, UAV 3D reconstruction, and multi-dimensional Web GIS systems for campus-scale spatial planning.
       </div>
 
       <div class="chips">
-        <div class="chip">Geodetic Leveling</div>
-        <div class="chip">Total Station</div>
-        <div class="chip">GNSS Positioning</div>
-        <div class="chip">3D Photogrammetry</div>
-        <div class="chip">ArcGIS Integration</div>
+        <div class="chip">TWD97 [2020] Reference Frame</div>
+        <div class="chip">UAV Photogrammetry</div>
+        <div class="chip">CityGML LOD-1 Modeling</div>
+        <li><b>SDG Spatial Analysis</b></li>
+        <div class="chip">Integrated Web GIS</div>
       </div>
 
       <div class="stats">
         <div class="stat">
-          <div class="k">Program</div>
-          <div class="v">Capstone</div>
+          <div class="k">Role</div>
+          <div class="v">Implementation</div>
         </div>
         <div class="stat">
-          <div class="k">Duration</div>
-          <div class="v">2 Months</div>
+          <div class="k">Project Cycle</div>
+          <div class="v">25 Days</div>
         </div>
         <div class="stat">
-          <div class="k">Scope</div>
-          <div class="v">Campus Wide</div>
+          <div class="k">Mapping Scale</div>
+          <div class="v">1/1000</div>
         </div>
         <div class="stat">
-          <div class="k">Technology</div>
-          <div class="v">Web GIS</div>
+          <div class="k">SDG Metric</div>
+          <div class="v">Solar PV Area</div>
         </div>
       </div>
 
       <div class="btnRow">
         <a class="btn primary" href="https://yuanku1215.github.io/JACK-KU/surveyingcampB-main/index.html" target="_blank">Live Demo</a>
         <a class="btn" href="https://github.com/yuanku1215/JACK-KU/tree/main/surveyingcampB-main" target="_blank">Repository</a>
-        <a class="btn" href="https://github.com/yuanku1215/JACK-KU/tree/main/surveyingcampB-main" target="_blank">Technical Notes</a>
       </div>
 
-      <div class="tagline">Surveying | Photogrammetry | GIS | Spatial Analysis</div>
+      <div class="tagline">Geomatics | 3D Reconstruction | GIS | NCKU Surveying</div>
     </div>
 
     <h2>Live Interactive Platform</h2>
     <p>
-      The integrated Web GIS environment provides a comprehensive view of the campus infrastructure. 
-      It combines LOD1 building geometry with thematic layers focused on sustainable development goals.
+      The integrated Web GIS environment provides a comprehensive spatial interface for campus infrastructure management. It combines LOD-1 building geometry with thematic layers focused on Sustainable Development Goals (SDGs), featuring campus-wide rooftop solar photovoltaic potential analysis.
     </p>
 
     <div class="interactive-container">
@@ -337,34 +325,59 @@
         </a>
     </div>
 
-    <h2>Technical Workflow</h2>
+    <h2>Technical Workflow (Implementation)</h2>
     <div class="grid">
       <div class="card span-6">
-        <h3>Primary Data Acquisition</h3>
-        <p>Execution of high-precision leveling and total station measurements to establish a reliable coordinate control framework.</p>
+        <h3>1. Geodetic Control Framework</h3>
+        <p>Establishment of a high-precision spatial reference network:</p>
+        <ul class="card-list">
+          [cite_start]<li><b>GNSS Positioning</b>: Static relative positioning in TWD97 [2020] linked to national tracking stations[cite: 120, 121].</li>
+          [cite_start]<li><b>Geodetic Leveling</b>: Precision leveling under the TWVD 2001 system connected to primary bench marks[cite: 123, 124].</li>
+          [cite_start]<li><b>Traverse Surveying</b>: Network densification in high-density areas to ensure sub-centimeter accuracy[cite: 129, 270].</li>
+        </ul>
       </div>
       <div class="card span-6">
-        <h3>3D Reconstruction</h3>
-        <p>Conversion of aerial and terrestrial imagery into georeferenced 3D models using advanced photogrammetric pipelines.</p>
+        <h3>2. UAV Photogrammetric Pipeline</h3>
+        <p>Aerial data acquisition and 3D surface reconstruction:</p>
+        <ul class="card-list">
+          [cite_start]<li><b>Aerial Photography</b>: High-resolution imagery acquisition with sub-10cm GSD and ground control signal placement[cite: 155, 362].</li>
+          [cite_start]<li><b>Aerotriangulation (AT)</b>: Rigorous bundle block adjustment to produce <b>True Orthophotos</b>[cite: 302, 360].</li>
+          [cite_start]<li><b>Model Generation</b>: Automated extraction of <b>DSM/DEM</b> and <b>CityGML LOD-1</b> building geometries[cite: 390, 491].</li>
+        </ul>
+      </div>
+      <div class="card span-6">
+        <h3>3. Numerical Topographic Mapping</h3>
+        <p>Production of 1/1000 scale digital topographic assets:</p>
+        <ul class="card-list">
+          [cite_start]<li><b>Terrestrial Surveying</b>: Field data collection using Total Stations for area-occluded by aerial sensors[cite: 408, 443].</li>
+          [cite_start]<li><b>Digital Compilation</b>: Compilation of standard DWG/DXF layers including contours and feature annotations[cite: 464, 467].</li>
+          [cite_start]<li><b>Quality Control</b>: Rigorous attribute and geometric verification following municipal mapping standards[cite: 464, 483].</li>
+        </ul>
+      </div>
+      <div class="card span-6">
+        <h3>4. Web GIS & SDG Analytics</h3>
+        <p>System development and sustainability thematic mapping:</p>
+        <ul class="card-list">
+          [cite_start]<li><b>Database Integration</b>: Organization of feature classes (SHP) and comprehensive TWSMP metadata[cite: 525, 576].</li>
+          [cite_start]<li><b>SDG Implementation</b>: Specialized analysis of <b>rooftop solar PV area</b> and other sustainability metrics[cite: 593, 596].</li>
+          [cite_start]<li><b>Web Platform</b>: Interactive 3D campus navigation system providing visualized spatial queries[cite: 602, 608].</li>
+        </ul>
       </div>
     </div>
 
-    <h2>Data Coverage</h2>
+    <h2>Core Deliverables</h2>
     <div class="grid">
-      <div class="figure span-6">
-        <div class="imgPlaceholder">
-          Survey Control Network Map
-        </div>
-        <div class="caption">
-          Spatial distribution of control points and surveying coverage areas.
-        </div>
-      </div>
-      <div class="figure span-6">
-        <div class="imgPlaceholder">
-          3D Model Visualization
-        </div>
-        <div class="caption">
-          Georeferenced 3D mesh reconstruction of the urban campus environment.
+      <div class="card span-12">
+        <p>
+          This project resulted in a professional-grade spatial information suite, ensuring high interoperability for campus facility management and sustainable urban planning.
+        </p>
+        <div class="chips" style="margin-top: 20px;">
+          <div class="chip">1/1000 Digital Topographic Map (DWG/SHP)</div>
+          <div class="chip">CityGML LOD-1 Building Models</div>
+          <div class="chip">10cm GSD True Orthophoto & DSM/DEM</div>
+          <div class="chip">SDG Thematic Layer: Rooftop Solar Potential</div>
+          <div class="chip">TWD97 [2020] Validated Control Network</div>
+          <div class="chip">Standardized TWSMP Metadata</div>
         </div>
       </div>
     </div>
