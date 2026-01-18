@@ -1,0 +1,57 @@
+! 2025/04/28 F64101066 KU TSUN YUAN Shortest Route Problem nodes;
+
+MODEL:
+SETS:
+  CITIES /1..10/: F, Next, X;
+  ROADS(CITIES, CITIES)/
+    1,2 1,3 1,4
+    2,5 2,6 2,7
+    3,5 3,6 3,7
+    4,5 4,6
+    5,8 5,9
+    6,8 6,9
+    7,8 7,9
+    8,10
+    9,10 /: D, Y;
+ENDSETS
+
+DATA:
+D = 
+1    5    2
+13   12   11
+6   10    4
+12   14
+3    9
+6    5
+8   10
+5
+2;
+ENDDATA
+
+F(10) = 0;
+X(1) = 1;
+
+@FOR(CITIES(i) | i #LT# 10:
+  F(i) = @MIN(ROADS(i,j): D(i,j) + F(j))
+);
+
+@FOR(ROADS(i,j):
+  F(i) >= D(i,j) + F(j) - 1000 * (1 - Y(i,j))
+);
+
+@FOR(CITIES(i) | i #LT# 10:
+  @SUM(ROADS(i,j): Y(i,j)) = X(i)
+);
+
+@FOR(CITIES(j) | j #GT# 1:
+  @SUM(ROADS(i,j): Y(i,j)) = X(j)
+);
+
+@FOR(CITIES(i) | i #LT# 10:
+  Next(i) = @SUM(ROADS(i,j): j * Y(i,j))
+);
+
+@FOR(ROADS(i,j): @BIN(Y(i,j)));
+@FOR(CITIES(i): @BIN(X(i)));
+
+END

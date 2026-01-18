@@ -1,0 +1,49 @@
+!2025/04/28 F64101066 KU TSUN YUAN One-Period Material Requirement Planning;
+
+MODEL:
+SETS:
+TYPES/U, R, T/:M, B, MP, BP, NEED;
+MATERIALS/S, W, C/: MM, MB, MMP, MBP;
+SUBMATS/H, P, L/: SMM, SMB, SMP, SBP;
+REQ(TYPES, MATERIALS): MATREQ;
+MREQ(MATERIALS, SUBMATS): SMATREQ;
+ENDSETS
+
+DATA:
+NEED = 100 500 200;
+MP = 1.04 1.16 1.9;
+BP = 2.6 5.2 3.1;
+MMP = .2 .22 .26;
+MBP = .25 1.4 .96;
+SMP = .16 .04 .03;
+SBP = .19 .07 .05;
+
+MATREQ = 
+1 1 0
+1 2 1
+2 2 2;
+
+SMATREQ = 
+0 0 0
+1 36 0
+0 0 84;
+ENDDATA
+
+@FOR(TYPES(T):
+    M(T) + B(T) = NEED(T)
+);
+
+@FOR(MATERIALS(I):
+    MM(I) + MB(I) = @SUM(TYPES(T): MATREQ(T, I) * M(T))
+);
+
+@FOR(SUBMATS(S):
+    SMM(S) + SMB(S) = @SUM(MATERIALS(I): SMATREQ(I, S) * MM(I))
+);
+
+MIN = 
+    @SUM(TYPES(T): MP(T) * M(T) + BP(T) * B(T)) +
+    @SUM(MATERIALS(I): MMP(I) * MM(I) + MBP(I) * MB(I)) +
+    @SUM(SUBMATS(S): SMP(S) * SMM(S) + SBP(S) * SMB(S));
+
+END

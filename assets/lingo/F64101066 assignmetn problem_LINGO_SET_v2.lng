@@ -1,0 +1,28 @@
+!2025/03/24 F64101066 KU TSUN YUAN The assignment problem_LINGO_SET_v2;
+
+MODEL:
+
+SETS: 
+machine /1..9/;
+job /1..9/;
+link(machine, job):cost, assignment;
+ENDSETS
+
+DATA:
+cost= 13 8 10 11 6 14 10 7 13
+12 13 11 1 2 11 2 12 10
+6 8 4 12 12 5 3 13 13
+12 2 6 4 11 5 10 4 6
+1 2 4 10 7 8 14 9 15
+11 2 7 10 3 8 5 11 11
+10 2 2 4 8 10 2 1 4
+11 3 2 12 15 3 3 14 14
+6 8 15 4 12 7 4 15 12;
+ENDDATA
+
+min = @SUM(LINK: cost*assignment);
+@FOR(machine(i): @SUM(job(j): assignment(i, j)) = 1);
+@FOR(job(j): @SUM(machine(i): assignment(i, j)) = 1);
+@FOR(link(i, j): @BIN(assignment(i, j)));
+
+END

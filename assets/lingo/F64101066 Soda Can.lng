@@ -1,0 +1,5 @@
+!2025/03/03 F64101066 KU TSUN YUAN Soda Can;
+PI = 3.1415926535;
+min=2*PI*r*r+2*pi*r*h;
+PI*r*r*h=355;
+h>=0;

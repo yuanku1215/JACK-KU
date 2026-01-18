@@ -1,0 +1,15 @@
+!2025/03/10 F64101066 KU TSUN YUAN Maximum-Flow Problem;
+
+MAX = x0;
+x0=xso_1+xso_2;
+xso_1=x1_3+x1_2;
+x1_2+xso_2=x2_si;
+x1_3=x3_si;
+x3_si+x2_si=x0;
+
+xso_1<=2;
+xso_2<=3;
+x1_2<=3;
+x1_3<=4;
+x2_si<=2;
+x3_si<=1;

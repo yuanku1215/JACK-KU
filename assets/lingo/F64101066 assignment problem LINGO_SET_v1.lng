@@ -1,0 +1,23 @@
+!2025/03/24 F64101066 KU TSUN YUAN LINGO SET_v1;
+
+MODEL:
+
+SETS: 
+machine /1..4/;
+job /1..4/;
+link(machine, job):cost, assignment;
+ENDSETS
+
+DATA:
+cost= 14 5 8 7
+2 12 6 5
+7 8 3 9
+2 4 6 10;
+ENDDATA
+
+min = @SUM(LINK: cost*assignment);
+@FOR(machine(i): @SUM(job(j): assignment(i, j)) = 1);
+@FOR(job(j): @SUM(machine(i): assignment(i, j)) = 1);
+@FOR(link(i, j): @BIN(assignment(i, j)));
+
+END

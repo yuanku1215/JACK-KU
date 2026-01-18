@@ -1,0 +1,35 @@
+!2025/04/28 F64101066 KU TSUN YUAN Set Covering_@IF;
+
+MODEL:
+SETS:
+  Cities /1..6/: X;
+  links(Cities, Cities): a, d;
+ENDSETS
+
+DATA:
+a = 
+ 1 1 0 0 0 0
+ 1 1 0 0 0 1
+ 0 0 1 1 0 0
+ 0 0 1 1 1 0
+ 0 0 0 1 1 1
+ 0 1 0 0 1 1;
+
+d = 
+ 0  10  20  30  30  20
+10   0  25  35  20  10
+20  25   0  15  30  20
+30  35  15   0  15  25
+30  20  30  15   0  14
+20  10  20  25  14   0;
+ENDDATA
+
+
+MIN = @SUM(Cities(i): X(i));
+@FOR(Cities(i):
+  @SUM(Cities(j): a(i,j) * X(j)) >= 1
+);
+@FOR(Cities(i): @BIN(X(i)));
+@FOR(links(i, j): a(i, j) = @IF(d(i, j)#LE#15, 1, 0));
+
+END

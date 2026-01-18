@@ -1,0 +1,27 @@
+!2025/04/28 F64101066 KU TSUN YUAN Set Covering_Base;
+
+MODEL:
+SETS:
+  Cities /1..6/: X;
+  links(Cities, Cities): a;
+ENDSETS
+
+DATA:
+a = 
+ 1 1 0 0 0 0
+ 1 1 0 0 0 1
+ 0 0 1 1 0 0
+ 0 0 1 1 1 0
+ 0 0 0 1 1 1
+ 0 1 0 0 1 1;
+ENDDATA
+
+MIN = @SUM(Cities(i): X(i));
+
+@FOR(Cities(i):
+  @SUM(Cities(j): a(i,j) * X(j)) >= 1
+);
+
+@FOR(Cities(i): @BIN(X(i)));
+
+END

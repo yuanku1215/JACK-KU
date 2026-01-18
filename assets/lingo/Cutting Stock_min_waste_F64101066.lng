@@ -1,0 +1,104 @@
+!2025/04/28 F64101066 KU TSUN YUAN Cutting Stock_min_waste;
+
+MODEL:
+SETS:
+RM: RWDTH, T, W, C, WCOST, S;
+FG: FWDTH, REQ, X; !X: number of access feet cut;
+PATTERN: USERM, WASTE, AMT;
+PXF(PATTERN, FG): NUM;
+ENDSETS
+
+DATA:
+RM = R72 R48 R36;
+RWDTH = 72 48 36;
+C = .28 .18 .15;
+WCOST = .00388889 .00395833 .00416667;
+S = 1600 10000 10000;
+
+! The finished good widths;
+FG = F60 F56 F42 F38 F34 F24 F15 F10;
+FWDTH = 60 56 42 38 34 24 15 10;
+REQ = 500 400 300 450 350 100 800 1000;
+
+USERM =
+1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1
+2 2 2 2 2 2 2 2 2 2
+3 3 3 3 3;
+
+NUM =
+1 0 0 0 0 0 0 1
+0 1 0 0 0 0 1 0
+0 1 0 0 0 0 0 1
+0 0 1 0 0 1 0 0
+0 0 1 0 0 0 2 0
+0 0 1 0 0 0 1 1
+0 0 1 0 0 0 0 3
+0 0 0 1 1 0 0 0
+0 0 0 1 0 1 0 1
+0 0 0 1 0 0 2 0
+0 0 0 1 0 0 1 1
+0 0 0 1 0 0 0 3
+0 0 0 0 2 0 0 0
+0 0 0 0 1 1 0 1
+0 0 0 0 1 0 2 0
+0 0 0 0 1 0 1 2
+0 0 0 0 1 0 0 3
+0 0 0 0 0 3 0 0
+0 0 0 0 0 2 1 0
+0 0 0 0 0 2 0 2
+0 0 0 0 0 1 3 0
+0 0 0 0 0 1 2 1
+0 0 0 0 0 1 1 3
+0 0 0 0 0 1 0 4
+0 0 0 0 0 0 4 1
+0 0 0 0 0 0 3 2
+0 0 0 0 0 0 2 4
+0 0 0 0 0 0 1 5
+0 0 0 0 0 0 0 7
+0 0 1 0 0 0 0 0
+0 0 0 1 0 0 0 1
+0 0 0 0 1 0 0 1
+0 0 0 0 0 2 0 0
+0 0 0 0 0 1 1 0
+0 0 0 0 0 1 0 2
+0 0 0 0 0 0 3 0
+0 0 0 0 0 0 2 1
+0 0 0 0 0 0 1 3
+0 0 0 0 0 0 0 4
+0 0 0 0 1 0 0 0
+0 0 0 0 0 1 0 1
+0 0 0 0 0 0 2 0
+0 0 0 0 0 0 1 2
+0 0 0 0 0 0 0 3;
+ENDDATA
+
+!Objective function;
+MIN = @SUM(PATTERN(P):
+    USERM(P) * WASTE(P)
+);
+
+!Constraints;
+
+@FOR(FG(F):
+    @SUM(PATTERN(P): NUM(P, F) * AMT(P)) = REQ(F) + X(F);
+);
+
+@FOR(PATTERN(P):
+    @SUM(FG(F): NUM(P, F) * FWDTH(F)) + WASTE(P) 
+    = RWDTH(USERM(P))
+);
+
+@FOR(RM(R):
+    T(R) = @SUM(PATTERN(P) | USERM(P) #EQ# R: AMT(P));
+    T(R) <= S(R);
+);
+
+@FOR(RM(R):
+    W(R) = @SUM(PATTERN(P) | USERM(P) #EQ# R: WASTE(P) * AMT(P))
+);
+
+@FOR(PATTERN(P): @GIN(AMT(P)));
+
+END

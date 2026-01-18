@@ -1,0 +1,44 @@
+!2025/04/28 F64101066 KU TSUN YUAN Product mix model;
+
+MODEL:
+SETS:
+  Planes /Rocket, Meteor, Streak, Comet, Jet, Hellenopter/ : Profit, Setup, X, Y;
+  Resources /steel, copper, plastic, rubber, glass, paint/ : Available;
+  RXP(Resources, Planes): usage;
+ENDSETS
+
+DATA:
+  PROFIT SETUP =
+    30     35
+    45     20
+    24     60
+    26     70
+    24     75
+    30     30;    
+
+  AVAILABLE =
+    800 1160 1780 1050 1360 1240;
+
+  USAGE =  
+    1 4 0 4 2 0
+    4 5 3 0 1 0
+    0 3 8 0 1 0
+    2 0 1 2 1 5
+    2 4 2 2 2 4
+    1 4 1 4 3 4;
+ENDDATA
+
+MAX = @SUM(Planes(i): Profit(i) * X(i) - Setup(i) * Y(i));
+
+@FOR(Resources(i):
+  @SUM(Planes(j): usage(i, j) * X(j)) <= Available(i)
+);
+
+@FOR(Planes(j):
+  X(j) <= 400 * Y(j)
+);
+
+@FOR(Planes(i): @GIN(X(i)));
+@FOR(Planes(i): @BIN(Y(i)));
+
+END

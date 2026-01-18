@@ -1,0 +1,31 @@
+! 2025/05/19 F64101066 KU TSUN YUAN A Matching Problem;
+
+MODEL:
+SETS:
+Classmates /1..8/;
+PAIRS(Classmates, Classmates) | &2 #GT# &1 : SCORE, X;
+ENDSETS
+
+DATA:
+SCORE =
+     9  3  4  2  1  5  6
+        1  7  3  5  2  1
+           4  4  2  9  2
+              1  5  5  2
+                 8  7  6
+                    2  3
+                       4;
+ENDDATA
+
+
+MIN = @SUM(PAIRS(I,J): SCORE(I,J) * X(I,J));
+
+
+@FOR(Classmates(I):
+    @SUM(PAIRS(I,J): X(I,J)) +
+    @SUM(PAIRS(J,I): X(J,I)) = 1
+);
+
+@FOR(PAIRS(I,J): @BIN(X(I,J)));
+
+END

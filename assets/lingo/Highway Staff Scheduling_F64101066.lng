@@ -1,0 +1,23 @@
+!2025/04/14 F64101066 KU TSUN YUAN A Highway Staff Scheduling;
+
+MODEL:
+SETS:
+HOUR /1..24/: x, NEED;
+ENDSETS
+
+DATA:
+NEED = 
+2 2 2 2 2 2 8 8 8 8 4 4 3 3 3 3 6 6 5 5 5 5 3 3;
+ENDDATA
+
+MIN = @SUM(HOUR(i): x(i));
+
+@FOR(HOUR(i):
+  @SUM(HOUR(j) | (j #LE# 9) #AND# (j #NE# 5):
+    x(@WRAP((i - j + 1), 24))
+  ) >= NEED(i)
+);
+
+@FOR(HOUR(i): @GIN(x(i)));
+
+END

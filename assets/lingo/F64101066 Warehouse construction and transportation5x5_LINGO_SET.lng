@@ -1,0 +1,56 @@
+!2025/03/24 F64101066 KU TSUN YUAN Warehouse construction and transportation 5x5_LINGO_SET;
+
+MODEL:
+SETS:
+  warehouse /1..5/: low_fee, y_l, high_fee, y_h;
+  vendor /1..5/: demand;
+  link(warehouse, vendor): cost, items;
+ENDSETS
+
+DATA:
+demand =
+12, 8, 14, 16, 7 ;
+
+cost =
+81  92 101 130 115
+117 77 108  98 100
+102 105  95 119 111
+115 125  90  59  74
+142 100 103 105  71 ;
+
+low_fee =
+6000 4500 6500 4100 4000 ;
+
+high_fee =
+9000 6750 9700 6150 6000 ;
+
+capacity_l = 10 ;
+capacity_h = 20 ;
+ENDDATA
+
+
+transport_cost = @sum(link(i,j): cost(i,j) * items(i,j));
+construction_cost = @sum(warehouse(i): low_fee(i) * y_l(i) + high_fee(i) * y_h(i));
+
+min = transport_cost + construction_cost ;
+
+
+@for(vendor(j): 
+  @sum(warehouse(i): items(i,j)) >= demand(j));
+
+
+@for(warehouse(i): 
+  @sum(vendor(j): items(i,j)) <= capacity_l * y_l(i) + capacity_h * y_h(i));
+
+
+@for(warehouse(i): 
+  y_l(i) + y_h(i) <= 1);
+
+
+@for(warehouse(i): @bin(y_l(i)));
+@for(warehouse(i): @bin(y_h(i)));
+
+
+@for(link(i,j): @gin(items(i,j)));
+
+END
