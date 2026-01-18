@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <title>Mathematical Modeling Portfolio | TSUN-YUAN KU</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Optimization modeling portfolio with LINGO: LP, MILP, network flow, scheduling, project management, and stochastic decision patterns." />
 
   <style>
     :root {
@@ -256,8 +257,7 @@
       width: 100%;
     }
 
-    /* ---------- Mind Map (Enhanced, integrated) ---------- */
-    /* --- 心智圖視窗與節點樣式優化 --- */
+    /* Mind Map */
     .mapWrap {
       border: 1px solid var(--border);
       background: #ffffff;
@@ -274,7 +274,7 @@
 
     .node { cursor: pointer; }
     .node circle { transition: r 0.3s, stroke-width 0.3s, fill 0.3s; }
-    
+
     .node.core circle { fill: #fff; stroke: var(--accent); stroke-width: 4; }
     .node.cat circle { fill: #fff; stroke: var(--accent-2); stroke-width: 3; }
     .node.sub circle { fill: #fff; stroke: #94a3b8; stroke-width: 2; }
@@ -302,7 +302,7 @@
       <div class="oneLiner">
         <b>Core capability:</b> I translate real world operational descriptions into formal optimization models, then validate feasibility and optimality through systematic constraint design and solver debugging.
         This page organizes my LINGO work into a reusable pattern library for IEOR graduate study and research.
-        <div class="hint">中文提示：此頁用「題型分類」與「程式碼索引」呈現我對數學建模的脈絡化理解，並展示可遷移到 Pyomo, PuLP, OR Tools 的建模邏輯。</div>
+       
       </div>
 
       <div class="chips">
@@ -349,9 +349,6 @@
 
     <div class="callout">
       <b>Key outcome:</b> I can rapidly move from qualitative descriptions to rigorous formulations, while understanding how formulation choices affect solver behavior, integrality, and stability.
-      <div class="mini" style="margin-top: 8px;">
-        Deployment note: place all LINGO files under <span style="font-family: var(--mono); font-weight: 800;">assets/lingo/</span> in your website repo.
-      </div>
     </div>
 
     <h2 id="taxonomy">Problem Taxonomy</h2>
@@ -362,15 +359,12 @@
     <div class="grid" id="taxonomyGrid"></div>
 
     <h2 id="mindmap">Architectural Explorer</h2>
-    <div class="mapWrap">
-      <svg id="mindMapSvg" viewBox="0 0 1040 860" preserveAspectRatio="xMidYMid meet"></svg>
+    <div class="mapWrap" aria-label="Mind map container">
+      <svg id="mindMapSvg" viewBox="0 0 1040 860" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Mind map of optimization modeling categories">
+        <title>Mind map of optimization modeling categories</title>
+      </svg>
     </div>
-
-    <div class="mapWrap">
-      <svg id="mindMapSvg" viewBox="0 0 1040 860" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Mind map of optimization modeling categories"></svg>
-      <div class="mini" style="margin-top: 10px;">
-        Layout logic: staggered radii for subtopics reduce overlap; subtopic labels auto align left or right for readability.
-      </div>
+    
     </div>
 
     <h2 id="index">Model Index</h2>
@@ -408,19 +402,35 @@
       </table>
     </div>
 
-    <h2 id="representative">Methodological Representative</h2>
+    <h2 id="representative">Modeling Competency for IEOR</h2>
     <p>
-      A compact formulation template that appears repeatedly in my work. It reflects a consistent practice: set definition, indexed variables, clean objective, then structural constraints.
+      This portfolio demonstrates more than solver usage. It shows a repeatable modeling workflow that aligns with IEOR graduate level expectations.
+      Across LP, MILP, network flow, scheduling, project management, and scenario based decision models, I practice translating operational narratives into formal decision variables, objective functions, and constraint systems, then iterating with systematic diagnosis when the solver reveals infeasibility, weak formulations, or unintended degrees of freedom.
     </p>
-    <div class="code">
-SETS:<br>
-&nbsp;&nbsp;I /S1..S3/: supply;<br>
-&nbsp;&nbsp;J /C1..C5/: demand;<br>
-&nbsp;&nbsp;LINK(I,J): cost, x;<br>
-ENDSETS<br><br>
-MIN = @SUM(LINK: cost * x);<br>
-@FOR(I: @SUM(J: x(I,J)) &lt;= supply(I));<br>
-@FOR(J: @SUM(I: x(I,J)) &gt;= demand(J));
+
+    <div class="grid">
+      <div class="card span-6">
+        <h3>What I have already trained</h3>
+        <p>
+          Variable design with set indexing, integrality control, and logical constraint encoding. I can implement canonical OR patterns such as transportation, assignment, set covering, max flow, shortest path, time indexed coverage, precedence constraints, and scenario evaluation, then validate them through feasibility checks and sensitivity to modeling choices.
+        </p>
+      </div>
+      <div class="card span-6">
+        <h3>Why it matters for IEOR admissions</h3>
+        <p>
+          These artifacts provide evidence that I can move from problem statement to a rigorous formulation, understand the implications of formulation strength, and communicate modeling structure clearly. The same patterns transfer directly to Python based stacks such as Pyomo, PuLP, and OR Tools, which is essential for research workflows, reproducible experimentation, and large scale computational studies.
+        </p>
+      </div>
+
+      <div class="card span-12">
+        <h3>Positioning statement</h3>
+        <p>
+          I treat each model as a reusable template rather than a single assignment deliverable. This pattern library reflects an IEOR mindset: modeling as a language for decision making, and debugging as a disciplined process that connects real world assumptions with mathematical structure and solver behavior.
+        </p>
+        <div class="mini">
+          中文補充：這頁對外呈現的是我已具備的「建模抽象能力」與「約束邏輯能力」，不只是把題目寫成程式，而是能解釋模型為何合理，哪裡可能造成不可行，怎麼修正到可解並保持原始意義。
+        </div>
+      </div>
     </div>
 
     <footer>
@@ -537,6 +547,7 @@ MIN = @SUM(LINK: cost * x);<br>
 
     function buildTaxonomy() {
       const grid = document.getElementById("taxonomyGrid");
+      if (!grid) return;
       grid.innerHTML = "";
 
       const byCat = {};
@@ -573,6 +584,7 @@ MIN = @SUM(LINK: cost * x);<br>
 
     function buildFilterChips() {
       const host = document.getElementById("filterChips");
+      if (!host) return;
       host.innerHTML = "";
 
       const all = document.createElement("div");
@@ -662,6 +674,7 @@ MIN = @SUM(LINK: cost * x);<br>
 
     function buildIndexTable() {
       const tbody = document.getElementById("indexBody");
+      if (!tbody) return;
       tbody.innerHTML = "";
 
       const rows = getFilteredModels();
@@ -688,7 +701,8 @@ MIN = @SUM(LINK: cost * x);<br>
         tbody.appendChild(tr);
       });
 
-      document.getElementById("statCount").textContent = String(totalFileCount());
+      const stat = document.getElementById("statCount");
+      if (stat) stat.textContent = String(totalFileCount());
     }
 
     function applyFilters() {
@@ -713,8 +727,7 @@ MIN = @SUM(LINK: cost * x);<br>
       });
     }
 
-    /* ---------- Mind Map (Integrated enhanced renderer) ---------- */
-
+    /* Mind Map */
     const mindState = { expanded: new Set(["cat-lp", "cat-network"]) };
 
     function polarToXY(cx, cy, r, deg) {
@@ -750,10 +763,13 @@ MIN = @SUM(LINK: cost * x);<br>
       while (svg.firstChild) svg.removeChild(svg.firstChild);
 
       const cx = 520;
-      const cy = 320;
-      const rCat = 210;
+      const cy = 360;
+      const rCat = 225;
 
-      // core node
+      const title = svgEl("title", {});
+      title.textContent = "Mind map of optimization modeling categories";
+      svg.appendChild(title);
+
       const core = svgEl("g", { class: "node core", "data-kind": "core", transform: `translate(${cx},${cy})` });
       core.appendChild(svgEl("circle", { r: 42 }));
       const t1 = svgEl("text", { class: "label", "text-anchor": "middle", y: -4 }); t1.textContent = "Optimization";
@@ -762,7 +778,6 @@ MIN = @SUM(LINK: cost * x);<br>
       core.appendChild(t2);
       svg.appendChild(core);
 
-      // keep your earlier category placement, but use the improved geometry and staggered sub nodes
       const catAngles = [
         { id: "cat-lp", deg: -95 },
         { id: "cat-assign", deg: -30 },
@@ -779,13 +794,11 @@ MIN = @SUM(LINK: cost * x);<br>
         const pos = polarToXY(cx, cy, rCat, cinfo.deg);
         const isExpanded = mindState.expanded.has(cat.id);
 
-        // edge core to category, quadratic for smoother curve
         svg.appendChild(svgEl("path", {
           class: "edge",
           d: `M ${cx} ${cy} Q ${(cx + pos.x) / 2} ${cy}, ${pos.x} ${pos.y}`
         }));
 
-        // category node
         const g = svgEl("g", {
           class: "node cat",
           "data-kind": "cat",
@@ -798,7 +811,6 @@ MIN = @SUM(LINK: cost * x);<br>
         g.appendChild(ct);
         svg.appendChild(g);
 
-        // sub nodes, staggered radii to reduce overlap
         if (isExpanded) {
           const subs = MODELS
             .filter(m => m.category === cat.id)
@@ -812,7 +824,7 @@ MIN = @SUM(LINK: cost * x);<br>
             const step = subs.length > 1 ? spread / (subs.length - 1) : 0;
 
             subs.forEach((m, i) => {
-              const rSub = (i % 2 === 0) ? 105 : 175;
+              const rSub = (i % 2 === 0) ? 115 : 185;
               const sDeg = start + i * step;
               const sPos = polarToXY(pos.x, pos.y, rSub, sDeg);
 
@@ -845,7 +857,6 @@ MIN = @SUM(LINK: cost * x);<br>
         }
       });
 
-      // click binding
       svg.onclick = (e) => {
         const node = e.target.closest(".node");
         if (!node) return;
@@ -880,7 +891,6 @@ MIN = @SUM(LINK: cost * x);<br>
           const indexEl = document.getElementById("index");
           if (indexEl) indexEl.scrollIntoView({ behavior: "smooth", block: "start" });
 
-          // optional: open the first file (keep existing behavior)
           if (file) {
             window.open(fileHref(file), "_blank", "noopener");
           }
@@ -894,7 +904,10 @@ MIN = @SUM(LINK: cost * x);<br>
       wireTaxonomyButtons();
       wireSearchAndSort();
       buildIndexTable();
-      document.getElementById("statCount").textContent = String(totalFileCount());
+
+      const stat = document.getElementById("statCount");
+      if (stat) stat.textContent = String(totalFileCount());
+
       renderMindMap();
     }
 
