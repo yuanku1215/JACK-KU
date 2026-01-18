@@ -17,7 +17,7 @@
       --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
       --radius: 18px;
       --radius-sm: 14px;
-      --maxw: 980px;
+      --maxw: 1100px; /* 已調整為與 Research 頁面相同的 1100px */
       --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     }
 
@@ -89,7 +89,7 @@
       border: 1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding: 32px 32px 28px;
+      padding: 40px 32px 36px;
       margin-bottom: 22px;
     }
 
@@ -104,14 +104,14 @@
       font-size: 19px;
       color: var(--muted);
       margin-bottom: 16px;
-      max-width: 920px;
+      max-width: 950px;
     }
 
     .oneLiner {
       font-size: 16px;
       color: var(--text);
       margin: 10px 0 20px;
-      max-width: 920px;
+      max-width: 950px;
     }
 
     .chips {
@@ -134,7 +134,7 @@
     .stats {
       display: grid;
       grid-template-columns: repeat(12, 1fr);
-      gap: 14px;
+      gap: 16px;
       margin-top: 24px;
     }
     .stat {
@@ -142,13 +142,16 @@
       background: rgba(255,255,255,0.8);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 20px;
+      padding: 24px 20px;
     }
-    .stat .k { font-size: 11px; color: var(--muted); text-transform: uppercase; margin-bottom: 8px; }
-    .stat .v { font-size: 22px; font-weight: 700; }
+    .stat .k { font-size: 10px; color: var(--muted); text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.05em; font-weight: 700; }
+    .stat .v { font-size: 20px; font-weight: 700; color: var(--text); }
     
     @media (max-width: 900px) {
       .stat { grid-column: span 6; }
+    }
+    @media (max-width: 520px) {
+      .stat { grid-column: span 12; }
     }
 
     /* Interactive Platform Window */
@@ -184,7 +187,7 @@
     .grid {
       display: grid;
       grid-template-columns: repeat(12, 1fr);
-      gap: 16px;
+      gap: 20px;
       margin-top: 16px;
     }
     .card {
@@ -221,7 +224,7 @@
     /* Buttons */
     .btnRow { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
     .btn {
-      padding: 12px 20px;
+      padding: 12px 24px;
       border-radius: 10px;
       border: 1px solid var(--border);
       background: #fff;
@@ -307,8 +310,8 @@
 
       <div class="btnRow">
         <a class="btn primary" href="https://yuanku1215.github.io/JACK-KU/surveyingcampB-main/index.html" target="_blank">Live Demo</a>
-        <a class="btn" href="https://github.com/yuanku1215/JACK-KU/tree/main/surveyingcampB-main">Repository</a>
-        <a class="btn" href="https://github.com/yuanku1215/JACK-KU/tree/main/surveyingcampB-main">Technical Notes</a>
+        <a class="btn" href="https://github.com/yuanku1215/JACK-KU/tree/main/surveyingcampB-main" target="_blank">Repository</a>
+        <a class="btn" href="https://github.com/yuanku1215/JACK-KU/tree/main/surveyingcampB-main" target="_blank">Technical Notes</a>
       </div>
 
       <div class="tagline">Surveying | Photogrammetry | GIS | Spatial Analysis</div>
