@@ -70,7 +70,7 @@
     }
     .dot { width: 6px; height: 6px; border-radius: 999px; background: var(--accent-2); display: inline-block; }
 
-    /* Hero Section (Customized Layout) */
+    /* Hero Section */
     .hero {
       background: radial-gradient(1200px 260px at 0% 0%, rgba(30, 58, 138, 0.10), transparent 60%),
                   radial-gradient(900px 240px at 100% 20%, rgba(11, 92, 171, 0.10), transparent 60%),
@@ -89,33 +89,49 @@
     .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
     .chip { background: #f1f5f9; color: var(--muted); padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 500; }
 
-    .stats { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; margin-top: 24px; }
-    .stat { grid-column: span 3; background: rgba(255, 255, 255, 0.8); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
-    .stat .k { font-size: 11px; color: var(--muted); text-transform: uppercase; margin-bottom: 6px; }
-    .stat .v { font-size: 18px; font-weight: 700; }
-    @media (max-width: 900px) { .stat { grid-column: span 6; } }
+    /* Horizontal Snapshot Stats */
+    .stats { 
+      display: flex; 
+      justify-content: space-between; 
+      gap: 14px; 
+      margin-top: 24px; 
+    }
+    .stat { 
+      flex: 1; 
+      background: rgba(255, 255, 255, 0.8); 
+      border: 1px solid var(--border); 
+      border-radius: var(--radius); 
+      padding: 16px; 
+    }
+    .stat .k { font-size: 10px; color: var(--muted); text-transform: uppercase; margin-bottom: 6px; letter-spacing: 0.05em; }
+    .stat .v { font-size: 14px; font-weight: 700; color: var(--text); line-height: 1.3; }
+    
+    @media (max-width: 900px) { 
+      .stats { flex-wrap: wrap; }
+      .stat { flex: 0 0 calc(50% - 7px); }
+    }
 
     /* Content Layout */
     h2 { font-size: 26px; margin-top: 64px; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
-    .abstract-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px; line-height: 1.8; color: var(--text); }
+    .abstract-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px; line-height: 1.8; color: var(--text); font-size: 15px; }
 
     .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; margin-top: 24px; }
     .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; }
     .card h3 { margin: 0 0 10px; font-size: 17px; }
     .card p { margin: 0; color: var(--muted); font-size: 14px; }
 
-    /* Platform Display (No Links) */
-    .platform-display { margin: 32px 0; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow); cursor: default; }
+    /* Platform Display */
+    .platform-display { margin: 32px 0; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow); }
     .platform-display img { width: 100%; height: auto; display: block; }
 
     /* Publication Block */
     .pub-block { background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px; margin-top: 48px; }
     .pdf-download { background: #fff; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 20px; margin-top: 24px; display: flex; align-items: center; justify-content: space-between; }
 
-    /* IEOR Section */
+    /* IEOR Highlight */
     .ieor-highlight { background: rgba(30, 58, 138, 0.04); border-left: 4px solid var(--accent); padding: 24px; border-radius: 0 var(--radius) var(--radius) 0; margin-top: 24px; }
 
-    .btn { padding: 12px 24px; border-radius: 10px; border: 1px solid var(--border); background: var(--accent); color: #fff; font-weight: 600; font-size: 14px; transition: all 0.2s; }
+    .btn { padding: 12px 24px; border-radius: 10px; border: 1px solid var(--border); background: var(--accent); color: #fff; font-weight: 600; font-size: 14px; transition: all 0.2s; cursor: pointer; }
     .btn:hover { opacity: 0.9; transform: translateY(-1px); }
 
     footer { margin-top: 120px; text-align: center; font-size: 13px; color: var(--muted); border-top: 1px solid var(--border); padding: 40px 0; }
@@ -131,37 +147,37 @@
     </div>
 
     <div class="hero">
-      <h1>Research: Multi-objective Facility Location</h1>
+      <h1>Multi-objective Facility Location</h1>
       <div class="subtitle">Spatial Optimization for Urban Levee Crossing Planning</div>
       
       <div class="oneLiner">
-        <b>Core Claim:</b> Solving mobility barriers in flood-prone cities by integrating GIS-based spatial analysis 
-        with hybrid optimization solvers (NSGA-III & SQA).
+        <b>Research Focus:</b> Solving mobility barriers in flood-prone cities by integrating 
+        geospatial decision science with hybrid metaheuristics (NSGA-III & QUBO-SQA).
       </div>
 
       <div class="chips">
-        <span class="chip">NSGA-III</span>
-        <span class="chip">Simulated Quantum Annealing</span>
+        <span class="chip">Operations Research</span>
+        <span class="chip">Combinatorial Optimization</span>
         <span class="chip">Facility Location Problem</span>
-        <span class="chip">GIS Network Analysis</span>
+        <span class="chip">GIS-Driven Science</span>
       </div>
 
       <div class="stats">
         <div class="stat">
-          <div class="k">Study Area</div>
-          <div class="v">Sanchong / Luzhou</div>
+          <div class="k">Analytical Domain</div>
+          <div class="v">Spatial Decision Support Systems (SDSS)</div>
         </div>
         <div class="stat">
-          <div class="k">Objectives</div>
-          <div class="v">5-Dimensions</div>
+          <div class="k">Optimization Engine</div>
+          <div class="v">Hybrid Metaheuristic & QUBO Solvers</div>
         </div>
         <div class="stat">
-          <div class="k">Solvers</div>
-          <div class="v">Hybrid Approach</div>
+          <div class="k">Problem Scope</div>
+          <div class="v">Large-scale Urban Facility Location (FLP)</div>
         </div>
         <div class="stat">
-          <div class="k">Status</div>
-          <div class="v">WCTR 2026</div>
+          <div class="k">Methodology</div>
+          <div class="v">Multi-objective Discrete Optimization</div>
         </div>
       </div>
     </div>
@@ -172,43 +188,43 @@
     </div>
 
     <h2>Primary Optimization Objectives</h2>
-    <p>Our research evaluates the facility location problem across five conflicting dimensions to ensure comprehensive decision support.</p>
+    <p>The facility location problem is modeled across five conflicting dimensions to identify the Pareto-optimal frontier for urban decision-making.</p>
     
     
 
     <div class="grid">
       <div class="card span-4">
         <h3>Construction Cost</h3>
-        <p>Minimizing total budget requirements for new facility establishment and structural updates.</p>
+        <p>Minimizing total capital expenditure for new structural facilities and site preparation.</p>
       </div>
       <div class="card span-4">
-        <h3>Sidewalk Improvement</h3>
-        <p>Accounting for the necessary retrofit costs to ensure seamless pedestrian access to the levee.</p>
+        <h3>Sidewalk Retrofitting</h3>
+        <p>Accounting for auxiliary costs required to ensure seamless pedestrian-to-levee connectivity.</p>
       </div>
       <div class="card span-4">
-        <h3>Population Coverage</h3>
-        <p>Maximizing the number of residents served within the 500m walkable network threshold.</p>
+        <h3>Demand Coverage</h3>
+        <p>Maximizing the weighted population served within walkable network-based catchments.</p>
       </div>
       <div class="card span-6">
         <h3>Spatial Equity</h3>
-        <p>Reducing accessibility disparity between neighborhoods to ensure social justice in infrastructure.</p>
+        <p>Minimizing the Gini-coefficient of accessibility to ensure fair infrastructure distribution across neighborhoods.</p>
       </div>
       <div class="card span-6">
-        <h3>Crash Risk (Safety)</h3>
-        <p>Minimizing exposure to traffic hazards by analyzing historical crash records and intersection safety.</p>
+        <h3>Crash Risk Exposure</h3>
+        <p>Reducing traffic-related hazards by penalizing sites with high historical crash densities.</p>
       </div>
     </div>
 
-    <h2>Decision Support Platform</h2>
-    <p>A Multi-dimensional GIS platform was built to visualize the 3D campus/urban environment and evaluate the impacts of different facility configurations.</p>
+    <h2>Decision Support Platform Visualization</h2>
+    <p>A Multi-dimensional GIS platform developed to synchronize LOD1 building geometry with thematic spatial indicators.</p>
     
     <div class="platform-display">
-      <img src="images/web.png" alt="Multi-dimensional GIS Platform Visualization">
+      <img src="images/web.png" alt="Decision Support GIS Platform Visualization">
     </div>
 
     <h2>Featured Publication</h2>
     <div class="pub-block">
-      <h3 style="font-size: 22px; margin-bottom: 12px;">World Conference on Transport Research (WCTR 2026)</h3>
+      <h3 style="font-size: 22px; margin-bottom: 12px;">Transportation Research Procedia (WCTR 2026)</h3>
       <p style="color: var(--muted); margin-bottom: 24px;">
         Integrating Multi-objective Optimization and Spatial Analysis for the Site Selection and Improvement of Levee Crossing Facilities.
       </p>
@@ -221,15 +237,15 @@
       </div>
     </div>
 
-    <h2>Impact on IEOR</h2>
-    <p>This research bridges the gap between spatial data science and operations research, providing novel insights into several IEOR domains.</p>
+    <h2>Impact on Industrial Engineering & Operations Research</h2>
+    <p>This research bridges the gap between spatial data science and formal mathematical programming, offering new insights into urban systems engineering.</p>
     
     <div class="ieor-highlight">
       <ul style="margin: 0; padding-left: 20px;">
-        <li><b>Combinatorial Optimization:</b> It models complex siting decisions as a Binary Programming problem, contributing to <b>Facility Location Theory</b> under multi-objective constraints.</li>
-        <li><b>Metaheuristics Benchmarking:</b> By comparing NSGA-III (Evolutionary) and SQA (Quantum-inspired), it evaluates the convergence and diversity of solvers in large-scale discrete search spaces.</li>
-        <li><b>Decision Science:</b> The use of Pareto fronts and weight-driven scalarization provides a systematic way for decision-makers to handle <b>Conflicting Objectives</b> in urban systems.</li>
-        <li><b>Algorithmic Efficiency:</b> The application of QUBO (Quadratic Unconstrained Binary Optimization) encoding explores the potential of <b>Quantum Computing</b> for real-world infrastructure problems.</li>
+        <li><b>Combinatorial Optimization:</b> Formulates levee-crossing siting as a <b>Binary Integer Programming</b> problem, advancing Facility Location Theory in constrained urban topographies.</li>
+        <li><b>Hybrid Metaheuristics:</b> Benchmarks <b>NSGA-III</b> against <b>Simulated Quantum Annealing (SQA)</b>, evaluating solver performance in non-convex discrete search spaces.</li>
+        <li><b>Multicriteria Decision Making (MCDM):</b> Employs <b>Pareto Front Analysis</b> and weight-driven scalarization to navigate trade-offs between socio-economic and safety objectives.</li>
+        <li><b>Emerging Computation:</b> Explores the practical application of <b>QUBO</b> (Quadratic Unconstrained Binary Optimization) for urban infrastructure modeling, paving the way for quantum-ready planning workflows.</li>
       </ul>
     </div>
 
