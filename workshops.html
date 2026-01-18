@@ -246,6 +246,39 @@
     .miniList{ margin: 10px 0 0; padding-left: 18px; }
     .miniList li{ color: var(--muted); }
 
+    /* Embedded viewers */
+    .viewer{
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: rgba(255,255,255,0.85);
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.05);
+    }
+    .viewerHeader{
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .viewerTitle{
+      font-weight: 700;
+      letter-spacing: -0.2px;
+    }
+    .viewerNote{
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .viewerFrame{
+      width: 100%;
+      height: 640px;
+      border: 0;
+      display: block;
+      background: #fff;
+    }
+
     /* Footer */
     footer{
       margin-top: 96px;
@@ -265,9 +298,11 @@
       .span-8, .span-6, .span-4 { grid-column: span 12; }
       .stat { grid-column: span 6; }
       h1 { font-size: 34px; }
+      .viewerFrame { height: 520px; }
     }
     @media (max-width: 520px){
       .stat { grid-column: span 12; }
+      .viewerFrame { height: 460px; }
     }
   </style>
 </head>
@@ -284,87 +319,108 @@
     <div class="hero">
       <h1>Workshop Instructor</h1>
       <div class="subtitle">
-        4-hour Workshop: Quantum Algorithms & Quantum Annealing for Optimization (with QUBO + demos)
+        4 hour Workshop: Quantum Algorithms and Quantum Annealing for Optimization (QUBO with demos and labs)
       </div>
 
       <div class="oneLiner">
-        <b>One-line summary:</b> I delivered a ~4-hour workshop to master’s/PhD students in my department and
-        cross-department participants, introducing quantum algorithms through an optimization-first learning path —
-        from classical annealing to simulated annealing to quantum annealing — and ending with hands-on Colab exercises.
+        <b>One line summary:</b>
+        I delivered a four hour workshop to MS and PhD students and cross department participants, introducing quantum
+        optimization through an optimization first learning path from classical annealing to simulated annealing to
+        quantum annealing, ending with hands on Colab exercises.
       </div>
 
       <div class="chips" aria-label="keywords">
-        <div class="chip">Classical → Quantum Annealing</div>
+        <div class="chip">Classical to Quantum Annealing</div>
         <div class="chip">QUBO Formulation</div>
-        <div class="chip">Hands-on Demos</div>
+        <div class="chip">Hands on Demos</div>
         <div class="chip">Google Colab</div>
-        <div class="chip">Teaching & Materials Design</div>
+        <div class="chip">Teaching and Materials Design</div>
         <div class="chip">Optimization Mindset</div>
       </div>
 
       <div class="stats" aria-label="workshop snapshot">
         <div class="stat">
           <div class="k">Audience</div>
-          <div class="v">MS / PhD + Seniors</div>
+          <div class="v">MS and PhD</div>
           <div class="s">Interdisciplinary group</div>
         </div>
         <div class="stat">
           <div class="k">Duration</div>
-          <div class="v">~4 Hours</div>
-          <div class="s">Lecture + demos</div>
+          <div class="v">4 Hours</div>
+          <div class="s">Lecture and demos</div>
         </div>
         <div class="stat">
           <div class="k">Materials</div>
-          <div class="v">Full Slide Deck</div>
-          <div class="s">Learning narrative</div>
+          <div class="v">Slide Deck</div>
+          <div class="s">Reusable narrative</div>
         </div>
         <div class="stat">
-          <div class="k">Hands-on</div>
-          <div class="v">3 Colab Labs</div>
-          <div class="s">Fill-in coding tasks</div>
+          <div class="k">Hands on</div>
+          <div class="v">3 Labs</div>
+          <div class="s">Fill in coding tasks</div>
         </div>
       </div>
 
+      <!-- Primary links: PDF for viewing, Keynote for downloading -->
       <div class="btnRow" aria-label="quick links">
-        <!-- TODO: replace href with your actual links -->
-        <a class="btn primary" href="#" target="_blank" rel="noopener">🖥️ Slides (PPT/PDF)</a>
-        <a class="btn" href="#" target="_blank" rel="noopener">📓 Colab Labs</a>
-        <a class="btn" href="#" target="_blank" rel="noopener">🧪 Demo Code</a>
+        <a class="btn primary" href="assets/workshop/0410_slides.pdf" target="_blank" rel="noopener">View slides full screen (PDF)</a>
+        <a class="btn" href="assets/workshop/0410_slides.pdf" download>Download slides (PDF)</a>
+        <a class="btn" href="assets/workshop/0410_slides.keynote" download>Download slides (Keynote)</a>
       </div>
+    </div>
+
+    <!-- SLIDES EMBED -->
+    <h2>Slides</h2>
+    <p class="muted">
+      For reliable in browser reading, the embedded viewer uses the exported PDF version. The Keynote file is provided as a download.
+    </p>
+
+    <div class="viewer" aria-label="embedded slides viewer">
+      <div class="viewerHeader">
+        <div>
+          <div class="viewerTitle">Quantum Annealing Workshop Slides</div>
+          <div class="viewerNote">Embedded PDF viewer for quick reading on the website</div>
+        </div>
+        <div class="btnRow" style="margin-top:0;">
+          <a class="btn primary" href="assets/workshop/0410_slides.pdf" target="_blank" rel="noopener">Open full screen</a>
+          <a class="btn" href="assets/workshop/0410_slides.pdf" download>Download PDF</a>
+          <a class="btn" href="assets/workshop/0410_slides.keynote" download>Download Keynote</a>
+        </div>
+      </div>
+      <iframe class="viewerFrame" src="assets/workshop/0410_slides.pdf#view=FitH" title="Workshop slides PDF"></iframe>
     </div>
 
     <!-- OVERVIEW -->
     <h2>Overview</h2>
 
     <p>
-      The goal of this workshop was to give participants a practical and structured entry point into quantum algorithms,
-      especially for optimization. Instead of starting from physics-heavy concepts, I organized the content around
-      a familiar optimization narrative: <b>energy landscapes</b>, <b>local minima</b>, and <b>search strategies</b>.
+      The goal of this workshop was to give participants a practical entry point into quantum algorithms for optimization.
+      Instead of starting from physics heavy concepts, the content is organized around an optimization narrative: energy landscapes,
+      local minima, and search strategies.
     </p>
 
     <p>
-      The workshop progresses from classical annealing ideas to simulated annealing, then to quantum annealing,
-      highlighting what changes (and what stays the same) when we reformulate optimization problems as QUBO.
-      I also addressed common implementation challenges — such as encoding constraints, scaling penalties, and debugging
-      energy functions — and concluded with demos and hands-on coding exercises.
+      The workshop progresses from classical annealing ideas to simulated annealing, then to quantum annealing, highlighting what changes
+      and what stays the same when reformulating problems as QUBO. I also addressed common implementation issues such as constraint encoding,
+      penalty scaling, and debugging energy functions, and concluded with hands on labs.
     </p>
 
     <div class="callout">
-      <b>Teaching design choice:</b> build intuition first (optimization viewpoint), then introduce quantum concepts as
-      extensions — so participants can immediately connect the ideas to their own research problems.
+      <b>Teaching design choice:</b> build intuition first from an optimization viewpoint, then introduce quantum concepts as extensions,
+      so participants can connect the ideas to their own research problems immediately.
     </div>
 
-    <!-- WHO IT WAS FOR -->
-    <h2>Audience & Learning Goals</h2>
+    <!-- AUDIENCE -->
+    <h2>Audience and Learning Goals</h2>
 
     <div class="grid">
       <div class="card span-4">
         <h3>Target Audience</h3>
-        <p>Geomatics MS/PhD students and cross-department learners who want an applied view of quantum optimization.</p>
+        <p>Geomatics MS and PhD students and cross department learners who want an applied view of quantum optimization.</p>
       </div>
       <div class="card span-4">
         <h3>Learning Goal</h3>
-        <p>Understand how optimization problems can be reformulated into QUBO and solved via annealing-based methods.</p>
+        <p>Understand how optimization problems can be reformulated into QUBO and solved via annealing based methods.</p>
       </div>
       <div class="card span-4">
         <h3>Outcome</h3>
@@ -372,127 +428,172 @@
       </div>
     </div>
 
-    <!-- CONTENT STRUCTURE -->
+    <!-- STRUCTURE -->
     <h2>Workshop Structure</h2>
 
     <p class="muted">
-      The slide deck follows my own learning path — designed to minimize “quantum intimidation” and maximize transfer
-      to real optimization tasks.
+      The slide deck follows a learning path designed to reduce intimidation and maximize transfer to real optimization tasks.
     </p>
 
     <div class="grid">
       <div class="card span-6">
-        <h3>Part 1 — Optimization Intuition</h3>
-        <p>Energy landscapes, local minima, exploration vs exploitation, and why annealing works as a search principle.</p>
+        <h3>Part 1: Optimization Intuition</h3>
+        <p>Energy landscapes, local minima, exploration versus exploitation, and why annealing works as a search principle.</p>
       </div>
       <div class="card span-6">
-        <h3>Part 2 — Simulated Annealing (SA)</h3>
-        <p>Temperature schedules, acceptance probability, neighborhood design, and practical pitfalls when coding SA.</p>
+        <h3>Part 2: Simulated Annealing</h3>
+        <p>Temperature schedules, acceptance probability, neighborhood design, and practical pitfalls when implementing SA.</p>
       </div>
       <div class="card span-6">
-        <h3>Part 3 — Quantum Annealing (QA)</h3>
-        <p>From classical states to quantum fluctuations, tunneling intuition, and mapping optimization to Ising/QUBO.</p>
+        <h3>Part 3: Quantum Annealing</h3>
+        <p>Quantum fluctuations and tunneling intuition, and mapping optimization problems to Ising and QUBO models.</p>
       </div>
       <div class="card span-6">
-        <h3>Part 4 — QUBO Modeling & Practice</h3>
-        <p>How to build QUBO from basic math, encode constraints, choose penalties, and validate energy correctness.</p>
+        <h3>Part 4: QUBO Modeling Practice</h3>
+        <p>Constructing QUBO, encoding constraints, penalty selection, and validating the energy function end to end.</p>
       </div>
     </div>
 
     <details>
-      <summary>Common implementation issues I explicitly taught</summary>
+      <summary>Common implementation issues explicitly covered</summary>
       <div>
         <ul class="miniList">
-          <li><b>Penalty tuning:</b> too small → infeasible solutions; too large → numerical dominance and poor exploration.</li>
-          <li><b>Constraint encoding:</b> equality constraints need careful quadratic expansion and scaling.</li>
-          <li><b>Energy debugging:</b> verify that “better solutions” truly reduce energy; test with known feasible cases.</li>
-          <li><b>Variable indexing:</b> wrong mapping between (i, j, t) and bit indices can silently break the model.</li>
-          <li><b>Interpretability:</b> always explain what each QUBO term means in the original problem context.</li>
+          <li><b>Penalty tuning:</b> too small leads to infeasible solutions, too large dominates numerically and harms exploration.</li>
+          <li><b>Constraint encoding:</b> equality constraints require careful quadratic expansion and scaling.</li>
+          <li><b>Energy debugging:</b> verify better solutions reduce energy, test with known feasible cases.</li>
+          <li><b>Variable indexing:</b> incorrect mapping between tuples and bit indices silently breaks models.</li>
+          <li><b>Interpretability:</b> each QUBO term must be explained in the original problem context.</li>
         </ul>
       </div>
     </details>
 
-    <!-- QUBO SECTION -->
+    <!-- QUBO -->
     <h2>QUBO: From Basic Math to an Executable Model</h2>
 
     <p>
-      A key part of the workshop focused on making QUBO feel “constructible” rather than mysterious.
-      I showed how to start from simple binary variables, build objectives, and then add constraints as quadratic penalties.
-      This gives a systematic recipe that participants can reuse.
+      A key part of the workshop is making QUBO feel constructible. Participants learn to start from binary variables,
+      write objectives, then add constraints as quadratic penalties to form an executable energy model.
     </p>
 
     <div class="callout">
-      <b>Core message:</b> QUBO is not magic — it is a disciplined way to express a problem as
-      <span style="font-family: var(--mono);">min xᵀQx</span> with binary decisions, where every term has a clear meaning.
+      <b>Core message:</b> QUBO is a disciplined way to express a problem as <span style="font-family: var(--mono);">min xᵀQx</span> with binary decisions,
+      where every term has a clear meaning.
     </div>
 
     <div class="code">
 Goal: minimize  xᵀ Q x  ,  where x ∈ {0,1}ⁿ<br><br>
 1) Write objective in binary variables<br>
-2) Convert constraints into penalties (quadratic)<br>
+2) Convert constraints into quadratic penalties<br>
 3) Combine:  E(x) = objective(x) + λ · penalty(x)<br>
-4) Validate: feasible solutions have low penalty; improvements reduce E(x)
+4) Validate: feasible solutions have low penalty, improvements reduce E(x)
     </div>
 
-    <!-- DEMOS & LABS -->
-    <h2>Demos & Hands-on Labs</h2>
+    <!-- LABS -->
+    <h2>Hands on Labs</h2>
 
-    <p>
-      The workshop concluded with demos and three Colab exercises. Each lab is designed as a short, story-driven problem
-      where participants fill in key missing steps (QUBO construction, penalty terms, or solver loop) to complete the solution.
+    <p class="muted">
+      Colab notebooks are typically not embeddable due to security headers. To enable reading on the website, each lab provides an embedded nbviewer view,
+      plus a button to open directly in Colab.
     </p>
 
     <div class="grid">
-      <div class="card span-4">
-        <h3>Demo</h3>
-        <p>Live walkthrough: how a small QUBO changes when constraints are added, and how the solution behavior shifts.</p>
+      <!-- Lab 1 -->
+      <div class="card span-12">
+        <h3>Lab 1: Build a QUBO and validate energy by brute force</h3>
+        <p>
+          Fill in missing steps to construct Q, verify energies on small n, and interpret solutions.
+        </p>
+        <div class="btnRow">
+          <!-- Replace placeholders with your real links -->
+          <a class="btn primary" href="YOUR_COLAB_LINK_LAB1" target="_blank" rel="noopener">Open in Colab</a>
+          <a class="btn" href="YOUR_NBVIEWER_LINK_LAB1" target="_blank" rel="noopener">Open nbviewer full screen</a>
+          <a class="btn" href="assets/workshop/lab1.ipynb" download>Download ipynb</a>
+        </div>
+
+        <details>
+          <summary>Read on this website (embedded nbviewer)</summary>
+          <div class="viewer" style="margin-top:12px;">
+            <iframe class="viewerFrame" src="YOUR_NBVIEWER_EMBED_LAB1" title="Lab 1 nbviewer"></iframe>
+          </div>
+          <div class="muted" style="margin-top:10px;">
+            Tip: If the embedded view does not load, open nbviewer in a new tab using the button above.
+          </div>
+        </details>
       </div>
-      <div class="card span-4">
-        <h3>Lab 1</h3>
-        <p>Build a basic QUBO from a simple objective; verify energy by brute force on small n.</p>
+
+      <!-- Lab 2 -->
+      <div class="card span-12">
+        <h3>Lab 2: NP hard mini problem with QUBO constraints</h3>
+        <p>
+          Story driven formulation, add penalties, then run an annealing solver loop and check feasibility.
+        </p>
+        <div class="btnRow">
+          <a class="btn primary" href="YOUR_COLAB_LINK_LAB2" target="_blank" rel="noopener">Open in Colab</a>
+          <a class="btn" href="YOUR_NBVIEWER_LINK_LAB2" target="_blank" rel="noopener">Open nbviewer full screen</a>
+          <a class="btn" href="assets/workshop/lab2.ipynb" download>Download ipynb</a>
+        </div>
+
+        <details>
+          <summary>Read on this website (embedded nbviewer)</summary>
+          <div class="viewer" style="margin-top:12px;">
+            <iframe class="viewerFrame" src="YOUR_NBVIEWER_EMBED_LAB2" title="Lab 2 nbviewer"></iframe>
+          </div>
+          <div class="muted" style="margin-top:10px;">
+            Tip: If the embedded view does not load, open nbviewer in a new tab using the button above.
+          </div>
+        </details>
       </div>
-      <div class="card span-4">
-        <h3>Lab 2 & 3</h3>
-        <p>Story-driven NP-hard mini-problems with fill-in code, ending with solution interpretation and sanity checks.</p>
+
+      <!-- Lab 3 -->
+      <div class="card span-12">
+        <h3>Lab 3: QUBO modeling, debugging, and interpretation</h3>
+        <p>
+          Focus on energy debugging and indexing correctness, then interpret results and failure cases.
+        </p>
+        <div class="btnRow">
+          <a class="btn primary" href="YOUR_COLAB_LINK_LAB3" target="_blank" rel="noopener">Open in Colab</a>
+          <a class="btn" href="YOUR_NBVIEWER_LINK_LAB3" target="_blank" rel="noopener">Open nbviewer full screen</a>
+          <a class="btn" href="assets/workshop/lab3.ipynb" download>Download ipynb</a>
+        </div>
+
+        <details>
+          <summary>Read on this website (embedded nbviewer)</summary>
+          <div class="viewer" style="margin-top:12px;">
+            <iframe class="viewerFrame" src="YOUR_NBVIEWER_EMBED_LAB3" title="Lab 3 nbviewer"></iframe>
+          </div>
+          <div class="muted" style="margin-top:10px;">
+            Tip: If the embedded view does not load, open nbviewer in a new tab using the button above.
+          </div>
+        </details>
       </div>
     </div>
 
-    <div class="btnRow">
-      <!-- TODO: replace with your actual links -->
-      <a class="btn primary" href="#" target="_blank" rel="noopener">📓 Colab Lab 1</a>
-      <a class="btn" href="#" target="_blank" rel="noopener">📓 Colab Lab 2</a>
-      <a class="btn" href="#" target="_blank" rel="noopener">📓 Colab Lab 3</a>
-    </div>
-
-    <!-- MY CONTRIBUTIONS -->
+    <!-- CONTRIBUTIONS -->
     <h2>My Contributions</h2>
 
     <div class="grid">
       <div class="card span-6">
         <h3>Instructional Design</h3>
         <p>
-          Designed a narrative learning path that connects classical optimization intuition to quantum annealing,
-          making the topic accessible to interdisciplinary learners.
+          Designed a narrative learning path connecting classical optimization intuition to quantum annealing for interdisciplinary learners.
         </p>
       </div>
       <div class="card span-6">
-        <h3>Materials & Exercises</h3>
+        <h3>Materials and Exercises</h3>
         <p>
-          Built a complete PPT deck, prepared demo scripts, and created Colab exercises with fill-in coding tasks
-          to encourage active learning.
+          Built the complete slide deck, prepared demo scripts, and created Colab labs with fill in coding tasks for active learning.
         </p>
       </div>
       <div class="card span-6">
         <h3>QUBO Modeling Guidance</h3>
         <p>
-          Provided practical templates and debugging methods for constructing and validating QUBO models.
+          Provided templates and debugging methods for constructing and validating QUBO models end to end.
         </p>
       </div>
       <div class="card span-6">
         <h3>Community Impact</h3>
         <p>
-          Supported participants from different backgrounds, helping them translate quantum optimization concepts into
-          their own research contexts.
+          Supported participants from different backgrounds to translate quantum optimization concepts into their own research contexts.
         </p>
       </div>
     </div>
@@ -501,16 +602,12 @@ Goal: minimize  xᵀ Q x  ,  where x ∈ {0,1}ⁿ<br><br>
     <h2>Why This Matters</h2>
 
     <p>
-      Teaching this workshop strengthened my ability to communicate complex technical ideas with clarity,
-      while also reinforcing my own understanding of optimization foundations. The process of turning abstract
-      concepts into demos and exercises is the same skill needed for research: identify the core idea, formalize it,
-      implement it, then explain it.
+      Teaching this workshop strengthened my ability to communicate technical ideas clearly, and reinforced a research ready workflow:
+      identify the core idea, formalize it, implement it, validate it, then explain it.
     </p>
 
     <div class="callout">
-      <b>IEOR relevance:</b> this experience demonstrates not only technical knowledge (QUBO / annealing),
-      but also the ability to design reproducible experiments, explain modeling choices, and teach others — all critical
-      skills in graduate research and collaborative engineering.
+      <b>IEOR relevance:</b> demonstrates technical depth in QUBO and annealing, reproducible experiment design, and the ability to teach and collaborate.
     </div>
 
     <footer>
@@ -520,7 +617,7 @@ Goal: minimize  xᵀ Q x  ,  where x ∈ {0,1}ⁿ<br><br>
         <a href="research.html">Research</a>
         <a href="internship.html">Internship</a>
         <a href="supplychain.html">Course Project</a>
-        <a href="mailto:yourname@email.com">Email</a>
+        <a href="mailto:YOUR_EMAIL_HERE">Email</a>
       </div>
     </footer>
 
