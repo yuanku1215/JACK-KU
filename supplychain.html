@@ -24,19 +24,20 @@
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
       margin: 0;
       background: var(--bg);
       color: var(--text);
       line-height: 1.75;
+      overflow-x: hidden;
     }
 
     .container {
       max-width: var(--maxw);
       margin: 0 auto;
       padding: 56px 22px 96px;
+      width: 100%;
     }
 
     a { color: var(--accent); text-decoration: none; }
@@ -68,6 +69,7 @@
       border-radius: 999px;
       color: var(--muted);
       font-size: 13px;
+      white-space: nowrap;
     }
     .dot { width: 6px; height: 6px; border-radius: 999px; background: var(--accent-2); display: inline-block; }
 
@@ -80,6 +82,7 @@
       box-shadow: var(--shadow);
       padding: 40px 32px;
       margin-bottom: 22px;
+      width: 100%;
     }
 
     h1 { font-size: 40px; letter-spacing: -1px; margin: 8px 0 6px; line-height: 1.1; }
@@ -94,15 +97,18 @@
       grid-template-columns: repeat(4, 1fr);
       gap: 14px;
       margin-top: 24px;
+      width: 100%;
     }
     .stat {
       background: rgba(255, 255, 255, 0.8);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 16px;
+      min-width: 0;
     }
     .stat .k { font-size: 10px; color: var(--muted); text-transform: uppercase; margin-bottom: 6px; letter-spacing: 0.05em; font-weight: 800; }
     .stat .v { font-size: 14px; font-weight: 800; color: var(--text); line-height: 1.35; }
+
     @media (max-width: 950px) {
       .stats { grid-template-columns: repeat(2, 1fr); }
     }
@@ -112,13 +118,13 @@
     .hint { color: var(--muted); font-size: 14px; margin-top: -6px; }
     .mini { font-size: 13px; color: var(--muted); }
 
-    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; margin-top: 24px; }
-    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03); }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; margin-top: 24px; width: 100%; }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03); min-width: 0; }
     .card h3 { margin: 0 0 10px; font-size: 17px; }
     .card p { margin: 0; color: var(--muted); font-size: 14px; }
 
     .span-12 { grid-column: span 12; }
-    .span-6  { grid-column: span 6; }
+    .span-6 { grid-column: span 6; }
     @media (max-width: 900px) {
       .span-6 { grid-column: span 12; }
     }
@@ -140,6 +146,8 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
+      min-width: 0;
+      white-space: nowrap;
     }
     .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
     .btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
@@ -149,6 +157,7 @@
       background: rgba(255,255,255,0.75);
       border-radius: var(--radius);
       padding: 16px;
+      width: 100%;
     }
     .panelRow {
       display: grid;
@@ -191,6 +200,7 @@
       font-weight: 800;
       cursor: pointer;
       transition: all 0.15s;
+      white-space: nowrap;
     }
     .fchip.active {
       border-color: rgba(30,58,138,0.4);
@@ -203,11 +213,13 @@
       background: #fff;
       border-radius: var(--radius);
       overflow: hidden;
+      width: 100%;
     }
     table {
       width: 100%;
       border-collapse: collapse;
       font-size: 14px;
+      table-layout: fixed;
     }
     thead th {
       text-align: left;
@@ -224,6 +236,7 @@
       padding: 12px 14px;
       border-bottom: 1px solid var(--border);
       vertical-align: top;
+      overflow: hidden;
     }
     tbody tr:hover td { background: rgba(248,250,252,0.9); }
     .tTitle { font-weight: 900; color: var(--text); }
@@ -255,29 +268,48 @@
       border: 1px solid var(--border);
       background: #fff;
       width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      overflow: hidden;
     }
+    .fileLink .fileName {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      opacity: 0.75;
+    }
+    .fileLink .openTxt { flex: 0 0 auto; }
+    .fileLink .arrow { flex: 0 0 auto; }
 
     /* Mind Map */
     .mapWrap {
       border: 1px solid var(--border);
-      background: #ffffff;
+      background: radial-gradient(900px 420px at 50% 10%, rgba(30, 58, 138, 0.06), transparent 55%),
+                  radial-gradient(900px 520px at 20% 80%, rgba(11, 92, 171, 0.06), transparent 55%),
+                  #ffffff;
       border-radius: var(--radius);
       padding: 0;
       overflow: hidden;
       position: relative;
       box-shadow: var(--shadow);
+      width: 100%;
     }
     #mindMapSvg { width: 100%; height: auto; display: block; }
 
-    .edge { fill: none; stroke: #cbd5e1; stroke-width: 2; opacity: 0.6; }
-    .edge.child { stroke: #e2e8f0; stroke-width: 1.5; opacity: 0.5; }
+    .edge { fill: none; stroke: #cbd5e1; stroke-width: 2; opacity: 0.65; }
+    .edge.child { stroke: #e2e8f0; stroke-width: 1.5; opacity: 0.55; }
 
     .node { cursor: pointer; }
-    .node circle { transition: r 0.3s, stroke-width 0.3s, fill 0.3s; }
+    .node circle { transition: r 0.25s, stroke-width 0.25s, fill 0.25s, filter 0.25s; }
 
     .node.core circle { fill: #fff; stroke: var(--accent); stroke-width: 4; }
     .node.cat circle { fill: #fff; stroke: var(--accent-2); stroke-width: 3; }
     .node.sub circle { fill: #fff; stroke: #94a3b8; stroke-width: 2; }
+
+    .node:hover circle { filter: url(#softGlow); }
+    .node.cat:hover circle { stroke-width: 4; }
+    .node.sub:hover circle { r: 7; }
 
     .node .label { fill: var(--text); font-weight: 800; font-size: 14px; pointer-events: none; }
     .node .sublabel { fill: var(--muted); font-weight: 700; font-size: 12px; font-family: var(--mono); pointer-events: none; }
@@ -302,7 +334,6 @@
       <div class="oneLiner">
         <b>Core capability:</b> I translate real world operational descriptions into formal optimization models, then validate feasibility and optimality through systematic constraint design and solver debugging.
         This page organizes my LINGO work into a reusable pattern library for IEOR graduate study and research.
-       
       </div>
 
       <div class="chips">
@@ -362,9 +393,21 @@
     <div class="mapWrap" aria-label="Mind map container">
       <svg id="mindMapSvg" viewBox="0 0 1040 860" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Mind map of optimization modeling categories">
         <title>Mind map of optimization modeling categories</title>
+        <defs>
+          <filter id="softGlow" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="2.2" result="blur" />
+            <feColorMatrix type="matrix"
+              values="1 0 0 0 0
+                      0 1 0 0 0
+                      0 0 1 0 0
+                      0 0 0 0.55 0" result="blurAlpha"/>
+            <feMerge>
+              <feMergeNode in="blurAlpha"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
       </svg>
-    </div>
-    
     </div>
 
     <h2 id="index">Model Index</h2>
@@ -404,32 +447,28 @@
 
     <h2 id="representative">Modeling Competency for IEOR</h2>
     <p>
-      This portfolio demonstrates more than solver usage. It shows a repeatable modeling workflow that aligns with IEOR graduate level expectations.
-      Across LP, MILP, network flow, scheduling, project management, and scenario based decision models, I practice translating operational narratives into formal decision variables, objective functions, and constraint systems, then iterating with systematic diagnosis when the solver reveals infeasibility, weak formulations, or unintended degrees of freedom.
+      I build optimization models from real operational narratives. I design decision variables, objectives, and constraints with clear indexing and logic, then debug infeasibility and strengthen formulations based on solver feedback.
     </p>
 
     <div class="grid">
       <div class="card span-6">
-        <h3>What I have already trained</h3>
+        <h3>What I can do</h3>
         <p>
-          Variable design with set indexing, integrality control, and logical constraint encoding. I can implement canonical OR patterns such as transportation, assignment, set covering, max flow, shortest path, time indexed coverage, precedence constraints, and scenario evaluation, then validate them through feasibility checks and sensitivity to modeling choices.
+          Formulate LP and MILP models, encode logical constraints, and implement standard OR patterns such as transportation, assignment, set covering, max flow, shortest path, precedence constraints, and scenario based evaluation.
         </p>
       </div>
       <div class="card span-6">
-        <h3>Why it matters for IEOR admissions</h3>
+        <h3>Why it is relevant</h3>
         <p>
-          These artifacts provide evidence that I can move from problem statement to a rigorous formulation, understand the implications of formulation strength, and communicate modeling structure clearly. The same patterns transfer directly to Python based stacks such as Pyomo, PuLP, and OR Tools, which is essential for research workflows, reproducible experimentation, and large scale computational studies.
+          These artifacts demonstrate rigorous formulation skills and disciplined debugging. The same modeling patterns transfer directly to Python modeling stacks such as Pyomo, PuLP, and OR Tools for research and reproducible experimentation.
         </p>
       </div>
 
       <div class="card span-12">
-        <h3>Positioning statement</h3>
+        <h3>How I work</h3>
         <p>
-          I treat each model as a reusable template rather than a single assignment deliverable. This pattern library reflects an IEOR mindset: modeling as a language for decision making, and debugging as a disciplined process that connects real world assumptions with mathematical structure and solver behavior.
+          I treat each model as a reusable template. My focus is not only solving, but also making assumptions explicit, keeping constraints consistent, and ensuring the formulation is stable and interpretable.
         </p>
-        <div class="mini">
-          中文補充：這頁對外呈現的是我已具備的「建模抽象能力」與「約束邏輯能力」，不只是把題目寫成程式，而是能解釋模型為何合理，哪裡可能造成不可行，怎麼修正到可解並保持原始意義。
-        </div>
       </div>
     </div>
 
@@ -682,8 +721,14 @@
       rows.forEach(m => {
         const tr = document.createElement("tr");
         const tags = (m.tags || []).slice(0, 8).map(t => `<span class="tag">${t}</span>`).join("");
+
         const filesHtml = (m.files || []).map(fn => {
-          return `<a class="fileLink" href="${fileHref(fn)}" target="_blank" rel="noopener">Open<span aria-hidden="true">↗</span><span style="opacity:0.75; margin-left: 8px;">${fn}</span></a>`;
+          return `
+            <a class="fileLink" href="${fileHref(fn)}" target="_blank" rel="noopener">
+              <span class="openTxt">Open</span>
+              <span class="arrow" aria-hidden="true">↗</span>
+              <span class="fileName">${fn}</span>
+            </a>`;
         }).join("<div style='height: 8px;'></div>");
 
         tr.innerHTML = `
@@ -756,22 +801,74 @@
       return t.length > 24 ? t.slice(0, 24) + "…" : t;
     }
 
+    function dist(a, b) {
+      const dx = b.x - a.x;
+      const dy = b.y - a.y;
+      return Math.sqrt(dx*dx + dy*dy) || 1;
+    }
+
+    function lerpPoint(a, b, t) {
+      return { x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t };
+    }
+
+    function shrinkSegment(a, b, shrinkA, shrinkB) {
+      const d = dist(a, b);
+      const tA = Math.min(Math.max(shrinkA / d, 0), 0.45);
+      const tB = Math.min(Math.max(shrinkB / d, 0), 0.45);
+      const start = lerpPoint(a, b, tA);
+      const end = lerpPoint(b, a, tB);
+      return { start, end };
+    }
+
+    function curvePath(a, b, bend = 0.18) {
+      const mid = lerpPoint(a, b, 0.5);
+      const dx = b.x - a.x;
+      const dy = b.y - a.y;
+      const len = Math.sqrt(dx*dx + dy*dy) || 1;
+      const nx = -dy / len;
+      const ny = dx / len;
+      const c = { x: mid.x + nx * len * bend, y: mid.y + ny * len * bend };
+      return `M ${a.x} ${a.y} Q ${c.x} ${c.y} ${b.x} ${b.y}`;
+    }
+
     function renderMindMap() {
       const svg = document.getElementById("mindMapSvg");
       if (!svg) return;
 
       while (svg.firstChild) svg.removeChild(svg.firstChild);
 
+      const defs = svgEl("defs", {});
+      defs.innerHTML = `
+        <filter id="softGlow" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="2.2" result="blur"></feGaussianBlur>
+          <feColorMatrix type="matrix"
+            values="1 0 0 0 0
+                    0 1 0 0 0
+                    0 0 1 0 0
+                    0 0 0 0.55 0" result="blurAlpha"></feColorMatrix>
+          <feMerge>
+            <feMergeNode in="blurAlpha"></feMergeNode>
+            <feMergeNode in="SourceGraphic"></feMergeNode>
+          </feMerge>
+        </filter>
+      `;
+      svg.appendChild(defs);
+
       const cx = 520;
       const cy = 360;
+
       const rCat = 225;
+
+      const rCore = 42;
+      const rCatNode = 34;
+      const rSubNode = 6;
 
       const title = svgEl("title", {});
       title.textContent = "Mind map of optimization modeling categories";
       svg.appendChild(title);
 
       const core = svgEl("g", { class: "node core", "data-kind": "core", transform: `translate(${cx},${cy})` });
-      core.appendChild(svgEl("circle", { r: 42 }));
+      core.appendChild(svgEl("circle", { r: rCore }));
       const t1 = svgEl("text", { class: "label", "text-anchor": "middle", y: -4 }); t1.textContent = "Optimization";
       const t2 = svgEl("text", { class: "label", "text-anchor": "middle", y: 14 }); t2.textContent = "Modeling";
       core.appendChild(t1);
@@ -791,21 +888,26 @@
         const cat = categoryById(cinfo.id);
         if (!cat) return;
 
-        const pos = polarToXY(cx, cy, rCat, cinfo.deg);
+        const catPos = polarToXY(cx, cy, rCat, cinfo.deg);
         const isExpanded = mindState.expanded.has(cat.id);
 
+        const corePt = { x: cx, y: cy };
+        const catPt = { x: catPos.x, y: catPos.y };
+        const seg = shrinkSegment(corePt, catPt, rCore + 6, rCatNode + 6);
+
+        const bend = 0.12;
         svg.appendChild(svgEl("path", {
           class: "edge",
-          d: `M ${cx} ${cy} Q ${(cx + pos.x) / 2} ${cy}, ${pos.x} ${pos.y}`
+          d: curvePath(seg.start, seg.end, bend)
         }));
 
         const g = svgEl("g", {
           class: "node cat",
           "data-kind": "cat",
           "data-id": cat.id,
-          transform: `translate(${pos.x},${pos.y})`
+          transform: `translate(${catPos.x},${catPos.y})`
         });
-        g.appendChild(svgEl("circle", { r: 34 }));
+        g.appendChild(svgEl("circle", { r: rCatNode }));
         const ct = svgEl("text", { class: "label", "text-anchor": "middle", y: 5 });
         ct.textContent = cat.label;
         g.appendChild(ct);
@@ -820,15 +922,22 @@
 
           if (subs.length > 0) {
             const spread = Math.min(110, 30 + subs.length * 12);
-            const start = cinfo.deg - spread / 2;
+            const startDeg = cinfo.deg - spread / 2;
             const step = subs.length > 1 ? spread / (subs.length - 1) : 0;
 
             subs.forEach((m, i) => {
-              const rSub = (i % 2 === 0) ? 115 : 185;
-              const sDeg = start + i * step;
-              const sPos = polarToXY(pos.x, pos.y, rSub, sDeg);
+              const rSub = (i % 2 === 0) ? 125 : 195;
+              const sDeg = startDeg + i * step;
+              const sPos = polarToXY(catPos.x, catPos.y, rSub, sDeg);
 
-              svg.appendChild(svgEl("path", { class: "edge child", d: `M ${pos.x} ${pos.y} L ${sPos.x} ${sPos.y}` }));
+              const a = { x: catPos.x, y: catPos.y };
+              const b = { x: sPos.x, y: sPos.y };
+              const segChild = shrinkSegment(a, b, rCatNode + 6, rSubNode + 6);
+
+              svg.appendChild(svgEl("path", {
+                class: "edge child",
+                d: `M ${segChild.start.x} ${segChild.start.y} L ${segChild.end.x} ${segChild.end.y}`
+              }));
 
               const sg = svgEl("g", {
                 class: "node sub",
@@ -839,9 +948,9 @@
                 transform: `translate(${sPos.x},${sPos.y})`
               });
 
-              sg.appendChild(svgEl("circle", { r: 6 }));
+              sg.appendChild(svgEl("circle", { r: rSubNode }));
 
-              const isLeft = sPos.x < pos.x;
+              const isLeft = sPos.x < catPos.x;
               const st = svgEl("text", {
                 class: "sublabel",
                 x: isLeft ? -12 : 12,
