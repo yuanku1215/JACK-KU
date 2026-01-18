@@ -86,7 +86,7 @@
       border: 1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding: 26px 26px 22px;
+      padding: 32px 32px 28px;
       margin-bottom: 22px;
     }
 
@@ -154,7 +154,7 @@
       border: 1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: 0 10px 20px rgba(15, 23, 42, 0.05);
-      padding: 18px 18px;
+      padding: 24px;
     }
     .card h3 {
       margin: 0 0 8px;
@@ -164,16 +164,8 @@
     .card p { margin: 0; color: var(--muted); font-size: 14px; }
 
     .span-12 { grid-column: span 12; }
-    .span-8  { grid-column: span 8; }
     .span-6  { grid-column: span 6; }
-    .span-5  { grid-column: span 5; }
     .span-4  { grid-column: span 4; }
-    .span-3  { grid-column: span 3; }
-
-    @media (max-width: 900px) {
-      .span-8, .span-6, .span-5, .span-4, .span-3 { grid-column: span 12; }
-      h1 { font-size: 34px; }
-    }
 
     /* Snapshot stats */
     .stats {
@@ -184,7 +176,7 @@
     }
     .stat {
       grid-column: span 3;
-      background: rgba(255,255,255,0.8);
+      background: rgba(255, 255, 255, 0.8);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 16px 16px;
@@ -209,11 +201,8 @@
     @media (max-width: 900px) {
       .stat { grid-column: span 6; }
     }
-    @media (max-width: 520px) {
-      .stat { grid-column: span 12; }
-    }
 
-    /* Meta block (refined) */
+    /* Meta block */
     .meta {
       background: var(--card-bg);
       border: 1px solid var(--border);
@@ -231,24 +220,11 @@
     .metaRow:first-child { border-top: none; }
     .metaKey { color: var(--muted); font-weight: 600; }
     .metaVal { color: var(--text); }
-    @media (max-width: 700px) {
-      .metaRow { grid-template-columns: 1fr; }
-    }
 
-    /* Callout */
-    .callout {
-      border: 1px solid rgba(30,58,138,0.25);
-      background: rgba(30,58,138,0.05);
-      border-radius: var(--radius);
-      padding: 16px 18px;
-      margin-top: 14px;
-    }
-    .callout b { color: var(--accent); }
-
-    /* Figures placeholders */
+    /* Figures */
     .figure {
       border: 1px solid var(--border);
-      background: linear-gradient(135deg, rgba(15,23,42,0.03), rgba(15,23,42,0.01));
+      background: #fff;
       border-radius: var(--radius);
       padding: 16px;
       overflow: hidden;
@@ -256,11 +232,8 @@
     .imgPlaceholder {
       height: 240px;
       border-radius: var(--radius-sm);
-      border: 1px dashed rgba(71,85,105,0.35);
-      background:
-        radial-gradient(400px 200px at 20% 10%, rgba(30,58,138,0.10), transparent 60%),
-        radial-gradient(380px 220px at 90% 40%, rgba(11,92,171,0.10), transparent 60%),
-        linear-gradient(to bottom, rgba(255,255,255,0.75), rgba(255,255,255,0.35));
+      border: 1px dashed var(--border);
+      background: #f8fafc;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -273,15 +246,6 @@
       margin-top: 12px;
       font-size: 13px;
       color: var(--muted);
-    }
-    .caption code {
-      font-family: var(--mono);
-      font-size: 12px;
-      color: #0f172a;
-      background: rgba(15, 23, 42, 0.04);
-      border: 1px solid rgba(15, 23, 42, 0.08);
-      padding: 2px 6px;
-      border-radius: 8px;
     }
 
     /* Buttons */
@@ -298,42 +262,16 @@
       padding: 10px 14px;
       border-radius: 12px;
       border: 1px solid var(--border);
-      background: rgba(255,255,255,0.85);
+      background: #fff;
       color: var(--text);
       font-weight: 600;
       font-size: 14px;
     }
     .btn.primary {
-      background: linear-gradient(180deg, rgba(30,58,138,0.12), rgba(30,58,138,0.06));
-      border-color: rgba(30,58,138,0.25);
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
     }
-    .btn:hover {
-      text-decoration: none;
-      transform: translateY(-1px);
-      box-shadow: 0 10px 18px rgba(15,23,42,0.08);
-    }
-
-    /* Details */
-    details {
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      background: rgba(255,255,255,0.8);
-      padding: 14px 16px;
-      margin-top: 14px;
-    }
-    summary {
-      cursor: pointer;
-      font-weight: 700;
-      color: var(--text);
-      letter-spacing: -0.2px;
-    }
-    details > div {
-      margin-top: 10px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-    .miniList { margin: 10px 0 0; padding-left: 18px; }
-    .miniList li { color: var(--muted); }
 
     /* Footer */
     footer {
@@ -341,13 +279,6 @@
       font-size: 14px;
       color: #64748b;
       text-align: center;
-    }
-    .footLinks {
-      margin-top: 10px;
-      display: flex;
-      justify-content: center;
-      gap: 14px;
-      flex-wrap: wrap;
     }
   </style>
 </head>
@@ -357,391 +288,154 @@
 
     <div class="topbar">
       <a class="backlink" href="index.html">← Back to Home</a>
-      <div class="pill"><span class="dot"></span> Updated: 2025</div>
+      <div class="pill"><span class="dot"></span> Research Paper | WCTR 2026</div>
     </div>
 
-    <!-- HERO -->
     <div class="hero">
-      <h1>Research</h1>
+      <h1>Optimizing Levee Crossing Selection</h1>
       <div class="subtitle">
-        Multi-objective Spatial Facility Location for Levee Crossing Planning
+        Integrating Multi-objective Optimization and Spatial Analysis for Urban Mobility Improvement
       </div>
 
       <div class="oneLiner">
-        <b>One-line claim:</b> Optimizing levee crossing locations to improve accessibility and equity
-        under cost and safety constraints — using GIS-based modeling, NSGA-III, and QUBO/SQA.
+        Developing a scientific framework to balance accessibility, cost, and equity in riverfront planning 
+        using <b>GIS Network Analysis</b>, <b>KDE</b>, and <b>Quantum-inspired Optimization</b>.
       </div>
 
-      <div class="chips" aria-label="keywords">
-        <div class="chip">Multi-objective Optimization</div>
-        <div class="chip">Spatial Facility Location</div>
-        <div class="chip">GIS & Network Analysis</div>
-        <div class="chip">NSGA-III (Pareto Front)</div>
-        <div class="chip">QUBO Encoding</div>
+      <div class="chips">
+        <div class="chip">NSGA-II / NSGA-III</div>
         <div class="chip">Simulated Quantum Annealing (SQA)</div>
+        <div class="chip">Kernel Density Estimation (KDE)</div>
+        <div class="chip">Spatial Optimization</div>
+        <div class="chip">WCTR 2026 Toulouse</div>
       </div>
 
-      <!-- Snapshot stats -->
-      <div class="stats" aria-label="research snapshot">
-        <div class="stat">
-          <div class="k">Role</div>
-          <div class="v">Researcher</div>
-          <div class="s">Undergraduate research project</div>
-        </div>
+      <div class="stats">
         <div class="stat">
           <div class="k">Study Area</div>
-          <div class="v">Sanchong & Luzhou</div>
-          <div class="s">New Taipei City, Taiwan</div>
+          <div class="v">New Taipei</div>
+          <div class="s">Sanchong & Luzhou</div>
         </div>
         <div class="stat">
-          <div class="k">Problem Type</div>
-          <div class="v">Facility Location</div>
-          <div class="s">Levee-crossing planning</div>
+          <div class="k">Objectives</div>
+          <div class="v">5 Goals</div>
+          <div class="s">Multi-objective Trade-offs</div>
         </div>
         <div class="stat">
-          <div class="k">Methods</div>
-          <div class="v">NSGA-III + SQA</div>
-          <div class="s">Pareto + QUBO exploration</div>
+          <div class="k">Framework</div>
+          <div class="v">Hybrid GIS</div>
+          <div class="s">Spatial + Optimization</div>
+        </div>
+        <div class="stat">
+          <div class="k">Solver</div>
+          <div class="v">SQA vs EA</div>
+          <div class="s">Performance Benchmarking</div>
         </div>
       </div>
 
-      <!-- Artifacts quick actions -->
-      <div class="btnRow" aria-label="quick links">
-        <!-- TODO: replace href with your actual links -->
-        <a class="btn primary" href="#" target="_blank" rel="noopener">📄 Poster / Slides (PDF)</a>
-        <a class="btn" href="#" target="_blank" rel="noopener">💻 Code (GitHub)</a>
-        <a class="btn" href="#" target="_blank" rel="noopener">🧪 Demo / Notebook</a>
+      <div class="btnRow">
+        <a class="btn primary" href="#" target="_blank">View Paper Abstract</a>
+        <a class="btn" href="#" target="_blank">Research Repository</a>
       </div>
     </div>
 
-    <!-- META (detailed) -->
-    <div class="meta" aria-label="project metadata">
+    <div class="meta">
       <div class="metaRow">
-        <div class="metaKey">Research Theme</div>
-        <div class="metaVal">People-centered levee-crossing planning via integrated GIS + optimization.</div>
+        <div class="metaKey">Research Context</div>
+        <div class="metaVal">Urban levee systems as physical barriers to riverfront accessibility.</div>
       </div>
       <div class="metaRow">
-        <div class="metaKey">Core Objectives</div>
-        <div class="metaVal">Cost, coverage, spatial equity, and traffic safety (multi-objective trade-offs).</div>
+        <div class="metaKey">Optimization Metrics</div>
+        <div class="metaVal">Coverage, Travel Time, Construction Cost, Spatial Equity, and Environmental Risk.</div>
       </div>
       <div class="metaRow">
-        <div class="metaKey">Data Inputs</div>
-        <div class="metaVal">Road network, population distribution, levee geometry, and crash records.</div>
-      </div>
-      <div class="metaRow">
-        <div class="metaKey">Outputs</div>
-        <div class="metaVal">Pareto solutions + maps highlighting underserved and high-risk corridors.</div>
+        <div class="metaKey">Core Contribution</div>
+        <div class="metaVal">Automated site selection framework using Pareto-optimal solutions for decision support.</div>
       </div>
     </div>
 
-    <!-- ABSTRACT -->
-    <h2>Abstract</h2>
-
+    <h2>Research Overview</h2>
     <p>
-      Levee systems protect cities from floods, but they can also act as mobility barriers that fragment
-      neighborhoods and reduce access to daily services. In riverfront districts such as Sanchong and
-      Luzhou in New Taipei City, residents may experience longer detours and uneven service accessibility
-      due to insufficient levee crossings.
+      Levee systems protect riverfront areas from flooding but often create barriers that limit local mobility. In many urban communities, residents face restricted access to riverside parks due to a lack of crossing facilities. This research introduces an integrated framework that combines <b>Spatial Analysis</b> with <b>Multi-objective Optimization</b> to guide the siting and improvement of levee crossings.
     </p>
 
     <p>
-      This research develops an integrated framework that combines GIS-based spatial analysis with
-      multi-objective optimization to support the selection of levee crossing facilities. The model
-      simultaneously considers construction and sidewalk improvement costs, population coverage,
-      spatial equity, and traffic safety by incorporating road network data, population distributions,
-      and crash records.
+      Using <b>Sanchong</b> and <b>Luzhou</b> districts in New Taipei City as a case study, we utilized GIS road network analysis and Kernel Density Estimation (KDE) to quantify accessibility. The model evaluates trade-offs using <b>NSGA-III</b> and explores large-scale combinatorial search spaces via <b>Simulated Quantum Annealing (SQA)</b>.
     </p>
 
-    <p>
-      Candidate locations are generated from spatial datasets and evaluated using two complementary
-      optimization approaches: the Non-dominated Sorting Genetic Algorithm III (NSGA-III) for Pareto
-      front approximation, and simulated quantum annealing (SQA) via QUBO encoding to explore large-scale
-      combinatorial search spaces. The resulting solutions reveal explicit trade-offs among cost,
-      accessibility, equity, and safety, enabling interpretable planning insights for people-centered
-      urban infrastructure decision-making.
-    </p>
-
-    <div class="callout">
-      <b>Takeaway:</b> This project is not “just shortest path.” It is a multi-objective, city-scale siting
-      problem where improving accessibility may conflict with budget, equity, and safety — making it a
-      strong fit for Pareto optimization and QUBO/SQA experimentation.
-    </div>
-
-    <!-- MOTIVATION & QUESTIONS -->
-    <h2>Motivation & Research Questions</h2>
-
-    <p>
-      Traditional planning approaches often emphasize feasibility and cost, but may not explicitly
-      quantify who benefits and who is left behind. For levee-crossing planning, this can lead to
-      solutions that improve average accessibility while still maintaining pockets of underserved
-      neighborhoods, especially where street connectivity and safe crossings are limited.
-    </p>
-
-    <ul>
-      <li><b>RQ1 — Multi-objective planning:</b> How can we jointly optimize cost, coverage, spatial equity, and safety in a single framework?</li>
-      <li><b>RQ2 — Spatial insight:</b> Which neighborhoods remain underserved under cost-driven solutions, and why?</li>
-      <li><b>RQ3 — Solver comparison:</b> Can QUBO-based simulated quantum annealing achieve competitive performance compared to NSGA-III as the problem scales?</li>
-    </ul>
-
-    <!-- DATA & STUDY AREA -->
-    <h2>Data & Study Setup</h2>
-
-    <div class="grid">
-      <div class="card span-6">
-        <h3>Demand (Population)</h3>
-        <p>
-          Demand is represented using spatial population distributions (e.g., grids or points) to measure
-          coverage and equity. Metrics are computed using walkable-network accessibility rather than
-          straight-line distance.
-        </p>
-      </div>
-
-      <div class="card span-6">
-        <h3>Network (Walkability)</h3>
-        <p>
-          The road network is used to compute travel distances and connectivity under realistic movement
-          constraints, enabling interpretable accessibility outcomes.
-        </p>
-      </div>
-
-      <div class="card span-6">
-        <h3>Candidate Sites</h3>
-        <p>
-          Candidate crossing locations are generated along levee segments using GIS rules (geometry, spacing,
-          and nearby network feasibility), producing a planning-ready set of selectable sites.
-        </p>
-      </div>
-
-      <div class="card span-6">
-        <h3>Safety (Crash Risk)</h3>
-        <p>
-          Traffic crash records are mapped into spatial risk indicators to penalize solutions that
-          concentrate crossings near high-risk intersections or corridors.
-        </p>
-      </div>
-    </div>
-
-    <details>
-      <summary>Implementation note: what “planning-ready” means in this project</summary>
-      <div>
-        Candidate sites are designed to be usable for planning discussion: each site is (1) spatially valid
-        along a levee segment, (2) connected to the surrounding street network, and (3) suitable for
-        evaluating cost and sidewalk-improvement needs with GIS-based measurements.
-        <ul class="miniList">
-          <li>Feasibility constraints help filter unrealistic sites early.</li>
-          <li>Network-based metrics keep evaluation consistent with real movement.</li>
-          <li>Safety and equity are modeled explicitly, not as afterthoughts.</li>
-        </ul>
-      </div>
-    </details>
-
-    <!-- METHOD -->
-    <h2>Method: GIS → Multi-objective Model → Solvers</h2>
-
-    <p>
-      The framework follows a pipeline approach that turns raw spatial datasets into comparable
-      decision metrics, then searches for non-dominated solutions under multiple conflicting goals.
-      This structure supports both evolutionary Pareto search (NSGA-III) and QUBO-based optimization
-      (SQA), enabling a principled comparison across solver paradigms.
-    </p>
-
+    <h2>Evaluation Framework</h2>
+    
     <div class="grid">
       <div class="card span-4">
-        <h3>Step 1 — Spatial preprocessing</h3>
-        <p>Generate candidate sites, compute walkable-network accessibility, and build spatial matrices for evaluation.</p>
+        <h3>1. Population Coverage</h3>
+        <p>Maximizing the number of residents served within defined network-based distance thresholds.</p>
       </div>
       <div class="card span-4">
-        <h3>Step 2 — Multi-objective formulation</h3>
-        <p>Define objectives (cost, coverage, equity, safety) and planning constraints to reflect real-world feasibility.</p>
+        <h3>2. Travel Efficiency</h3>
+        <p>Minimizing average walking time and detours for residents to reach riverfront spaces.</p>
       </div>
       <div class="card span-4">
-        <h3>Step 3 — Solver execution</h3>
-        <p>Run NSGA-III for Pareto approximation; run QUBO/SQA to explore combinatorial decision space.</p>
+        <h3>3. Facility Cost</h3>
+        <p>Balancing the scale of construction (stairs vs. ramps) with available municipal budgets.</p>
+      </div>
+      <div class="card span-4">
+        <h3>4. Spatial Equity</h3>
+        <p>Ensuring an even distribution of accessibility to prevent service gaps in underserved neighborhoods.</p>
+      </div>
+      <div class="card span-4">
+        <h3>5. Safety & Risk</h3>
+        <p>Considering traffic safety and environmental impacts near potential crossing corridors.</p>
       </div>
     </div>
 
-    <details>
-      <summary>Model formulation (human-readable)</summary>
-      <div>
-        <p style="margin-top: 8px;">
-          Each candidate site corresponds to a binary decision variable (<span style="font-family: var(--mono);">0/1</span>).
-          The model selects a subset of sites that jointly optimizes:
-        </p>
-        <ul class="miniList">
-          <li><b>Cost:</b> construction and sidewalk retrofit costs (minimize)</li>
-          <li><b>Coverage:</b> population served within network-based accessibility thresholds (maximize)</li>
-          <li><b>Equity:</b> reduce spatial disparity in service accessibility (maximize / minimize inequality)</li>
-          <li><b>Safety:</b> avoid placing crossings in high-risk crash environments (minimize risk)</li>
-        </ul>
-        <p style="margin-top: 10px;">
-          Constraints enforce planning feasibility, such as budget, spacing, and realistic implementation limits.
-          This binary structure naturally supports QUBO encoding for SQA experiments.
-        </p>
+    <h2>Methodological Pipeline</h2>
+    <div class="grid">
+      <div class="card span-6">
+        <h3>Spatial Preprocessing</h3>
+        <p>Generating candidate crossing sites and computing service areas through GIS network analysis. Population density is mapped via KDE to identify high-demand clusters.</p>
       </div>
-    </details>
-
-    <!-- RESULTS -->
-    <h2>Results & Insights</h2>
-
-    <p>
-      The primary outcome is a set of non-dominated solutions that explicitly visualize trade-offs between
-      competing planning goals. Instead of a single “best” answer, the Pareto front provides a menu of
-      options that can be selected based on policy preferences (e.g., equity-first vs cost-first).
-    </p>
-
-    <ul>
-      <li><b>Trade-offs are explicit:</b> lower-cost solutions may concentrate benefits in already-served corridors, reducing equity.</li>
-      <li><b>Underserved areas become visible:</b> some high-demand neighborhoods remain under-covered unless equity is prioritized.</li>
-      <li><b>Safety-aware siting matters:</b> incorporating crash risk can shift recommendations away from high-risk corridors while maintaining accessibility gains.</li>
-      <li><b>Solver comparison:</b> SQA produces competitive solution patterns relative to NSGA-III, suggesting promise for scalable combinatorial exploration.</li>
-    </ul>
-
-    <div class="callout">
-      <b>Interpretation style (for planners):</b> choose a solution by answering “What are we willing to trade?”
-      — a small increase in cost may produce a large equity gain, or a safer configuration may slightly reduce
-      coverage but significantly lower exposure to crash risk.
+      <div class="card span-6">
+        <h3>Optimization Engine</h3>
+        <p>Comparing Evolutionary Algorithms (NSGA-II/III) with Simulated Quantum Annealing (SQA) using QUBO encoding to find the most efficient Pareto-front solutions.</p>
+      </div>
     </div>
 
-    <!-- VISUAL HIGHLIGHTS -->
-    <h2>Visual Highlights</h2>
-
+    <h2>Visualizing Insights</h2>
     <div class="grid">
       <div class="figure span-6">
         <div class="imgPlaceholder">
-          <div>
-            <b>Figure 1: Study Area & Candidate Sites</b><br />
-            (Replace this placeholder with your map image)<br />
-            <span class="muted">Suggested: candidate points + levee line + population heatmap</span>
-          </div>
+          [Spatial Demand & Network Map]
         </div>
         <div class="caption">
-          Map overview for <code>Sanchong</code> and <code>Luzhou</code> showing candidate crossing sites and demand distribution.
-          This figure anchors the research context and validates site feasibility.
+          <b>Fig 1:</b> KDE-based population demand analysis and existing facility service coverage in the study area.
         </div>
       </div>
 
       <div class="figure span-6">
         <div class="imgPlaceholder">
-          <div>
-            <b>Figure 2: Pareto Front (NSGA-III vs SQA)</b><br />
-            (Replace this placeholder with your plot)<br />
-            <span class="muted">Suggested: 2–3 objectives scatter + color by solver</span>
-          </div>
+          [Pareto Front Results]
         </div>
         <div class="caption">
-          Pareto solutions visualize trade-offs among objectives; overlaying NSGA-III and SQA results supports solver comparison.
-        </div>
-      </div>
-
-      <div class="figure span-12">
-        <div class="imgPlaceholder" style="height: 260px;">
-          <div>
-            <b>Figure 3: Accessibility Improvement (Before vs After)</b><br />
-            (Replace this placeholder with your result maps)<br />
-            <span class="muted">Suggested: two maps or one map + difference layer</span>
-          </div>
-        </div>
-        <div class="caption">
-          Outcome maps communicate “who benefits” at a glance, enabling equity-focused planning discussion beyond average metrics.
+          <b>Fig 2:</b> Pareto-optimal solutions showcasing the trade-offs between coverage, cost, and equity.
         </div>
       </div>
     </div>
 
-    <!-- YOUR CONTRIBUTIONS -->
-    <h2>My Contributions</h2>
-
-    <p class="muted">
-      This section clarifies what I personally built and validated, beyond general project participation.
-    </p>
-
-    <div class="grid">
-      <div class="card span-6">
-        <h3>GIS & Data Engineering</h3>
-        <p>
-          Built the GIS preprocessing pipeline to generate candidate sites, compute network-based metrics,
-          and integrate population and crash datasets into model-ready inputs.
-        </p>
-      </div>
-      <div class="card span-6">
-        <h3>Optimization & Evaluation</h3>
-        <p>
-          Implemented multi-objective formulation and evaluation scripts in Python, performed trade-off analysis,
-          and designed interpretable outputs for planning decisions.
-        </p>
-      </div>
-      <div class="card span-6">
-        <h3>QUBO / SQA Experimentation</h3>
-        <p>
-          Developed QUBO encoding strategy and executed simulated quantum annealing experiments to compare solution
-          patterns and scalability against NSGA-III.
-        </p>
-      </div>
-      <div class="card span-6">
-        <h3>Communication & Visualization</h3>
-        <p>
-          Produced maps and figures to communicate underserved areas and safety-sensitive corridors, translating
-          technical results into planning-friendly insights.
-        </p>
-      </div>
-    </div>
-
-    <!-- ARTIFACTS -->
-    <h2>Artifacts</h2>
-
-    <p>
-      Below are public-facing materials that make the project reproducible and easy to review.
-      (Replace <span style="font-family: var(--mono);">#</span> with your real links.)
-    </p>
-
-    <div class="grid">
-      <div class="card span-4">
-        <h3>Poster / Slides</h3>
-        <p class="muted">A concise visual summary of motivation, methods, and key results.</p>
-        <div class="btnRow">
-          <a class="btn primary" href="#" target="_blank" rel="noopener">Open PDF</a>
-        </div>
-      </div>
-
-      <div class="card span-4">
-        <h3>Source Code</h3>
-        <p class="muted">Code for preprocessing, modeling, optimization, and evaluation.</p>
-        <div class="btnRow">
-          <a class="btn primary" href="#" target="_blank" rel="noopener">View GitHub</a>
-        </div>
-      </div>
-
-      <div class="card span-4">
-        <h3>Demo / Notebook</h3>
-        <p class="muted">Interactive notebook or demo showcasing pipeline and visual outputs.</p>
-        <div class="btnRow">
-          <a class="btn primary" href="#" target="_blank" rel="noopener">Open Demo</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- SIGNIFICANCE & FUTURE WORK -->
-    <h2>Significance & Future Work</h2>
-
-    <p>
-      This project demonstrates how integrated spatial analysis and advanced optimization can support
-      people-centered and resilient infrastructure planning. By translating planning goals into explicit
-      multi-objective metrics, the framework offers both interpretability (maps, Pareto trade-offs) and
-      computational scalability (QUBO/SQA experimentation).
-    </p>
-
+    <h2>My Key Contributions</h2>
     <ul>
-      <li><b>Dynamic demand:</b> extend the model to time-of-day or event-driven demand patterns.</li>
-      <li><b>Uncertainty-aware planning:</b> incorporate stochastic risk models and robustness criteria.</li>
-      <li><b>Scaling experiments:</b> expand candidate sets to city scale and benchmark GPU-accelerated optimization.</li>
+      <li>Built the <b>GIS data pipeline</b> to integrate population, road network, and levee geometry.</li>
+      <li>Implemented the <b>Multi-objective Optimization</b> model using Python and ArcPy.</li>
+      <li>Conducted performance benchmarking between <b>Evolutionary Algorithms</b> and <b>Simulated Quantum Annealing</b>.</li>
+      <li>Developed <b>Spatial Equity metrics</b> to visualize underserved areas for planning decision support.</li>
     </ul>
 
     <footer>
       © 2025 TSUN-YUAN KU
       <div class="footLinks">
         <a href="index.html">Home</a>
-        <a href="#" target="_blank" rel="noopener">GitHub</a>
-        <a href="#" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="mailto:yourname@email.com">Email</a>
+        <a href="#" target="_blank">LinkedIn</a>
+        <a href="https://github.com/yuanku1215" target="_blank">GitHub</a>
+        <a href="mailto:contact@email.com">Email</a>
       </div>
     </footer>
 
