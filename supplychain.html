@@ -256,44 +256,31 @@
       width: 100%;
     }
 
+    /* ---------- Mind Map (Enhanced, integrated) ---------- */
     .mapWrap {
       border: 1px solid var(--border);
       background: #fff;
       border-radius: var(--radius);
-      padding: 18px;
-      overflow: auto;
+      padding: 20px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: inset 0 2px 10px rgba(0,0,0,0.02);
     }
-    .mapNote { font-size: 13px; color: var(--muted); margin-top: 10px; }
+    #mindMapSvg { width: 100%; height: auto; display: block; }
 
-    svg text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; }
+    .edge { fill: none; stroke: #cbd5e1; stroke-width: 1.5; transition: stroke 0.3s; }
+    .edge.child { stroke: #e2e8f0; stroke-width: 1.2; }
 
-    .edge { stroke: rgba(71,85,105,0.40); stroke-width: 2; fill: none; }
-    .edge.child { stroke: rgba(71,85,105,0.28); stroke-width: 2; }
+    .node { cursor: pointer; transition: transform 0.2s; }
+    .node:hover { filter: drop-shadow(0 4px 12px rgba(30,58,138,0.15)); }
 
-    .node { cursor: pointer; }
-    .node .halo { opacity: 0; transition: opacity 0.15s; }
-    .node:hover .halo { opacity: 1; }
+    .node.core circle { fill: #fff; stroke: var(--accent); stroke-width: 3; }
+    .node.cat circle { fill: #fff; stroke: var(--accent-2); stroke-width: 2.2; }
+    .node.sub circle { fill: #f8fafc; stroke: #94a3b8; stroke-width: 1; }
 
-    .node.core circle.main {
-      fill: rgba(30,58,138,0.10);
-      stroke: rgba(30,58,138,0.55);
-      stroke-width: 2.5;
-    }
-
-    .node.cat circle.main {
-      fill: rgba(11,92,171,0.08);
-      stroke: rgba(11,92,171,0.55);
-      stroke-width: 2.2;
-    }
-
-    .node.sub circle.main {
-      fill: rgba(15,23,42,0.04);
-      stroke: rgba(15,23,42,0.22);
-      stroke-width: 2;
-    }
-
-    .node text.label { fill: #0f172a; font-weight: 900; font-size: 12px; }
-    .node text.sublabel { fill: rgba(15,23,42,0.78); font-weight: 800; font-size: 11px; }
+    .node text { pointer-events: none; user-select: none; }
+    .node .label { fill: var(--text); font-weight: 800; font-size: 13px; }
+    .node .sublabel { fill: var(--muted); font-weight: 700; font-size: 11px; font-family: var(--mono); }
 
     footer { margin-top: 120px; text-align: center; font-size: 13px; color: var(--muted); border-top: 1px solid var(--border); padding: 40px 0; }
     .footLinks { margin-top: 10px; display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
@@ -372,19 +359,17 @@
       The taxonomy below is designed for readers to quickly understand what I can model, how I structure constraints, and which canonical OR patterns I already implemented.
     </p>
 
-    <div class="grid" id="taxonomyGrid">
-      <!-- Populated by JS -->
-    </div>
+    <div class="grid" id="taxonomyGrid"></div>
 
     <h2 id="mindmap">Mind Map (Two Level)</h2>
     <p class="hint">
-      Click a category node to expand or collapse its subtopics. Click a subtopic node to jump to the Model Index and open the corresponding code file.
+      Click a category node to expand or collapse its subtopics. Click a subtopic node to filter the index (and optionally open code).
     </p>
 
     <div class="mapWrap">
-      <svg id="mindMapSvg" width="1040" height="600" viewBox="0 0 1040 600" role="img" aria-label="Mind map of optimization modeling categories"></svg>
-      <div class="mapNote">
-        Design logic: the first ring shows your modeling taxonomy; the second ring shows representative problems that demonstrate concrete formulation skills.
+      <svg id="mindMapSvg" viewBox="0 0 1040 640" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Mind map of optimization modeling categories"></svg>
+      <div class="mini" style="margin-top: 10px;">
+        Layout logic: staggered radii for subtopics reduce overlap; subtopic labels auto align left or right for readability.
       </div>
     </div>
 
@@ -493,185 +478,40 @@ MIN = @SUM(LINK: cost * x);<br>
     ];
 
     const MODELS = [
-      {
-        title: "Diet Problem",
-        category: "cat-lp",
-        tags: ["LP", "constraints"],
-        files: ["F64101066 Diet.lng", "F64101066 Diet IP.lng"]
-      },
-      {
-        title: "Product Mix",
-        category: "cat-lp",
-        tags: ["LP", "resource allocation"],
-        files: ["Product mix model_F64101066.lng"]
-      },
-      {
-        title: "Knapsack",
-        category: "cat-lp",
-        tags: ["ILP", "selection"],
-        files: ["Knapsack_F64101066.lng"]
-      },
-      {
-        title: "Cutting Stock",
-        category: "cat-lp",
-        tags: ["MILP", "pattern"],
-        files: ["Cutting Stock_min_waste_F64101066.lng", "Cutting Stock _min_total_cost_F64101066.lng"]
-      },
-      {
-        title: "Set Covering",
-        category: "cat-lp",
-        tags: ["binary", "coverage"],
-        files: ["Set Covering_Base_F64101066.lng", "Set Covering_If_then_F64101066.lng", "Set Covering_@IF_F64101066.lng"]
-      },
-      {
-        title: "Logical Constraints",
-        category: "cat-lp",
-        tags: ["either or", "if then", "Big M"],
-        files: ["F64101066 Either-or and if-then constraints.lng"]
-      },
-      {
-        title: "Soda Can Geometry",
-        category: "cat-lp",
-        tags: ["geometry", "nonlinear"],
-        files: ["F64101066 Soda Can.lng"]
-      },
+      { title: "Diet Problem", category: "cat-lp", tags: ["LP", "constraints"], files: ["F64101066 Diet.lng", "F64101066 Diet IP.lng"] },
+      { title: "Product Mix", category: "cat-lp", tags: ["LP", "resource allocation"], files: ["Product mix model_F64101066.lng"] },
+      { title: "Knapsack", category: "cat-lp", tags: ["ILP", "selection"], files: ["Knapsack_F64101066.lng"] },
+      { title: "Cutting Stock", category: "cat-lp", tags: ["MILP", "pattern"], files: ["Cutting Stock_min_waste_F64101066.lng", "Cutting Stock _min_total_cost_F64101066.lng"] },
+      { title: "Set Covering", category: "cat-lp", tags: ["binary", "coverage"], files: ["Set Covering_Base_F64101066.lng", "Set Covering_If_then_F64101066.lng", "Set Covering_@IF_F64101066.lng"] },
+      { title: "Logical Constraints", category: "cat-lp", tags: ["either or", "if then", "Big M"], files: ["F64101066 Either-or and if-then constraints.lng"] },
+      { title: "Soda Can Geometry", category: "cat-lp", tags: ["geometry", "nonlinear"], files: ["F64101066 Soda Can.lng"] },
 
-      {
-        title: "Maximum Flow",
-        category: "cat-network",
-        tags: ["max flow", "capacity"],
-        files: ["F64101066 Maxium-Flow Problem.lng"]
-      },
-      {
-        title: "Shortest Path",
-        category: "cat-network",
-        tags: ["shortest route", "routing"],
-        files: ["Shortest Route Problem_nodes_F64101066.lng"]
-      },
-      {
-        title: "Warehouse Location + Transport",
-        category: "cat-network",
-        tags: ["facility", "transportation"],
-        files: ["F64101066 Warehouse contruction and transportation 5x5.lng", "F64101066 Warehouse construction and transportation5x5_LINGO_SET.lng"]
-      },
-      {
-        title: "6 Warehouses 8 Vendors",
-        category: "cat-network",
-        tags: ["distribution", "allocation"],
-        files: ["6 Warehouses 8 Venders_F64101066.lng"]
-      },
-      {
-        title: "7 11 Distribution",
-        category: "cat-network",
-        tags: ["distribution", "planning"],
-        files: ["F64101066 The 7-11.lng"]
-      },
+      { title: "Maximum Flow", category: "cat-network", tags: ["max flow", "capacity"], files: ["F64101066 Maxium-Flow Problem.lng"] },
+      { title: "Shortest Path", category: "cat-network", tags: ["shortest route", "routing"], files: ["Shortest Route Problem_nodes_F64101066.lng"] },
+      { title: "Warehouse Location + Transport", category: "cat-network", tags: ["facility", "transportation"], files: ["F64101066 Warehouse contruction and transportation 5x5.lng", "F64101066 Warehouse construction and transportation5x5_LINGO_SET.lng"] },
+      { title: "6 Warehouses 8 Vendors", category: "cat-network", tags: ["distribution", "allocation"], files: ["6 Warehouses 8 Venders_F64101066.lng"] },
+      { title: "7 11 Distribution", category: "cat-network", tags: ["distribution", "planning"], files: ["F64101066 The 7-11.lng"] },
 
-      {
-        title: "Assignment (Basic)",
-        category: "cat-assign",
-        tags: ["assignment", "binary"],
-        files: ["F64101066 assignment problem.lng"]
-      },
-      {
-        title: "Assignment (Set Template)",
-        category: "cat-assign",
-        tags: ["set indexing", "template"],
-        files: ["F64101066 assignment problem LINGO_SET_v1.lng", "F64101066 assignmetn problem_LINGO_SET_v2.lng"]
-      },
-      {
-        title: "Matching Problem",
-        category: "cat-assign",
-        tags: ["matching", "constraints"],
-        files: ["A Matching Problem_F64101066.lng", "A Matching Problem_2_F64101066.lng"]
-      },
-      {
-        title: "Einstein Puzzle",
-        category: "cat-assign",
-        tags: ["logic", "assignment"],
-        files: ["F64101066 Einstein.lng"]
-      },
+      { title: "Assignment (Basic)", category: "cat-assign", tags: ["assignment", "binary"], files: ["F64101066 assignment problem.lng"] },
+      { title: "Assignment (Set Template)", category: "cat-assign", tags: ["set indexing", "template"], files: ["F64101066 assignment problem LINGO_SET_v1.lng", "F64101066 assignmetn problem_LINGO_SET_v2.lng"] },
+      { title: "Matching Problem", category: "cat-assign", tags: ["matching", "constraints"], files: ["A Matching Problem_F64101066.lng", "A Matching Problem_2_F64101066.lng"] },
+      { title: "Einstein Puzzle", category: "cat-assign", tags: ["logic", "assignment"], files: ["F64101066 Einstein.lng"] },
 
-      {
-        title: "Work Scheduling",
-        category: "cat-sched",
-        tags: ["coverage", "shift"],
-        files: ["Work_Scheduling_F64101066.lng"]
-      },
-      {
-        title: "Highway Staff Scheduling",
-        category: "cat-sched",
-        tags: ["staffing", "coverage"],
-        files: ["Highway Staff Scheduling_F64101066.lng"]
-      },
-      {
-        title: "Assembly Line Balancing",
-        category: "cat-sched",
-        tags: ["balancing", "precedence"],
-        files: ["Assembly Line Balancing_F64101066.lng"]
-      },
-      {
-        title: "Basketball Lineup",
-        category: "cat-sched",
-        tags: ["selection", "composition"],
-        files: ["F64101066 Basketball_Line-up players.lng"]
-      },
+      { title: "Work Scheduling", category: "cat-sched", tags: ["coverage", "shift"], files: ["Work_Scheduling_F64101066.lng"] },
+      { title: "Highway Staff Scheduling", category: "cat-sched", tags: ["staffing", "coverage"], files: ["Highway Staff Scheduling_F64101066.lng"] },
+      { title: "Assembly Line Balancing", category: "cat-sched", tags: ["balancing", "precedence"], files: ["Assembly Line Balancing_F64101066.lng"] },
+      { title: "Basketball Lineup", category: "cat-sched", tags: ["selection", "composition"], files: ["F64101066 Basketball_Line-up players.lng"] },
 
-      {
-        title: "CPM Project Management",
-        category: "cat-project",
-        tags: ["CPM", "precedence"],
-        files: ["CPM_Project Management_F64101066.lng", "CPM_Project Management_no dummy_F64101066.lng"]
-      },
-      {
-        title: "Project Crashing (Base)",
-        category: "cat-project",
-        tags: ["crashing", "time cost"],
-        files: ["Project Management_Crashing_Project_F64101066.lng"]
-      },
-      {
-        title: "Project Crashing (Deadline)",
-        category: "cat-project",
-        tags: ["deadline", "crashing"],
-        files: ["Management_Crashing_Project_duedate=31_F64101066.lng"]
-      },
-      {
-        title: "Project Crashing (BND)",
-        category: "cat-project",
-        tags: ["bounds", "crashing"],
-        files: ["Project management_Crashing 2_@BND_F64101066.lng"]
-      },
+      { title: "CPM Project Management", category: "cat-project", tags: ["CPM", "precedence"], files: ["CPM_Project Management_F64101066.lng", "CPM_Project Management_no dummy_F64101066.lng"] },
+      { title: "Project Crashing (Base)", category: "cat-project", tags: ["crashing", "time cost"], files: ["Project Management_Crashing_Project_F64101066.lng"] },
+      { title: "Project Crashing (Deadline)", category: "cat-project", tags: ["deadline", "crashing"], files: ["Management_Crashing_Project_duedate=31_F64101066.lng"] },
+      { title: "Project Crashing (BND)", category: "cat-project", tags: ["bounds", "crashing"], files: ["Project management_Crashing 2_@BND_F64101066.lng"] },
 
-      {
-        title: "Expected Value Policy",
-        category: "cat-stoch",
-        tags: ["expected value", "scenarios"],
-        files: ["黃小玉_expected_F64101066.lng"]
-      },
-      {
-        title: "Good Weather Scenario",
-        category: "cat-stoch",
-        tags: ["scenario", "evaluation"],
-        files: ["黃小玉_goodweather_F64101066.lng"]
-      },
-      {
-        title: "Bad Weather Scenario",
-        category: "cat-stoch",
-        tags: ["scenario", "evaluation"],
-        files: ["黃小玉_badweather_F64101066.lng"]
-      },
-      {
-        title: "Robust Variant",
-        category: "cat-stoch",
-        tags: ["robust", "worst case"],
-        files: ["黃小玉_Robuts_F64101066.lng"]
-      },
-      {
-        title: "EVPI",
-        category: "cat-stoch",
-        tags: ["EVPI", "value of information"],
-        files: ["黃小玉_EVPI_F64101066.lng"]
-      },
+      { title: "Expected Value Policy", category: "cat-stoch", tags: ["expected value", "scenarios"], files: ["黃小玉_expected_F64101066.lng"] },
+      { title: "Good Weather Scenario", category: "cat-stoch", tags: ["scenario", "evaluation"], files: ["黃小玉_goodweather_F64101066.lng"] },
+      { title: "Bad Weather Scenario", category: "cat-stoch", tags: ["scenario", "evaluation"], files: ["黃小玉_badweather_F64101066.lng"] },
+      { title: "Robust Variant", category: "cat-stoch", tags: ["robust", "worst case"], files: ["黃小玉_Robuts_F64101066.lng"] },
+      { title: "EVPI", category: "cat-stoch", tags: ["EVPI", "value of information"], files: ["黃小玉_EVPI_F64101066.lng"] },
     ];
 
     function fileHref(filename) {
@@ -693,10 +533,6 @@ MIN = @SUM(LINK: cost * x);<br>
     function categoryLabel(id) {
       const c = categoryById(id);
       return c ? c.label : "Uncategorized";
-    }
-
-    function uniq(arr) {
-      return Array.from(new Set(arr));
     }
 
     function buildTaxonomy() {
@@ -877,11 +713,9 @@ MIN = @SUM(LINK: cost * x);<br>
       });
     }
 
-    /* ---------- Mind Map (Two Level) ---------- */
+    /* ---------- Mind Map (Integrated enhanced renderer) ---------- */
 
-    const mindState = {
-      expanded: new Set(["cat-lp", "cat-network"]), // default expanded categories
-    };
+    const mindState = { expanded: new Set(["cat-lp", "cat-network"]) };
 
     function polarToXY(cx, cy, r, deg) {
       const rad = (deg * Math.PI) / 180;
@@ -894,142 +728,124 @@ MIN = @SUM(LINK: cost * x);<br>
       return el;
     }
 
+    function shortTitleForMindMap(title) {
+      const t = String(title || "")
+        .replace("Project Crashing", "Crashing")
+        .replace("Warehouse Location + Transport", "Warehouse + Transport")
+        .replace("Assignment (Set Template)", "Assignment Sets")
+        .replace("Assignment (Basic)", "Assignment")
+        .replace("Expected Value Policy", "Expected Value")
+        .replace("Good Weather Scenario", "Good Weather")
+        .replace("Bad Weather Scenario", "Bad Weather")
+        .replace("Soda Can Geometry", "Soda Can")
+        .replace("Set Covering", "Set Cover")
+        .replace("Logical Constraints", "Logic Constraints");
+      return t.length > 24 ? t.slice(0, 24) + "…" : t;
+    }
+
     function renderMindMap() {
       const svg = document.getElementById("mindMapSvg");
       if (!svg) return;
 
       while (svg.firstChild) svg.removeChild(svg.firstChild);
 
-      const W = 1040;
-      const H = 600;
-      const cx = W / 2;
-      const cy = H / 2;
+      const cx = 520;
+      const cy = 320;
+      const rCat = 210;
 
-      const rCat = 195;
-      const rSub = 105;
+      // core node
+      const core = svgEl("g", { class: "node core", "data-kind": "core", transform: `translate(${cx},${cy})` });
+      core.appendChild(svgEl("circle", { r: 42 }));
+      const t1 = svgEl("text", { class: "label", "text-anchor": "middle", y: -4 }); t1.textContent = "Optimization";
+      const t2 = svgEl("text", { class: "label", "text-anchor": "middle", y: 14 }); t2.textContent = "Modeling";
+      core.appendChild(t1);
+      core.appendChild(t2);
+      svg.appendChild(core);
 
-      // Core node
-      const coreG = svgEl("g", { class: "node core", "data-kind": "core" });
-      const coreHalo = svgEl("circle", { class: "halo", cx, cy, r: 44, fill: "rgba(30,58,138,0.12)" });
-      const coreCircle = svgEl("circle", { class: "main", cx, cy, r: 34 });
-      const coreText1 = svgEl("text", { class: "label", x: cx, y: cy - 4, "text-anchor": "middle" });
-      coreText1.textContent = "Optimization";
-      const coreText2 = svgEl("text", { class: "label", x: cx, y: cy + 14, "text-anchor": "middle" });
-      coreText2.textContent = "Modeling";
-      coreG.appendChild(coreHalo);
-      coreG.appendChild(coreCircle);
-      coreG.appendChild(coreText1);
-      coreG.appendChild(coreText2);
-      svg.appendChild(coreG);
-
-      // Category angles
+      // keep your earlier category placement, but use the improved geometry and staggered sub nodes
       const catAngles = [
-        { id: "cat-lp", deg: -90 },
-        { id: "cat-assign", deg: -25 },
+        { id: "cat-lp", deg: -95 },
+        { id: "cat-assign", deg: -30 },
         { id: "cat-project", deg: 35 },
-        { id: "cat-stoch", deg: 90 },
+        { id: "cat-stoch", deg: 95 },
         { id: "cat-sched", deg: 155 },
         { id: "cat-network", deg: 215 },
       ];
 
-      const byCatModels = {};
-      MODELS.forEach(m => {
-        if (!byCatModels[m.category]) byCatModels[m.category] = [];
-        byCatModels[m.category].push(m);
-      });
-
-      // Draw categories and child nodes
       catAngles.forEach((cinfo) => {
         const cat = categoryById(cinfo.id);
         if (!cat) return;
 
-        const catPos = polarToXY(cx, cy, rCat, cinfo.deg);
+        const pos = polarToXY(cx, cy, rCat, cinfo.deg);
+        const isExpanded = mindState.expanded.has(cat.id);
 
-        // Edge core to category
-        const edge = svgEl("path", {
+        // edge core to category, quadratic for smoother curve
+        svg.appendChild(svgEl("path", {
           class: "edge",
-          d: `M ${cx} ${cy} C ${cx} ${cy} ${catPos.x} ${catPos.y} ${catPos.x} ${catPos.y}`
-        });
-        svg.appendChild(edge);
+          d: `M ${cx} ${cy} Q ${(cx + pos.x) / 2} ${cy}, ${pos.x} ${pos.y}`
+        }));
 
-        // Category node
-        const g = svgEl("g", { class: "node cat", "data-kind": "cat", "data-id": cat.id, transform: `translate(${catPos.x} ${catPos.y})` });
-        const halo = svgEl("circle", { class: "halo", r: 38, fill: "rgba(11,92,171,0.10)" });
-        const circle = svgEl("circle", { class: "main", r: 30 });
-        const label = svgEl("text", { class: "label", x: 0, y: 4, "text-anchor": "middle" });
-        label.textContent = cat.label;
-        g.appendChild(halo);
-        g.appendChild(circle);
-        g.appendChild(label);
+        // category node
+        const g = svgEl("g", {
+          class: "node cat",
+          "data-kind": "cat",
+          "data-id": cat.id,
+          transform: `translate(${pos.x},${pos.y})`
+        });
+        g.appendChild(svgEl("circle", { r: 34 }));
+        const ct = svgEl("text", { class: "label", "text-anchor": "middle", y: 5 });
+        ct.textContent = cat.label;
+        g.appendChild(ct);
         svg.appendChild(g);
 
-        // Sub nodes, show representative ones
-        const models = (byCatModels[cat.id] || []).slice(0, 6);
-        const expanded = mindState.expanded.has(cat.id);
+        // sub nodes, staggered radii to reduce overlap
+        if (isExpanded) {
+          const subs = MODELS
+            .filter(m => m.category === cat.id)
+            .slice()
+            .sort((a,b) => (a.title || "").localeCompare(b.title || ""))
+            .slice(0, 8);
 
-        if (expanded && models.length > 0) {
-          const spread = Math.min(55, 18 + models.length * 6);
-          const start = cinfo.deg - spread / 2;
-          const step = (models.length === 1) ? 0 : spread / (models.length - 1);
+          if (subs.length > 0) {
+            const spread = Math.min(110, 30 + subs.length * 12);
+            const start = cinfo.deg - spread / 2;
+            const step = subs.length > 1 ? spread / (subs.length - 1) : 0;
 
-          models.forEach((m, idx) => {
-            const d = start + step * idx;
-            const subPos = polarToXY(catPos.x, catPos.y, rSub, d);
+            subs.forEach((m, i) => {
+              const rSub = (i % 2 === 0) ? 105 : 175;
+              const sDeg = start + i * step;
+              const sPos = polarToXY(pos.x, pos.y, rSub, sDeg);
 
-            // Edge category to child
-            const e2 = svgEl("path", {
-              class: "edge child",
-              d: `M ${catPos.x} ${catPos.y} C ${(catPos.x + subPos.x)/2} ${(catPos.y + subPos.y)/2} ${subPos.x} ${subPos.y} ${subPos.x} ${subPos.y}`
+              svg.appendChild(svgEl("path", { class: "edge child", d: `M ${pos.x} ${pos.y} L ${sPos.x} ${sPos.y}` }));
+
+              const sg = svgEl("g", {
+                class: "node sub",
+                "data-kind": "sub",
+                "data-cat": cat.id,
+                "data-title": m.title,
+                "data-file": (m.files && m.files[0]) ? m.files[0] : "",
+                transform: `translate(${sPos.x},${sPos.y})`
+              });
+
+              sg.appendChild(svgEl("circle", { r: 6 }));
+
+              const isLeft = sPos.x < pos.x;
+              const st = svgEl("text", {
+                class: "sublabel",
+                x: isLeft ? -12 : 12,
+                y: 4,
+                "text-anchor": isLeft ? "end" : "start"
+              });
+              st.textContent = shortTitleForMindMap(m.title);
+              sg.appendChild(st);
+
+              svg.appendChild(sg);
             });
-            svg.appendChild(e2);
-
-            // Child node
-            const sg = svgEl("g", {
-              class: "node sub",
-              "data-kind": "sub",
-              "data-cat": cat.id,
-              "data-title": m.title,
-              "data-file": (m.files && m.files[0]) ? m.files[0] : "",
-              transform: `translate(${subPos.x} ${subPos.y})`
-            });
-
-            const shalo = svgEl("circle", { class: "halo", r: 22, fill: "rgba(15,23,42,0.06)" });
-            const sc = svgEl("circle", { class: "main", r: 18 });
-            const t = svgEl("text", { class: "sublabel", x: 0, y: 4, "text-anchor": "middle" });
-
-            // Short labels for readability
-            const short = m.title
-              .replace("Project Crashing", "Crashing")
-              .replace("Warehouse Location + Transport", "Warehouse + Transport")
-              .replace("Assignment (Set Template)", "Assignment Sets")
-              .replace("Assignment (Basic)", "Assignment")
-              .replace("Expected Value Policy", "Expected Value")
-              .replace("Good Weather Scenario", "Good Weather")
-              .replace("Bad Weather Scenario", "Bad Weather")
-              .replace("Soda Can Geometry", "Soda Can")
-              .replace("Set Covering", "Set Cover")
-              .replace("Logical Constraints", "Logic Constraints");
-
-            t.textContent = short.length > 16 ? short.slice(0, 16) + "…" : short;
-
-            sg.appendChild(shalo);
-            sg.appendChild(sc);
-            sg.appendChild(t);
-
-            svg.appendChild(sg);
-          });
+          }
         }
       });
 
-      // Help text
-      const hint = svgEl("text", { x: 18, y: 580, fill: "rgba(71,85,105,0.85)", "font-size": "12", "font-weight": "800" });
-      hint.textContent = "Tip: Click a category to expand or collapse. Click a subtopic to open code and jump to Index.";
-      svg.appendChild(hint);
-
-      wireMindMapClicks(svg);
-    }
-
-    function wireMindMapClicks(svg) {
+      // click binding
       svg.onclick = (e) => {
         const node = e.target.closest(".node");
         if (!node) return;
@@ -1037,25 +853,24 @@ MIN = @SUM(LINK: cost * x);<br>
         const kind = node.getAttribute("data-kind");
 
         if (kind === "cat") {
-          const id = node.getAttribute("data-id");
-          if (!id) return;
+          const catId = node.getAttribute("data-id");
+          if (!catId) return;
 
-          if (mindState.expanded.has(id)) mindState.expanded.delete(id);
-          else mindState.expanded.add(id);
+          if (mindState.expanded.has(catId)) mindState.expanded.delete(catId);
+          else mindState.expanded.add(catId);
 
-          setActiveChip(id);
+          setActiveChip(catId);
           applyFilters();
           renderMindMap();
           return;
         }
 
         if (kind === "sub") {
-          const cat = node.getAttribute("data-cat") || "all";
+          const catId = node.getAttribute("data-cat") || "all";
           const title = node.getAttribute("data-title") || "";
           const file = node.getAttribute("data-file") || "";
 
-          setActiveChip(cat);
-          applyFilters();
+          setActiveChip(catId);
 
           const inp = document.getElementById("searchInput");
           if (inp) inp.value = title;
@@ -1065,6 +880,7 @@ MIN = @SUM(LINK: cost * x);<br>
           const indexEl = document.getElementById("index");
           if (indexEl) indexEl.scrollIntoView({ behavior: "smooth", block: "start" });
 
+          // optional: open the first file (keep existing behavior)
           if (file) {
             window.open(fileHref(file), "_blank", "noopener");
           }
