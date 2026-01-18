@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>TSUN-YUAN KU</title>
+  <title>TSUN-YUAN KU | Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
@@ -16,92 +16,80 @@
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-                   Roboto, Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
       margin: 0;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.7;
+      line-height: 1.6;
     }
 
     .container {
-      max-width: 900px;
+      max-width: 850px;
       margin: 0 auto;
-      padding: 64px 24px 88px;
+      padding: 60px 24px;
     }
 
-    h1 {
-      font-size: 42px;
-      margin-bottom: 12px;
-      letter-spacing: 0.6px;
-    }
-
-    .subtitle {
-      font-size: 18px;
-      color: var(--muted);
-      margin-bottom: 48px;
-    }
+    /* Header & Intro */
+    header { margin-bottom: 40px; }
+    h1 { font-size: 48px; margin: 0; letter-spacing: -1px; }
+    .subtitle { font-size: 18px; color: var(--muted); margin-top: 8px; font-weight: 500; }
+    .contact-info { font-size: 14px; color: var(--muted); margin-top: 12px; }
 
     h2 {
-      font-size: 26px;
-      margin-top: 56px;
-      margin-bottom: 22px;
-      padding-bottom: 8px;
+      font-size: 22px;
+      margin-top: 48px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
       border-bottom: 2px solid var(--border);
+      padding-bottom: 8px;
     }
 
-    p {
-      font-size: 16px;
-      margin-bottom: 18px;
-      color: var(--text);
-    }
+    .section-content { margin-bottom: 32px; }
+    .cv-item { margin-bottom: 20px; }
+    .cv-header { display: flex; justify-content: space-between; align-items: baseline; font-weight: 700; }
+    .cv-sub { color: var(--muted); font-size: 14px; margin-bottom: 6px; }
+    ul { padding-left: 20px; margin: 8px 0; }
+    li { margin-bottom: 4px; font-size: 15px; }
 
-    a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
+    /* Horizontal Strip Links */
     .themes {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 22px;
-      margin-top: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 24px;
     }
 
-    .theme-card {
+    .theme-strip {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 24px 22px;
+      border-radius: 12px;
+      padding: 20px 24px;
+      text-decoration: none;
       color: inherit;
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.2s ease;
     }
 
-    .theme-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+    .theme-strip:hover {
+      border-color: var(--accent);
+      transform: translateX(4px);
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
     }
 
-    .theme-card b {
-      font-size: 17px;
-      display: block;
-      margin-bottom: 6px;
-      color: var(--text);
-    }
-
-    .theme-card span {
-      font-size: 15px;
-      color: var(--muted);
-    }
+    .strip-content b { font-size: 17px; display: block; color: var(--accent); }
+    .strip-content span { font-size: 14px; color: var(--muted); }
+    .arrow { color: var(--border); font-size: 20px; font-weight: bold; }
+    .theme-strip:hover .arrow { color: var(--accent); }
 
     footer {
-      margin-top: 96px;
-      font-size: 14px;
-      color: #64748b;
+      margin-top: 80px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--muted);
       text-align: center;
     }
   </style>
@@ -109,59 +97,96 @@
 
 <body>
   <div class="container">
+    <header>
+      <h1>TSUN-YUAN KU</h1>
+      <div class="subtitle">Optimization · GIS · Spatial Analytics · Quantum-inspired Methods</div>
+      <div class="contact-info">
+        Tainan, Taiwan | ackjj1125@gmail.com | +886-902-216-027
+      </div>
+    </header>
 
-    <h1>TSUN-YUAN KU</h1>
+    <section>
+      <h2>Education</h2>
+      <div class="cv-item">
+        <div class="cv-header">
+          <span>National Cheng Kung University (NCKU)</span>
+          <span>Expected Jan. 2026</span>
+        </div>
+        <div class="cv-sub">Bachelor of Geomatics</div>
+        <p style="font-size: 14px; color: var(--muted);">
+          Key Coursework: Supply Chain Optimization, Machine Learning, Spatial Information Integration[cite: 848].
+        </p>
+      </div>
+    </section>
 
-    <div class="subtitle">
-      Optimization · GIS · Spatial Analytics · Quantum-inspired Methods
-    </div>
+    <section>
+      <h2>Professional Experience</h2>
+      <div class="cv-item">
+        <div class="cv-header">
+          <span>Spatial Social Science Laboratory, NCKU</span>
+          <span>2024 – Present</span>
+        </div>
+        <div class="cv-sub">Laboratory Assistant</div>
+        <ul>
+          <li>Developed a Python-based <b>Simulated Quantum Annealing (SQA)</b> system on the Taiwania 3 HPC platform for large-scale spatial allocation[cite: 855].</li>
+          <li>Applied Genetic Algorithms and NSGA-II/III to evaluate trade-offs between efficiency and equity in public facility planning[cite: 856].</li>
+          <li>Utilized YOLO-based deep learning for automated pedestrian flow analysis and safety assessments[cite: 857].</li>
+        </ul>
+      </div>
 
-    <h2>About Me</h2>
+      <div class="cv-item">
+        <div class="cv-header">
+          <span>INFORMS Annual Meeting 2025</span>
+          <span>Oct. 2025</span>
+        </div>
+        <div class="cv-sub">Presenter & First Author (Atlanta, GA)</div>
+        <ul>
+          <li>Presented research on multi-objective site selection for levee crossings comparing SQA and NSGA-III[cite: 862, 864].</li>
+          <li>Designed a GIS-integrated model addressing construction costs, population coverage, and spatial equity[cite: 865].</li>
+        </ul>
+      </div>
+    </section>
 
-    <p>
-      I am an undergraduate student with a background in spatial information science,
-      optimization, and computational modeling. My interests focus on GIS-based
-      network analysis, pedestrian routing optimization, and quantum-inspired
-      heuristics for large-scale decision problems.
-    </p>
+    <section>
+      <h2>Key Projects & Engagements</h2>
+      <div class="themes">
+        <a class="theme-strip" href="research.html">
+          <div class="strip-content">
+            <b>Research Project</b>
+            <span>Quantum-Inspired Optimization for Spatial Facility Location</span>
+          </div>
+          <div class="arrow">→</div>
+        </a>
 
-    <p>
-      <a href="activities.html">
-        Learn more about my activities, awards, and academic engagements →
-      </a>
-    </p>
+        <a class="theme-strip" href="internship.html">
+          <div class="strip-content">
+            <b>Comprehensive Surveying Practicum</b>
+            <span>End-to-end Geomatics: GNSS, Terrestrial Surveying & Map Production</span>
+          </div>
+          <div class="arrow">→</div>
+        </a>
 
-    <h2>Research Themes</h2>
+        <a class="theme-strip" href="supplychain.html">
+          <div class="strip-content">
+            <b>Supply Chain Optimization</b>
+            <span>Modeling and Solving Complex Network & Logistics Problems</span>
+          </div>
+          <div class="arrow">→</div>
+        </a>
 
-    <div class="themes">
-
-      <a class="theme-card" href="research.html">
-        <b>Research Project</b>
-        <span>    Simulated Quantum Annealing & Multi-objective Optimization
-    for Spatial Facility Location</span>
-      </a>
-
-      <a class="theme-card" href="internship.html">
-        <b>Senior Internship</b>
-        <span>Applied Optimization and Spatial Analysis</span>
-      </a>
-
-      <a class="theme-card" href="supplychain.html">
-        <b>Course Project</b>
-        <span>Supply Chain Optimization</span>
-      </a>
-
-      <a class="theme-card" href="workshops.html">
-        <b>Workshop Instructor</b>
-        <span>Hands-on Workshops on Optimization and Computational Modeling</span>
-      </a>
-
-    </div>
+        <a class="theme-strip" href="workshops.html">
+          <div class="strip-content">
+            <b>Workshop Instruction</b>
+            <span>Teaching SQA, QUBO Modeling, and HPC Implementation</span>
+          </div>
+          <div class="arrow">→</div>
+        </a>
+      </div>
+    </section>
 
     <footer>
-      © 2025 TSUN-YUAN KU
+      © 2025 TSUN-YUAN KU | Built with Spatial Precision
     </footer>
-
   </div>
 </body>
 </html>
