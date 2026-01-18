@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Course Project | TSUN-YUAN KU</title>
+  <title>Mathematical Modeling Portfolio | TSUN-YUAN KU</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
@@ -17,11 +17,12 @@
       --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
       --radius: 18px;
       --radius-sm: 14px;
-      --maxw: 1100px; /* 已同步調整為與 Research 頁面相同的寬度 */
+      --maxw: 1100px;
       --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     }
 
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
@@ -82,56 +83,213 @@
       margin-bottom: 22px;
     }
 
-    h1 { font-size: 42px; letter-spacing: -1px; margin: 8px 0 6px; line-height: 1.1; }
-    .subtitle { font-size: 19px; color: var(--muted); margin-bottom: 14px; }
-    .oneLiner { font-size: 16px; color: var(--text); margin: 16px 0; max-width: 950px; }
+    h1 { font-size: 40px; letter-spacing: -1px; margin: 8px 0 6px; line-height: 1.1; }
+    .subtitle { font-size: 18px; color: var(--muted); margin-bottom: 14px; }
+    .oneLiner { font-size: 16px; color: var(--text); margin: 16px 0; max-width: 980px; }
 
     .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
-    .chip { background: #f1f5f9; color: var(--muted); padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 500; }
+    .chip { background: #f1f5f9; color: var(--muted); padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 600; }
 
-    /* Snapshot Stats (Horizontal 4-column Grid) */
-    .stats { 
+    /* Snapshot Stats */
+    .stats {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 14px; 
-      margin-top: 24px; 
+      gap: 14px;
+      margin-top: 24px;
     }
-    .stat { 
-      background: rgba(255, 255, 255, 0.8); 
-      border: 1px solid var(--border); 
-      border-radius: var(--radius); 
-      padding: 16px; 
+    .stat {
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
     }
-    .stat .k { font-size: 10px; color: var(--muted); text-transform: uppercase; margin-bottom: 6px; letter-spacing: 0.05em; font-weight: 700; }
-    .stat .v { font-size: 14px; font-weight: 700; color: var(--text); line-height: 1.3; }
-    
-    @media (max-width: 950px) { 
+    .stat .k { font-size: 10px; color: var(--muted); text-transform: uppercase; margin-bottom: 6px; letter-spacing: 0.05em; font-weight: 800; }
+    .stat .v { font-size: 14px; font-weight: 800; color: var(--text); line-height: 1.35; }
+    @media (max-width: 950px) {
       .stats { grid-template-columns: repeat(2, 1fr); }
     }
 
     /* Section Styling */
     h2 { font-size: 26px; margin-top: 64px; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
     p { font-size: 16px; margin-bottom: 16px; }
+    .hint { color: var(--muted); font-size: 14px; margin-top: -6px; }
 
     .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; margin-top: 24px; }
-    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03); }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03); }
     .card h3 { margin: 0 0 10px; font-size: 17px; }
     .card p { margin: 0; color: var(--muted); font-size: 14px; }
 
     .span-12 { grid-column: span 12; }
+    .span-8  { grid-column: span 8; }
     .span-6  { grid-column: span 6; }
     .span-4  { grid-column: span 4; }
+
+    @media (max-width: 900px) {
+      .span-8, .span-6, .span-4 { grid-column: span 12; }
+    }
 
     /* Callout & Code */
     .callout { border: 1px solid rgba(30,58,138,0.25); background: rgba(30,58,138,0.05); border-radius: var(--radius); padding: 18px 24px; margin-top: 14px; }
     .code { font-family: var(--mono); font-size: 12.5px; color: #0f172a; background: rgba(15, 23, 42, 0.04); border: 1px solid rgba(15, 23, 42, 0.10); border-radius: var(--radius-sm); padding: 16px; overflow-x: auto; margin-top: 10px; }
 
     .btnRow { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
-    .btn { padding: 12px 20px; border-radius: 10px; border: 1px solid var(--border); background: #fff; color: var(--text); font-weight: 600; font-size: 14px; transition: all 0.2s; cursor: pointer; }
+    .btn {
+      padding: 10px 16px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--text);
+      font-weight: 700;
+      font-size: 14px;
+      transition: all 0.2s;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
     .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
     .btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
 
+    /* Tooling Panel */
+    .panel {
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.75);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+    .panelRow {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 12px;
+      align-items: center;
+    }
+    @media (max-width: 900px) { .panelRow { grid-template-columns: 1fr; } }
+
+    .searchBox {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-size: 14px;
+      outline: none;
+      background: #fff;
+    }
+    .selectBox {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-size: 14px;
+      outline: none;
+      background: #fff;
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    /* Category chips (filter) */
+    .filterChips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .fchip {
+      user-select: none;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .fchip.active {
+      border-color: rgba(30,58,138,0.4);
+      background: rgba(30,58,138,0.08);
+      color: var(--text);
+    }
+
+    /* Index table */
+    .tableWrap {
+      border: 1px solid var(--border);
+      background: #fff;
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    thead th {
+      text-align: left;
+      padding: 12px 14px;
+      background: rgba(241,245,249,0.9);
+      border-bottom: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 900;
+    }
+    tbody td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    tbody tr:hover td { background: rgba(248,250,252,0.9); }
+    .tTitle { font-weight: 900; color: var(--text); }
+    .tMeta { color: var(--muted); font-size: 12px; margin-top: 4px; }
+    .tag {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.05);
+      border: 1px solid rgba(15, 23, 42, 0.10);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      margin-right: 6px;
+      margin-top: 6px;
+      white-space: nowrap;
+    }
+    .fileLink {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #fff;
+    }
+
+    /* Mind Map */
+    .mapWrap {
+      border: 1px solid var(--border);
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 18px;
+      overflow: auto;
+    }
+    .mapNote { font-size: 13px; color: var(--muted); margin-top: 10px; }
+
+    svg text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; }
+    .node { cursor: pointer; }
+    .node circle {
+      fill: rgba(30,58,138,0.08);
+      stroke: rgba(30,58,138,0.45);
+      stroke-width: 2;
+    }
+    .node:hover circle {
+      fill: rgba(11,92,171,0.10);
+      stroke: rgba(11,92,171,0.65);
+    }
+    .node text { fill: #0f172a; font-weight: 900; font-size: 12px; }
+    .edge { stroke: rgba(71,85,105,0.45); stroke-width: 2; fill: none; }
+
+    /* Footer */
     footer { margin-top: 120px; text-align: center; font-size: 13px; color: var(--muted); border-top: 1px solid var(--border); padding: 40px 0; }
+    .footLinks { margin-top: 10px; display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
   </style>
 </head>
 
@@ -140,97 +298,150 @@
 
     <div class="topbar">
       <a class="backlink" href="index.html">Back to Home</a>
-      <div class="pill"><span class="dot"></span> Course Project</div>
+      <div class="pill"><span class="dot"></span> Mathematical Modeling Portfolio</div>
     </div>
 
     <div class="hero">
-      <h1>Supply Chain Optimization</h1>
-      <div class="subtitle">Mathematical Modeling Practice with LINGO and Transferable Solver Logic</div>
+      <h1>Optimization Modeling with LINGO</h1>
+      <div class="subtitle">A structured portfolio of LP, MILP, network flow, scheduling, and stochastic modeling patterns</div>
 
       <div class="oneLiner">
-        <b>Core Capability:</b> Developed a systematic ability to translate real-world logistics constraints 
-        into formal optimization models, primarily utilizing <b>LINGO</b> to bridge business decisions and mathematical solutions.
+        <b>Core capability:</b> I translate real world operational descriptions into formal optimization models, then validate feasibility and optimality through systematic constraint design and solver debugging.
+        This page organizes my LINGO work into a reusable pattern library for IEOR graduate study and research.
+        <div class="hint">中文提示：此頁用「題型分類」與「程式碼索引」呈現我對數學建模的脈絡化理解，並展示可遷移到 Pyomo, PuLP, OR Tools 的建模邏輯。</div>
       </div>
 
       <div class="chips">
-        <span class="chip">Linear & Integer Programming</span>
-        <span class="chip">Network Flow Optimization</span>
-        <span class="chip">Facility Location Theory</span>
-        <span class="chip">Production Planning</span>
-        <span class="chip">Mathematical Debugging</span>
+        <span class="chip">LP / ILP / MILP</span>
+        <span class="chip">Network Flow</span>
+        <span class="chip">Scheduling</span>
+        <span class="chip">Project Management</span>
+        <span class="chip">Stochastic Decision</span>
+        <span class="chip">Logical Constraints</span>
       </div>
 
       <div class="stats">
         <div class="stat">
-          <div class="k">Course Domain</div>
-          <div class="v">Supply Chain Modeling & Optimization</div>
+          <div class="k">Primary Focus</div>
+          <div class="v">Model formulation, feasibility logic, and solver debugging</div>
         </div>
         <div class="stat">
-          <div class="k">Primary Solver</div>
-          <div class="v">LINGO (Syntax & Formulation)</div>
+          <div class="k">Tooling</div>
+          <div class="v">LINGO syntax, set indexing, and structured constraints</div>
         </div>
         <div class="stat">
-          <div class="k">Model Repository</div>
-          <div class="v">50+ Representative Problem Sets</div>
+          <div class="k">Artifacts</div>
+          <div class="v"><span id="statCount">40+</span> model files categorized by problem class</div>
         </div>
         <div class="stat">
-          <div class="k">Skill Transfer</div>
-          <div class="v">Python-ready (PuLP / Pyomo Logic)</div>
+          <div class="k">Transferability</div>
+          <div class="v">Direct mapping to Python modeling stacks and OR solvers</div>
         </div>
+      </div>
+
+      <div class="btnRow" style="margin-top: 18px;">
+        <a class="btn primary" href="#index">Open Model Index</a>
+        <a class="btn" href="#mindmap">View Mind Map</a>
+        <a class="btn" href="#taxonomy">See Taxonomy</a>
       </div>
     </div>
 
-    <h2>Learning Overview</h2>
+    <h2 id="overview">Learning Overview</h2>
     <p>
-      This course focused on high-intensity modeling across diverse supply chain architectures. Each exercise followed a rigorous IEOR workflow: 
-      defining decision variables, formulating clean objective functions, and expressing operational constraints in a way that ensures both feasibility and optimality.
+      This portfolio consolidates modeling exercises into a consistent IEOR workflow: define decision variables, implement clean objective functions,
+      encode real operational logic as constraints, and iterate with diagnosis when infeasibility or degeneracy occurs.
+      I treat each file as a reusable template rather than a one off homework solution.
     </p>
 
     <div class="callout">
-      <b>Key Outcome:</b> I can rapidly transition from qualitative business descriptions to formal mathematical models, 
-      with a deep understanding of how different formulation choices impact solver behavior.
+      <b>Key outcome:</b> I can rapidly move from qualitative descriptions to rigorous formulations, while understanding how formulation choices affect solver behavior, integrality, and stability.
     </div>
 
-    <h2>What I Built (Skills & Habits)</h2>
-    <div class="grid">
-      <div class="card span-4">
-        <h3>Formulation Literacy</h3>
-        <p>Mastery of LP / ILP / MILP structures, including rigorous set indexing and unit consistency.</p>
-      </div>
-      <div class="card span-4">
-        <h3>Constraint Debugging</h3>
-        <p>Expertise in identifying hidden traps: big-M misuse, redundant constraints, and infeasible regions.</p>
-      </div>
-      <div class="card span-4">
-        <h3>Solver Thinking</h3>
-        <p>Developed logic transferable to modern Python stacks like Pyomo, PuLP, and Google OR-Tools.</p>
+    <h2 id="taxonomy">Problem Taxonomy</h2>
+    <p class="hint">
+      The taxonomy below is designed for readers to quickly understand what I can model, how I structure constraints, and which canonical OR patterns I already implemented.
+    </p>
+
+    <div class="grid" id="taxonomyGrid">
+      <!-- Populated by JS -->
+    </div>
+
+    <h2 id="mindmap">Mind Map</h2>
+    <p class="hint">
+      Click any node to jump to the corresponding category in the taxonomy and index. The map emphasizes conceptual grouping rather than course chapter order.
+    </p>
+
+    <div class="mapWrap">
+      <svg id="mindMapSvg" width="980" height="520" viewBox="0 0 980 520" role="img" aria-label="Mind map of optimization modeling categories">
+        <!-- Edges -->
+        <path class="edge" d="M490 260 C420 210, 350 180, 250 160"></path>
+        <path class="edge" d="M490 260 C420 300, 350 330, 250 360"></path>
+        <path class="edge" d="M490 260 C560 210, 640 180, 740 160"></path>
+        <path class="edge" d="M490 260 C560 300, 640 330, 740 360"></path>
+        <path class="edge" d="M490 260 C490 190, 490 150, 490 110"></path>
+        <path class="edge" d="M490 260 C490 330, 490 370, 490 410"></path>
+
+        <!-- Center -->
+        <g class="node" data-target="cat-core">
+          <circle cx="490" cy="260" r="42"></circle>
+          <text x="490" y="254" text-anchor="middle">Optimization</text>
+          <text x="490" y="272" text-anchor="middle">Modeling</text>
+        </g>
+
+        <!-- Top -->
+        <g class="node" data-target="cat-lp-milp">
+          <circle cx="490" cy="110" r="34"></circle>
+          <text x="490" y="106" text-anchor="middle">LP</text>
+          <text x="490" y="124" text-anchor="middle">MILP</text>
+        </g>
+
+        <!-- Bottom -->
+        <g class="node" data-target="cat-stochastic">
+          <circle cx="490" cy="410" r="34"></circle>
+          <text x="490" y="406" text-anchor="middle">Stochastic</text>
+          <text x="490" y="424" text-anchor="middle">Decisions</text>
+        </g>
+
+        <!-- Left top -->
+        <g class="node" data-target="cat-network">
+          <circle cx="250" cy="160" r="34"></circle>
+          <text x="250" y="156" text-anchor="middle">Network</text>
+          <text x="250" y="174" text-anchor="middle">Flow</text>
+        </g>
+
+        <!-- Left bottom -->
+        <g class="node" data-target="cat-scheduling">
+          <circle cx="250" cy="360" r="34"></circle>
+          <text x="250" y="356" text-anchor="middle">Scheduling</text>
+          <text x="250" y="374" text-anchor="middle">Staffing</text>
+        </g>
+
+        <!-- Right top -->
+        <g class="node" data-target="cat-assignment">
+          <circle cx="740" cy="160" r="34"></circle>
+          <text x="740" y="156" text-anchor="middle">Assignment</text>
+          <text x="740" y="174" text-anchor="middle">Matching</text>
+        </g>
+
+        <!-- Right bottom -->
+        <g class="node" data-target="cat-project">
+          <circle cx="740" cy="360" r="34"></circle>
+          <text x="740" y="356" text-anchor="middle">Project</text>
+          <text x="740" y="374" text-anchor="middle">Mgmt</text>
+        </g>
+      </svg>
+
+      <div class="mapNote">
+        Note: Some topics (cutting stock, knapsack, set covering, logical constraints, nonlinear geometry) are grouped under LP and MILP patterns, since they are primarily discrete formulation exercises in this portfolio.
       </div>
     </div>
 
-    <h2>Model Patterns Library</h2>
-    <p>I treat my collection as a structural pattern library, recognizing recurrent frameworks and adapting them to new logistics contexts.</p>
-    
-    <div class="grid">
-      <div class="card span-6">
-        <h3>1) Transportation & Transshipment</h3>
-        <p>Min-cost flow with capacity limits and multi-stage shipping nodes.</p>
-      </div>
-      <div class="card span-6">
-        <h3>2) Facility Location Problems (FLP)</h3>
-        <p>Binary decision models involving fixed opening costs and service assignment trade-offs.</p>
-      </div>
-      <div class="card span-6">
-        <h3>3) Production & Inventory Planning</h3>
-        <p>Multi-period balance constraints with production capacity and holding costs.</p>
-      </div>
-      <div class="card span-6">
-        <h3>4) Blending & Resource Allocation</h3>
-        <p>Optimization of composition ratios and workforce scheduling under quality limits.</p>
-      </div>
-    </div>
+    <h2 id="patterns">Representative Modeling Pattern</h2>
+    <p>
+      Below is an illustrative LINGO set based structure showing my consistent style: explicit indexing, data separation, and constraint readability.
+      Even when the problem changes, the modeling grammar stays stable.
+    </p>
 
-    <h2>Methodological Representative</h2>
-    <p>A typical model structure utilized to ensure speed and debugging efficiency in large-scale discrete problems.</p>
     <div class="code">
 SETS:<br>
 &nbsp;&nbsp;I /S1..S3/: supply;<br>
@@ -242,25 +453,72 @@ MIN = @SUM(LINK: cost * x);<br>
 @FOR(J: @SUM(I: x(I,J)) &gt;= demand(J));
     </div>
 
-    <h2>Portfolio Artifacts</h2>
+    <h2 id="index">Model Index</h2>
+    <p class="hint">
+      The index below is designed for fast evaluation by faculty and admissions readers. It supports keyword search, category filtering, and direct file links.
+      You can point these links to your GitHub Pages repository paths.
+    </p>
+
+    <div class="panel">
+      <div class="panelRow">
+        <div>
+          <input id="searchInput" class="searchBox" type="text" placeholder="Search by keyword: transportation, set covering, CPM, robust, scheduling, etc" />
+          <div class="filterChips" id="filterChips"></div>
+        </div>
+        <div>
+          <select id="sortSelect" class="selectBox">
+            <option value="category">Sort: Category</option>
+            <option value="title">Sort: Title</option>
+            <option value="method">Sort: Method</option>
+          </select>
+          <div class="btnRow" style="margin-top: 10px;">
+            <button id="clearBtn" class="btn">Clear</button>
+            <a class="btn primary" id="downloadAllBtn" href="#" title="Optional: link to a zip file if you publish one">Download All (optional)</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="height: 14px;"></div>
+
+    <div class="tableWrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 36%;">Model</th>
+            <th style="width: 18%;">Category</th>
+            <th style="width: 22%;">Method Tags</th>
+            <th style="width: 24%;">Code</th>
+          </tr>
+        </thead>
+        <tbody id="indexBody">
+          <!-- Populated by JS -->
+        </tbody>
+      </table>
+    </div>
+
+    <h2 id="why">Why this prepares me for an IEOR Master’s Program</h2>
     <div class="grid">
       <div class="card span-12">
-        <h3>Why this prepares me for IEOR Master’s Program</h3>
+        <h3>Graduate readiness through formulation depth</h3>
         <p>
-          This training built the modeling "muscle" required for graduate-level operations research. I can rigorously formulate complex systems, 
-          verify model stability, and translate solver outputs into actionable managerial insights. This foundation is essential for moving toward 
-          advanced topics like Stochastic Optimization and Large-scale Integer Programming.
+          This portfolio demonstrates not only exposure to optimization topics, but also the ability to build stable formulations with clean indexing,
+          explicit assumptions, and a debugging workflow that anticipates infeasibility, integrality issues, and poor Big M design.
+          This foundation supports advanced graduate work in stochastic optimization, large scale integer programming, and algorithmic decision making.
         </p>
         <div class="btnRow" style="margin-top: 16px;">
-          <a class="btn primary" href="#">📁 Download Model Files</a>
-          <a class="btn" href="#">🧾 View Model Index</a>
-          <a class="btn" href="#">📄 Technical Summary</a>
+          <a class="btn primary" href="#index">Open Model Index</a>
+          <a class="btn" href="#taxonomy">Review Taxonomy</a>
+          <a class="btn" href="#mindmap">Mind Map</a>
+        </div>
+        <div class="hint" style="margin-top: 10px;">
+          Implementation note: set each file link to your repo path, for example assets/lingo/filename.lng. A simple approach is to place all LINGO files under /assets/lingo/ and keep this HTML at site root.
         </div>
       </div>
     </div>
 
     <footer>
-      © 2025 TSUN-YUAN KU
+      © 2026 TSUN-YUAN KU
       <div class="footLinks">
         <a href="index.html">Home</a>
         <a href="research.html">Research</a>
@@ -270,5 +528,346 @@ MIN = @SUM(LINK: cost * x);<br>
     </footer>
 
   </div>
+
+  <script>
+    /*
+      IMPORTANT: Update basePath to match where you publish the .lng files on your website.
+      Example:
+        const basePath = "assets/lingo/";
+      If you use GitHub Pages and keep files in /assets/lingo/, this relative path works.
+    */
+    const basePath = "assets/lingo/";
+
+    const categories = [
+      {
+        id: "cat-lp-milp",
+        title: "LP and MILP Formulations",
+        subtitle: "Core building blocks: product mix, diet, knapsack, cutting stock, logical constraints, nonlinear geometry",
+        rationale: "Emphasis on decision variables, objective clarity, and constraint tightness for discrete feasibility.",
+        anchorsTo: "cat-lp-milp",
+        methods: ["LP", "ILP", "MILP", "Big M", "Set indexing"]
+      },
+      {
+        id: "cat-network",
+        title: "Transportation, Transshipment, and Network Flow",
+        subtitle: "Shipping networks, min cost flow, shortest route, maximum flow, facility distribution",
+        rationale: "Flow conservation, arc capacities, node balance, and scalable network indexing.",
+        anchorsTo: "cat-network",
+        methods: ["Network flow", "Shortest path", "Max flow", "Min cost flow"]
+      },
+      {
+        id: "cat-assignment",
+        title: "Assignment and Matching",
+        subtitle: "Assignment matrix modeling and matching constraints with set based indexing templates",
+        rationale: "Canonical bipartite structure and clean integrality constraints for one to one selection.",
+        anchorsTo: "cat-assignment",
+        methods: ["Assignment", "Matching", "Binary variables"]
+      },
+      {
+        id: "cat-scheduling",
+        title: "Scheduling and Staffing",
+        subtitle: "Work scheduling, highway staff scheduling, assembly line balancing",
+        rationale: "Time indexed decisions, coverage constraints, and feasibility under shift rules.",
+        anchorsTo: "cat-scheduling",
+        methods: ["Scheduling", "Coverage", "Balancing"]
+      },
+      {
+        id: "cat-project",
+        title: "Project Management",
+        subtitle: "CPM, dummy activities, crashing with deadline constraints and cost time tradeoffs",
+        rationale: "Precedence constraints, critical path logic, and crashing decisions under time bounds.",
+        anchorsTo: "cat-project",
+        methods: ["CPM", "Crashing", "Precedence constraints"]
+      },
+      {
+        id: "cat-stochastic",
+        title: "Stochastic and Robust Decisions",
+        subtitle: "Scenario based planning, EVPI, expected value, robust formulation variants",
+        rationale: "Compare expected value policies and information value, then tighten decisions with robust logic.",
+        anchorsTo: "cat-stochastic",
+        methods: ["Scenarios", "Expected value", "EVPI", "Robust"]
+      }
+    ];
+
+    const models = [
+      /* LP and MILP Formulations */
+      { title: "Diet Problem", file: "F64101066 Diet.lng", category: "LP and MILP Formulations", tags: ["LP", "Nutrition constraints"], note: "Classic diet formulation with cost minimization and nutrient lower bounds." },
+      { title: "Diet Problem with Integer Programming", file: "F64101066 Diet IP.lng", category: "LP and MILP Formulations", tags: ["MILP", "Integrality"], note: "Discrete choices layered on diet constraints." },
+      { title: "Knapsack", file: "Knapsack_F64101066.lng", category: "LP and MILP Formulations", tags: ["ILP", "Binary"], note: "Capacity constrained selection with profit maximization." },
+      { title: "Cutting Stock (Min Waste)", file: "Cutting Stock_min_waste_F64101066.lng", category: "LP and MILP Formulations", tags: ["MILP", "Pattern"], note: "Cutting stock minimizing waste using pattern decisions." },
+      { title: "Cutting Stock (Min Total Cost)", file: "Cutting Stock _min_total_cost_F64101066.lng", category: "LP and MILP Formulations", tags: ["MILP", "Cost tradeoff"], note: "Cutting stock minimizing cost under demand constraints." },
+      { title: "Set Covering (Base)", file: "Set Covering_Base_F64101066.lng", category: "LP and MILP Formulations", tags: ["Set covering", "Binary"], note: "Coverage constraints with minimum selection objective." },
+      { title: "Set Covering (If Then)", file: "Set Covering_If_then_F64101066.lng", category: "LP and MILP Formulations", tags: ["Logic", "If then"], note: "Logical coupling constraints layered on set covering." },
+      { title: "Set Covering (At If)", file: "Set Covering_@IF_F64101066.lng", category: "LP and MILP Formulations", tags: ["Logic", "LINGO @IF"], note: "Conditional constraints implemented using LINGO conditional syntax." },
+      { title: "Product Mix Model", file: "Product mix model_F64101066.lng", category: "LP and MILP Formulations", tags: ["LP", "Resource allocation"], note: "Canonical product mix under capacity constraints." },
+      { title: "MRP One Period", file: "One-Period Material Requirement Planning_F64101066.lng", category: "LP and MILP Formulations", tags: ["Planning", "Balance"], note: "One period material requirement and feasibility constraints." },
+      { title: "Einstein Puzzle (Logic Modeling)", file: "F64101066 Einstein.lng", category: "LP and MILP Formulations", tags: ["Logic", "Binary"], note: "Logic puzzle encoded as binary assignment constraints." },
+      { title: "Either Or and If Then Constraints", file: "F64101066 Either-or and if-then constraints.lng", category: "LP and MILP Formulations", tags: ["Either or", "Big M"], note: "Logical disjunction patterns for MILP formulation." },
+      { title: "Soda Can (Geometry / Nonlinear)", file: "F64101066 Soda Can.lng", category: "LP and MILP Formulations", tags: ["Nonlinear", "Geometry"], note: "Geometric optimization for can dimensions under surface or volume constraints." },
+
+      /* Network Flow */
+      { title: "Warehouse Construction and Transportation (5x5)", file: "F64101066 Warehouse contruction and transportation 5x5.lng", category: "Transportation and Network Flow", tags: ["Transportation", "Fixed charge"], note: "Warehouse decision plus shipping allocation." },
+      { title: "Warehouse Construction and Transportation (5x5 Set Model)", file: "F64101066 Warehouse construction and transportation5x5_LINGO_SET.lng", category: "Transportation and Network Flow", tags: ["Set indexing", "Transportation"], note: "Set based version of the 5x5 problem for scalability." },
+      { title: "6 Warehouses and 8 Vendors", file: "6 Warehouses 8 Venders_F64101066.lng", category: "Transportation and Network Flow", tags: ["Distribution", "Allocation"], note: "Multi origin distribution network with assignment and capacity." },
+      { title: "The 7 11 Distribution Case", file: "F64101066 The 7-11.lng", category: "Transportation and Network Flow", tags: ["Transshipment", "Cost"], note: "Retail distribution style flow and cost structure." },
+      { title: "Maximum Flow Problem", file: "F64101066 Maxium-Flow Problem.lng", category: "Transportation and Network Flow", tags: ["Max flow", "Capacity"], note: "Arc capacity and flow conservation for max throughput." },
+      { title: "Shortest Route Problem (Nodes)", file: "Shortest Route Problem_nodes_F64101066.lng", category: "Transportation and Network Flow", tags: ["Shortest path", "Network"], note: "Shortest route modeled via node arc decisions." },
+
+      /* Assignment and Matching */
+      { title: "Assignment Problem (Basic)", file: "F64101066 assignment problem.lng", category: "Assignment and Matching", tags: ["Assignment", "Binary"], note: "Classic assignment model with one to one constraints." },
+      { title: "Assignment Problem (Set Version v1)", file: "F64101066 assignment problem LINGO_SET_v1.lng", category: "Assignment and Matching", tags: ["Set indexing", "Template"], note: "Set based indexing for generalized assignment matrices." },
+      { title: "Assignment Problem (Set Version v2)", file: "F64101066 assignmetn problem_LINGO_SET_v2.lng", category: "Assignment and Matching", tags: ["Set indexing", "Template"], note: "Alternative set based encoding for assignment model variants." },
+      { title: "Matching Problem", file: "A Matching Problem_F64101066.lng", category: "Assignment and Matching", tags: ["Matching", "Binary"], note: "Matching constraints and feasibility logic." },
+      { title: "Matching Problem (Variant 2)", file: "A Matching Problem_2_F64101066.lng", category: "Assignment and Matching", tags: ["Matching", "Variant"], note: "Alternative matching constraints or dataset variant." },
+
+      /* Scheduling and Staffing */
+      { title: "Work Scheduling", file: "Work_Scheduling_F64101066.lng", category: "Scheduling and Staffing", tags: ["Scheduling", "Coverage"], note: "Coverage constraints and shift assignment decisions." },
+      { title: "Highway Staff Scheduling", file: "Highway Staff Scheduling_F64101066.lng", category: "Scheduling and Staffing", tags: ["Staffing", "Shift rules"], note: "Staffing coverage with constraints across time periods." },
+      { title: "Assembly Line Balancing", file: "Assembly Line Balancing_F64101066.lng", category: "Scheduling and Staffing", tags: ["Balancing", "Precedence"], note: "Task assignment to stations under cycle time and precedence." },
+      { title: "Basketball Line Up Players", file: "F64101066 Basketball_Line-up players.lng", category: "Scheduling and Staffing", tags: ["Selection", "Constraints"], note: "Roster selection with composition constraints." },
+
+      /* Project Management */
+      { title: "CPM Project Management", file: "CPM_Project Management_F64101066.lng", category: "Project Management", tags: ["CPM", "Critical path"], note: "CPM style precedence with project duration extraction." },
+      { title: "CPM Project Management (No Dummy)", file: "CPM_Project Management_no dummy_F64101066.lng", category: "Project Management", tags: ["CPM", "Model refinement"], note: "CPM model without dummy activities." },
+      { title: "Project Crashing (Baseline)", file: "Project Management_Crashing_Project_F64101066.lng", category: "Project Management", tags: ["Crashing", "Cost time"], note: "Crashing with cost time tradeoffs." },
+      { title: "Project Crashing (No Obj Function)", file: "Project Management_Crashing_Project_no obj fun_F64101066.lng", category: "Project Management", tags: ["Crashing", "Diagnostics"], note: "Constraint only variant for feasibility validation." },
+      { title: "Project Crashing (Due Date 31)", file: "Management_Crashing_Project_duedate=31_F64101066.lng", category: "Project Management", tags: ["Deadline", "Crashing"], note: "Crashing under a specific due date constraint." },
+      { title: "Project Crashing (Bounded Variant)", file: "Project management_Crashing 2_@BND_F64101066.lng", category: "Project Management", tags: ["Bounds", "@BND"], note: "Crashing with bounded variables using LINGO @BND." },
+
+      /* Production planning and either or constraints */
+      { title: "Toy Manufacturing (Either Or Constraints)", file: "F64101066 Either-or Toy manufacturing 1.lng", category: "LP and MILP Formulations", tags: ["Either or", "Big M"], note: "Toy manufacturing with disjunctive production constraints." },
+      { title: "Toy Manufacturing 2", file: "F64101066 Toy manufacturing 2.lng", category: "LP and MILP Formulations", tags: ["Production", "MILP"], note: "Second variant of toy manufacturing planning." },
+      { title: "Toy Manufacturing 3", file: "F64101066 Toy munufacturing 3.lng", category: "LP and MILP Formulations", tags: ["Production", "MILP"], note: "Third variant of toy manufacturing planning." },
+
+      /* Stochastic and Robust */
+      { title: "Scenario Planning (Good Weather)", file: "黃小玉_goodweather_F64101066.lng", category: "Stochastic and Robust Decisions", tags: ["Scenario", "Good"], note: "Scenario specific decision or evaluation model." },
+      { title: "Scenario Planning (Expected Value)", file: "黃小玉_expected_F64101066.lng", category: "Stochastic and Robust Decisions", tags: ["Expected value", "Policy"], note: "Expected value formulation across scenarios." },
+      { title: "Scenario Planning (Bad Weather)", file: "黃小玉_badweather_F64101066.lng", category: "Stochastic and Robust Decisions", tags: ["Scenario", "Bad"], note: "Scenario specific constraints and decisions." },
+      { title: "Robust Variant", file: "黃小玉_Robuts_F64101066.lng", category: "Stochastic and Robust Decisions", tags: ["Robust", "Worst case"], note: "Robust decision logic for uncertainty protection." },
+      { title: "EVPI Analysis", file: "黃小玉_EVPI_F64101066.lng", category: "Stochastic and Robust Decisions", tags: ["EVPI", "Value of info"], note: "EVPI style computation for information value." },
+
+      /* Misc catch all */
+      { title: "Course Master File", file: "F64101066.lng", category: "LP and MILP Formulations", tags: ["Misc", "Archive"], note: "Course aggregated or miscellaneous formulation." }
+    ];
+
+    const categoryMap = {
+      "LP and MILP Formulations": "cat-lp-milp",
+      "Transportation and Network Flow": "cat-network",
+      "Assignment and Matching": "cat-assignment",
+      "Scheduling and Staffing": "cat-scheduling",
+      "Project Management": "cat-project",
+      "Stochastic and Robust Decisions": "cat-stochastic"
+    };
+
+    const filterOrder = [
+      "All",
+      "LP and MILP Formulations",
+      "Transportation and Network Flow",
+      "Assignment and Matching",
+      "Scheduling and Staffing",
+      "Project Management",
+      "Stochastic and Robust Decisions"
+    ];
+
+    function esc(s) {
+      return String(s).replace(/[&<>"']/g, (c) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+      }[c]));
+    }
+
+    function buildTaxonomy() {
+      const grid = document.getElementById("taxonomyGrid");
+      grid.innerHTML = "";
+
+      const counts = {};
+      models.forEach(m => { counts[m.category] = (counts[m.category] || 0) + 1; });
+
+      const blocks = [
+        { id: "cat-lp-milp", title: "LP and MILP Formulations", desc: "Diet, product mix, knapsack, cutting stock, set covering, logical constraints, and nonlinear geometry.", key: ["LP", "ILP", "MILP", "Big M", "Set indexing"] },
+        { id: "cat-network", title: "Transportation and Network Flow", desc: "Transportation, distribution, maximum flow, shortest route, and warehouse network decisions.", key: ["Network flow", "Balance", "Capacity", "Min cost"] },
+        { id: "cat-assignment", title: "Assignment and Matching", desc: "Assignment matrices, matching constraints, and generalized set based indexing templates.", key: ["Binary", "One to one", "Bipartite"] },
+        { id: "cat-scheduling", title: "Scheduling and Staffing", desc: "Coverage, shift assignment, assembly line balancing, and selection constraints under rules.", key: ["Coverage", "Time index", "Feasibility"] },
+        { id: "cat-project", title: "Project Management", desc: "CPM precedence logic, critical path structure, and project crashing with cost time tradeoffs.", key: ["Precedence", "CPM", "Crashing"] },
+        { id: "cat-stochastic", title: "Stochastic and Robust Decisions", desc: "Scenario modeling, expected value policies, EVPI, and robust variants.", key: ["Scenarios", "EVPI", "Robust"] }
+      ];
+
+      blocks.forEach(b => {
+        const count = counts[b.title] || 0;
+        const tags = b.key.map(k => `<span class="tag">${esc(k)}</span>`).join("");
+
+        const el = document.createElement("div");
+        el.className = "card span-6";
+        el.id = b.id;
+        el.innerHTML = `
+          <h3>${esc(b.title)} <span style="color: var(--muted); font-weight: 800; font-size: 13px;">(${count} files)</span></h3>
+          <p>${esc(b.desc)}</p>
+          <div style="margin-top: 10px;">${tags}</div>
+          <div class="btnRow" style="margin-top: 14px;">
+            <a class="btn primary" href="#index" data-jump="${esc(b.title)}">Open in Index</a>
+            <a class="btn" href="#patterns">View Modeling Pattern</a>
+          </div>
+        `;
+        grid.appendChild(el);
+      });
+
+      document.getElementById("statCount").textContent = String(models.length);
+    }
+
+    function buildFilterChips() {
+      const wrap = document.getElementById("filterChips");
+      wrap.innerHTML = "";
+
+      filterOrder.forEach(name => {
+        const chip = document.createElement("div");
+        chip.className = "fchip";
+        chip.textContent = name;
+        chip.dataset.category = name;
+        if (name === "All") chip.classList.add("active");
+        chip.addEventListener("click", () => {
+          document.querySelectorAll(".fchip").forEach(c => c.classList.remove("active"));
+          chip.classList.add("active");
+          renderIndex();
+        });
+        wrap.appendChild(chip);
+      });
+    }
+
+    function getActiveCategory() {
+      const active = document.querySelector(".fchip.active");
+      return active ? active.dataset.category : "All";
+    }
+
+    function getSortKey() {
+      return document.getElementById("sortSelect").value;
+    }
+
+    function matchesQuery(m, q) {
+      if (!q) return true;
+      const hay = [
+        m.title,
+        m.file,
+        m.category,
+        (m.tags || []).join(" "),
+        (m.note || "")
+      ].join(" ").toLowerCase();
+      return hay.includes(q.toLowerCase());
+    }
+
+    function renderIndex() {
+      const tbody = document.getElementById("indexBody");
+      const q = (document.getElementById("searchInput").value || "").trim();
+      const activeCat = getActiveCategory();
+      const sortKey = getSortKey();
+
+      let list = models.slice();
+
+      if (activeCat && activeCat !== "All") {
+        list = list.filter(m => m.category === activeCat);
+      }
+
+      if (q) {
+        list = list.filter(m => matchesQuery(m, q));
+      }
+
+      list.sort((a, b) => {
+        const ka = (a[sortKey] || "").toLowerCase();
+        const kb = (b[sortKey] || "").toLowerCase();
+        return ka.localeCompare(kb);
+      });
+
+      tbody.innerHTML = "";
+
+      list.forEach(m => {
+        const tags = (m.tags || []).map(t => `<span class="tag">${esc(t)}</span>`).join("");
+        const fileHref = basePath + encodeURIComponent(m.file);
+        const anchor = categoryMap[m.category] || "cat-lp-milp";
+
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>
+            <div class="tTitle">${esc(m.title)}</div>
+            <div class="tMeta">${esc(m.note || "")}</div>
+          </td>
+          <td>
+            <a href="#${esc(anchor)}"><span class="tag">${esc(m.category)}</span></a>
+          </td>
+          <td>${tags}</td>
+          <td>
+            <a class="fileLink" href="${esc(fileHref)}" target="_blank" rel="noopener">Open</a>
+            <a class="fileLink" href="${esc(fileHref)}" download>Download</a>
+            <div class="tMeta" style="margin-top: 8px;">${esc(m.file)}</div>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      // Optional: set "Download All" button placeholder
+      const allBtn = document.getElementById("downloadAllBtn");
+      // If you publish a zip, replace this with your real link, for example basePath + "lingo_models.zip"
+      allBtn.href = "#";
+    }
+
+    function bindMindMap() {
+      document.querySelectorAll(".node").forEach(n => {
+        n.addEventListener("click", () => {
+          const target = n.dataset.target;
+          if (!target) return;
+          const el = document.getElementById(target);
+          if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      });
+    }
+
+    function bindTaxonomyJumpButtons() {
+      document.querySelectorAll("[data-jump]").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+          const cat = btn.dataset.jump;
+          if (!cat) return;
+
+          // Update filter to category and open index
+          document.querySelectorAll(".fchip").forEach(c => {
+            c.classList.toggle("active", c.dataset.category === cat);
+          });
+
+          // If not found, set to All
+          const anyActive = document.querySelector(".fchip.active");
+          if (!anyActive) {
+            document.querySelectorAll(".fchip").forEach(c => c.classList.toggle("active", c.dataset.category === "All"));
+          }
+
+          renderIndex();
+          // allow anchor navigation to index
+        });
+      });
+    }
+
+    function bindControls() {
+      document.getElementById("searchInput").addEventListener("input", renderIndex);
+      document.getElementById("sortSelect").addEventListener("change", renderIndex);
+
+      document.getElementById("clearBtn").addEventListener("click", () => {
+        document.getElementById("searchInput").value = "";
+        document.getElementById("sortSelect").value = "category";
+        document.querySelectorAll(".fchip").forEach(c => c.classList.remove("active"));
+        document.querySelectorAll(".fchip").forEach(c => c.classList.toggle("active", c.dataset.category === "All"));
+        renderIndex();
+      });
+    }
+
+    function init() {
+      buildTaxonomy();
+      buildFilterChips();
+      bindMindMap();
+      bindControls();
+      renderIndex();
+      bindTaxonomyJumpButtons();
+    }
+
+    init();
+  </script>
 </body>
 </html>
