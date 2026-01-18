@@ -49,7 +49,7 @@
     .cv-item { margin-bottom: 24px; }
     .cv-header { display: flex; justify-content: space-between; align-items: baseline; font-weight: 700; }
     .cv-sub { color: var(--muted); font-size: 14px; margin-bottom: 6px; font-weight: 600; }
-    
+
     ul { padding-left: 20px; margin: 8px 0; }
     li { margin-bottom: 6px; font-size: 15px; }
 
@@ -86,6 +86,13 @@
     .strip-content span { font-size: 14px; color: var(--muted); }
     .arrow { color: var(--border); font-size: 24px; transition: color 0.2s ease; }
     .theme-strip:hover .arrow { color: var(--accent); }
+
+    /* A compact strip placed right above a section title */
+    .themes-pre {
+      margin-top: 12px;
+      margin-bottom: 18px;
+      gap: 12px;
+    }
 
     footer {
       margin-top: 80px;
@@ -152,7 +159,18 @@
     </section>
 
     <section>
+      <div class="themes themes-pre">
+        <a class="theme-strip" href="activities.html">
+          <div class="strip-content">
+            <b>Activities & Awards</b>
+            <span>Conferences, hackathons, research submissions, and community engagement</span>
+          </div>
+          <div class="arrow">→</div>
+        </a>
+      </div>
+
       <h2>Research & Projects</h2>
+
       <div class="themes">
         <a class="theme-strip" href="research.html">
           <div class="strip-content">
@@ -189,8 +207,7 @@
     </section>
 
     <footer>
-      © 2025 TSUN-YUAN KU | Engineered with Spatial Intelligence
-    </footer>
+      © 2025 TSUN-YUAN KU 
   </div>
 </body>
 </html>
