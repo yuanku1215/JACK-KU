@@ -17,7 +17,7 @@
       --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
       --radius: 18px;
       --radius-sm: 14px;
-      --maxw: 980px;
+      --maxw: 1100px; /* same as your Capstone page */
       --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     }
 
@@ -46,18 +46,20 @@
       gap:14px; margin-bottom:18px;
     }
     .backlink{
-      display:inline-flex; align-items:center; gap:8px; font-weight:600;
+      display:inline-flex; align-items:center; gap:8px;
+      font-weight:600; text-transform:uppercase;
+      font-size:13px; letter-spacing:0.05em;
     }
     .pill{
       display:inline-flex; align-items:center; gap:8px;
-      padding:8px 12px; border:1px solid var(--border);
+      padding:8px 16px; border:1px solid var(--border);
       background: rgba(255,255,255,0.65);
       backdrop-filter: blur(6px);
       border-radius:999px; color:var(--muted);
       font-size:13px; white-space:nowrap;
     }
     .dot{
-      width:8px; height:8px; border-radius:999px;
+      width:6px; height:6px; border-radius:999px;
       background: var(--accent-2); display:inline-block;
     }
 
@@ -69,29 +71,29 @@
       border: 1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding: 26px 26px 22px;
+      padding: 40px 32px 36px;
       margin-bottom: 22px;
     }
 
     h1{
-      font-size: 38px;
-      letter-spacing: -0.5px;
+      font-size: 42px;
+      letter-spacing: -1px;
       margin: 8px 0 6px;
-      line-height: 1.2;
+      line-height: 1.1;
     }
 
     .subtitle{
-      font-size: 18px;
+      font-size: 19px;
       color: var(--muted);
-      margin-bottom: 14px;
-      max-width: 920px;
+      margin-bottom: 16px;
+      max-width: 980px;
     }
 
     .oneLiner{
       font-size: 16px;
       color: var(--text);
-      margin: 10px 0 16px;
-      max-width: 920px;
+      margin: 10px 0 20px;
+      max-width: 980px;
     }
 
     .chips{
@@ -102,49 +104,37 @@
       background: rgba(255,255,255,0.72);
       color: var(--muted);
       border-radius: 999px;
-      padding: 8px 12px;
-      font-size: 13px;
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 500;
     }
-
-    /* Sections */
-    h2{
-      font-size: 24px;
-      margin-top: 56px;
-      margin-bottom: 14px;
-      padding-bottom: 8px;
-      border-bottom: 2px solid var(--border);
-      letter-spacing: -0.2px;
-    }
-    p{ font-size: 16px; margin-bottom: 16px; }
-    ul{ padding-left: 20px; margin-bottom: 16px; }
-    li{ margin-bottom: 8px; }
-    .muted{ color: var(--muted); }
 
     /* Stats */
     .stats{
       display:grid;
       grid-template-columns: repeat(12, 1fr);
-      gap: 14px;
-      margin-top: 14px;
+      gap: 16px;
+      margin-top: 24px;
     }
     .stat{
       grid-column: span 3;
       background: rgba(255,255,255,0.8);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 16px 16px;
+      padding: 24px 20px;
     }
     .stat .k{
-      font-size: 12px;
+      font-size: 10px;
       color: var(--muted);
-      margin-bottom: 6px;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+      letter-spacing: 0.05em;
+      font-weight: 700;
     }
     .stat .v{
       font-size: 20px;
       font-weight: 700;
-      letter-spacing: -0.2px;
+      color: var(--text);
     }
     .stat .s{
       margin-top: 6px;
@@ -152,23 +142,37 @@
       color: var(--muted);
     }
 
+    /* Sections */
+    h2{
+      font-size: 26px;
+      margin-top: 64px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      letter-spacing: -0.5px;
+    }
+    p{ font-size: 16px; margin-bottom: 16px; }
+    ul{ padding-left: 20px; margin-bottom: 16px; }
+    li{ margin-bottom: 8px; }
+    .muted{ color: var(--muted); }
+
     /* Grid + cards */
     .grid{
       display:grid;
       grid-template-columns: repeat(12, 1fr);
-      gap: 14px;
-      margin-top: 14px;
+      gap: 20px;
+      margin-top: 16px;
     }
     .card{
       background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: var(--radius);
+      padding: 24px;
       box-shadow: 0 10px 20px rgba(15, 23, 42, 0.05);
-      padding: 18px 18px;
     }
     .card h3{
-      margin: 0 0 8px;
-      font-size: 16px;
+      margin: 0 0 10px;
+      font-size: 17px;
       letter-spacing: -0.2px;
     }
     .card p{ margin: 0; color: var(--muted); font-size: 14px; }
@@ -190,38 +194,65 @@
 
     /* Buttons */
     .btnRow{
-      display:flex; flex-wrap:wrap; gap:10px; margin-top:12px;
+      display:flex; flex-wrap:wrap; gap:12px; margin-top: 16px;
     }
     .btn{
       display:inline-flex; align-items:center; gap:10px;
-      padding:10px 14px; border-radius:12px;
+      padding:12px 24px; border-radius:10px;
       border:1px solid var(--border);
-      background: rgba(255,255,255,0.85);
+      background:#fff;
       color: var(--text);
       font-weight: 600;
       font-size: 14px;
+      transition: all 0.2s ease;
     }
     .btn.primary{
-      background: linear-gradient(180deg, rgba(30,58,138,0.12), rgba(30,58,138,0.06));
-      border-color: rgba(30,58,138,0.25);
+      background: var(--accent);
+      color:#fff;
+      border-color: var(--accent);
     }
     .btn:hover{
       text-decoration:none;
       transform: translateY(-1px);
-      box-shadow: 0 10px 18px rgba(15,23,42,0.08);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     }
 
-    /* Code block */
-    .code{
-      font-family: var(--mono);
-      font-size: 12.5px;
-      color: #0f172a;
-      background: rgba(15, 23, 42, 0.04);
-      border: 1px solid rgba(15, 23, 42, 0.10);
-      border-radius: var(--radius-sm);
+    /* Embedded viewers */
+    .viewer{
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: rgba(255,255,255,0.85);
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.05);
+      margin-top: 16px;
+    }
+    .viewerHeader{
       padding: 12px 14px;
-      overflow-x: auto;
-      margin-top: 10px;
+      border-bottom: 1px solid var(--border);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .viewerTitle{
+      font-weight: 700;
+      letter-spacing: -0.2px;
+    }
+    .viewerNote{
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 4px;
+    }
+    .viewerFrame{
+      width: 100%;
+      height: 680px;
+      border: 0;
+      display:block;
+      background: #fff;
+    }
+    @media (max-width: 700px){
+      .viewerFrame{ height: 520px; }
     }
 
     /* Details */
@@ -243,66 +274,33 @@
       color: var(--muted);
       font-size: 14px;
     }
-    .miniList{ margin: 10px 0 0; padding-left: 18px; }
-    .miniList li{ color: var(--muted); }
-
-    /* Embedded viewers */
-    .viewer{
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      background: rgba(255,255,255,0.85);
-      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.05);
-    }
-    .viewerHeader{
-      padding: 12px 14px;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    .viewerTitle{
-      font-weight: 700;
-      letter-spacing: -0.2px;
-    }
-    .viewerNote{
-      color: var(--muted);
-      font-size: 13px;
-    }
-    .viewerFrame{
-      width: 100%;
-      height: 640px;
-      border: 0;
-      display: block;
-      background: #fff;
-    }
 
     /* Footer */
     footer{
-      margin-top: 96px;
-      font-size: 14px;
-      color: #64748b;
+      margin-top: 120px;
+      padding-bottom: 60px;
+      font-size: 13px;
+      color: var(--muted);
       text-align: center;
+      border-top: 1px solid var(--border);
+      padding-top: 40px;
     }
     .footLinks{
-      margin-top: 10px;
-      display: flex;
-      justify-content: center;
-      gap: 14px;
+      display:flex;
+      justify-content:center;
+      gap: 24px;
+      margin-top: 16px;
       flex-wrap: wrap;
     }
 
+    /* Responsive */
     @media (max-width: 900px){
       .span-8, .span-6, .span-4 { grid-column: span 12; }
       .stat { grid-column: span 6; }
-      h1 { font-size: 34px; }
-      .viewerFrame { height: 520px; }
+      h1 { font-size: 36px; }
     }
     @media (max-width: 520px){
       .stat { grid-column: span 12; }
-      .viewerFrame { height: 460px; }
     }
   </style>
 </head>
@@ -311,68 +309,67 @@
   <div class="container">
 
     <div class="topbar">
-      <a class="backlink" href="index.html">← Back to Home</a>
+      <a class="backlink" href="index.html">Back to Home</a>
       <div class="pill"><span class="dot"></span> Workshop Instructor</div>
     </div>
 
     <!-- HERO -->
     <div class="hero">
       <h1>Workshop Instructor</h1>
+
       <div class="subtitle">
-        4 hour Workshop: Quantum Algorithms and Quantum Annealing for Optimization (QUBO with demos and labs)
+        Quantum Annealing for Optimization: Origins, QUBO Modeling, and HPC Execution
       </div>
 
       <div class="oneLiner">
         <b>One line summary:</b>
-        I delivered a four hour workshop to MS and PhD students and cross department participants, introducing quantum
-        optimization through an optimization first learning path from classical annealing to simulated annealing to
-        quantum annealing, ending with hands on Colab exercises.
+        I delivered an eight hour workshop for undergraduate and master’s students, focusing on where quantum annealing comes from, how to construct the core mathematical models (Ising and QUBO), how to run experiments on NCHC Taiwania 3, and how to extend the workflow from small examples toward routing problems such as VRP.
       </div>
 
       <div class="chips" aria-label="keywords">
-        <div class="chip">Classical to Quantum Annealing</div>
-        <div class="chip">QUBO Formulation</div>
-        <div class="chip">Hands on Demos</div>
-        <div class="chip">Google Colab</div>
-        <div class="chip">Teaching and Materials Design</div>
-        <div class="chip">Optimization Mindset</div>
+        <div class="chip">Quantum Annealing Origins</div>
+        <div class="chip">Ising and QUBO Modeling</div>
+        <div class="chip">Simulated Quantum Annealing</div>
+        <div class="chip">Taiwania 3 and Slurm</div>
+        <div class="chip">Code Walkthrough</div>
+        <div class="chip">From TSP to VRP</div>
       </div>
 
       <div class="stats" aria-label="workshop snapshot">
         <div class="stat">
           <div class="k">Audience</div>
-          <div class="v">MS and PhD</div>
-          <div class="s">Interdisciplinary group</div>
+          <div class="v">UG and MS</div>
+          <div class="s">Interdisciplinary learners</div>
         </div>
         <div class="stat">
           <div class="k">Duration</div>
-          <div class="v">4 Hours</div>
-          <div class="s">Lecture and demos</div>
+          <div class="v">8 Hours</div>
+          <div class="s">Lecture plus practice</div>
         </div>
         <div class="stat">
-          <div class="k">Materials</div>
-          <div class="v">Slide Deck</div>
-          <div class="s">Reusable narrative</div>
+          <div class="k">Slides</div>
+          <div class="v">PDF and Keynote</div>
+          <div class="s">Full deck embedded</div>
         </div>
         <div class="stat">
-          <div class="k">Hands on</div>
-          <div class="v">3 Labs</div>
-          <div class="s">Fill in coding tasks</div>
+          <div class="k">Examples</div>
+          <div class="v">3 Notebooks</div>
+          <div class="s">Knapsack, N Queen, TSP</div>
         </div>
       </div>
 
-      <!-- Primary links: PDF for viewing, Keynote for downloading -->
       <div class="btnRow" aria-label="quick links">
-        <a class="btn primary" href="assets/workshop/0410_slides.pdf" target="_blank" rel="noopener">View slides full screen (PDF)</a>
-        <a class="btn" href="assets/workshop/0410_slides.pdf" download>Download slides (PDF)</a>
-        <a class="btn" href="assets/workshop/0410_slides.keynote" download>Download slides (Keynote)</a>
+        <!-- Replace with your real paths on the website -->
+        <a class="btn primary" href="assets/workshop/0410_slides.pdf" target="_blank" rel="noopener">Open slides full screen</a>
+        <a class="btn" href="assets/workshop/0410_slides.pdf" download>Download PDF</a>
+        <a class="btn" href="assets/workshop/0410_slides.keynote" download>Download Keynote</a>
       </div>
     </div>
 
-    <!-- SLIDES EMBED -->
+    <!-- SLIDES -->
     <h2>Slides</h2>
     <p class="muted">
-      For reliable in browser reading, the embedded viewer uses the exported PDF version. The Keynote file is provided as a download.
+      The embedded viewer uses the exported PDF for reliable in browser reading. The Keynote file is provided as a download.
     </p>
 
     <div class="viewer" aria-label="embedded slides viewer">
@@ -394,220 +391,166 @@
     <h2>Overview</h2>
 
     <p>
-      The goal of this workshop was to give participants a practical entry point into quantum algorithms for optimization.
-      Instead of starting from physics heavy concepts, the content is organized around an optimization narrative: energy landscapes,
-      local minima, and search strategies.
-    </p>
-
-    <p>
-      The workshop progresses from classical annealing ideas to simulated annealing, then to quantum annealing, highlighting what changes
-      and what stays the same when reformulating problems as QUBO. I also addressed common implementation issues such as constraint encoding,
-      penalty scaling, and debugging energy functions, and concluded with hands on labs.
+      This workshop is organized around an optimization first learning path. The narrative starts from NP hard combinatorial problems and simulated annealing, then introduces quantum concepts needed for quantum annealing, and proceeds to practical QUBO modeling and simulated quantum annealing.
+      The second half focuses on execution workflows, including how to run experiments on Taiwania 3 with Slurm and how to scale code using modular scripts.
     </p>
 
     <div class="callout">
-      <b>Teaching design choice:</b> build intuition first from an optimization viewpoint, then introduce quantum concepts as extensions,
-      so participants can connect the ideas to their own research problems immediately.
+      <b>Scope boundary:</b>
+      I focused on the modeling workflow and how to run and validate experiments. Physics details are introduced only as needed to explain the algorithmic behavior and representations. 
     </div>
 
-    <!-- AUDIENCE -->
-    <h2>Audience and Learning Goals</h2>
+    <!-- WHAT WAS COVERED -->
+    <h2>What I Covered</h2>
 
     <div class="grid">
-      <div class="card span-4">
-        <h3>Target Audience</h3>
-        <p>Geomatics MS and PhD students and cross department learners who want an applied view of quantum optimization.</p>
+      <div class="card span-6">
+        <h3>Origins and motivation</h3>
+        <p>Problem definition for NP hard optimization and why search becomes difficult as the solution space grows.</p>
       </div>
-      <div class="card span-4">
-        <h3>Learning Goal</h3>
-        <p>Understand how optimization problems can be reformulated into QUBO and solved via annealing based methods.</p>
+      <div class="card span-6">
+        <h3>Core mathematical representations</h3>
+        <p>Hamiltonian viewpoint and the mapping choices between Ising and QUBO for executable models.</p>
       </div>
-      <div class="card span-4">
-        <h3>Outcome</h3>
-        <p>Participants can interpret QUBO energy terms, implement a basic solver pipeline, and debug formulations.</p>
+      <div class="card span-6">
+        <h3>Simulated Quantum Annealing</h3>
+        <p>SQA as a classical simulation of quantum annealing behavior using Path Integral Monte Carlo and time slicing.</p>
+      </div>
+      <div class="card span-6">
+        <h3>HPC execution on Taiwania 3</h3>
+        <p>Linux workflow, Slurm batch scripts, environment modules, and modular program structure for scaling runs.</p>
+      </div>
+      <div class="card span-6">
+        <h3>Code walkthrough and demos</h3>
+        <p>Step by step code explanation, sanity checks, and how to debug indexing, penalties, and energy correctness.</p>
+      </div>
+      <div class="card span-6">
+        <h3>Extension toward routing</h3>
+        <p>From TSP formulation toward VRP style constraints and problem variants as an extension direction.</p>
       </div>
     </div>
 
     <!-- STRUCTURE -->
     <h2>Workshop Structure</h2>
-
     <p class="muted">
-      The slide deck follows a learning path designed to reduce intimidation and maximize transfer to real optimization tasks.
+      The structure follows the chapter layout of the slide deck, from problem definition through SA, quantum concepts, QUBO modeling, SQA, Taiwania 3 workflows, and demos including a routing extension. 
     </p>
 
-    <div class="grid">
-      <div class="card span-6">
-        <h3>Part 1: Optimization Intuition</h3>
-        <p>Energy landscapes, local minima, exploration versus exploitation, and why annealing works as a search principle.</p>
-      </div>
-      <div class="card span-6">
-        <h3>Part 2: Simulated Annealing</h3>
-        <p>Temperature schedules, acceptance probability, neighborhood design, and practical pitfalls when implementing SA.</p>
-      </div>
-      <div class="card span-6">
-        <h3>Part 3: Quantum Annealing</h3>
-        <p>Quantum fluctuations and tunneling intuition, and mapping optimization problems to Ising and QUBO models.</p>
-      </div>
-      <div class="card span-6">
-        <h3>Part 4: QUBO Modeling Practice</h3>
-        <p>Constructing QUBO, encoding constraints, penalty selection, and validating the energy function end to end.</p>
-      </div>
-    </div>
-
     <details>
-      <summary>Common implementation issues explicitly covered</summary>
+      <summary>Chapter based outline</summary>
       <div>
-        <ul class="miniList">
-          <li><b>Penalty tuning:</b> too small leads to infeasible solutions, too large dominates numerically and harms exploration.</li>
-          <li><b>Constraint encoding:</b> equality constraints require careful quadratic expansion and scaling.</li>
-          <li><b>Energy debugging:</b> verify better solutions reduce energy, test with known feasible cases.</li>
-          <li><b>Variable indexing:</b> incorrect mapping between tuples and bit indices silently breaks models.</li>
-          <li><b>Interpretability:</b> each QUBO term must be explained in the original problem context.</li>
+        <ul>
+          <li>Chapter 1: Defining the problem and NP hard examples such as TSP, VRP, and knapsack  [oai_citation:1‡0410_slides.pdf](sediment://file_00000000f328720694346f6be6006dc3)</li>
+          <li>Chapter 2: Simulated annealing and core acceptance model  [oai_citation:2‡0410_slides.pdf](sediment://file_00000000f328720694346f6be6006dc3)</li>
+          <li>Chapter 3 and 4: Quantum concepts, Hamiltonian, Ising versus QUBO, and penalty techniques  [oai_citation:3‡0410_slides.pdf](sediment://file_00000000f328720694346f6be6006dc3)</li>
+          <li>Chapter 5: SQA core model including time slicing and Path Integral Monte Carlo  [oai_citation:4‡0410_slides.pdf](sediment://file_00000000f328720694346f6be6006dc3)</li>
+          <li>Chapter 6: Taiwania 3 usage and recommended modular program structure  [oai_citation:5‡0410_slides.pdf](sediment://file_00000000f328720694346f6be6006dc3)</li>
+          <li>Chapter 7 to 9: D Wave demos, custom QUBO application from TSP to VRP, and real world demo  [oai_citation:6‡0410_slides.pdf](sediment://file_00000000f328720694346f6be6006dc3)</li>
         </ul>
       </div>
     </details>
 
-    <!-- QUBO -->
-    <h2>QUBO: From Basic Math to an Executable Model</h2>
+    <!-- HPC SECTION -->
+    <h2>HPC Workflow Highlights</h2>
 
     <p>
-      A key part of the workshop is making QUBO feel constructible. Participants learn to start from binary variables,
-      write objectives, then add constraints as quadratic penalties to form an executable energy model.
+      For Taiwania 3, I introduced the minimum set of operational steps: uploading files, verifying environments, writing Slurm scripts, submitting jobs, monitoring logs, and downloading results. I also explained why single script workflows often need refactoring into a task list plus worker scripts for large scale runs.
     </p>
 
-    <div class="callout">
-      <b>Core message:</b> QUBO is a disciplined way to express a problem as <span style="font-family: var(--mono);">min xᵀQx</span> with binary decisions,
-      where every term has a clear meaning.
-    </div>
-
-    <div class="code">
-Goal: minimize  xᵀ Q x  ,  where x ∈ {0,1}ⁿ<br><br>
-1) Write objective in binary variables<br>
-2) Convert constraints into quadratic penalties<br>
-3) Combine:  E(x) = objective(x) + λ · penalty(x)<br>
-4) Validate: feasible solutions have low penalty, improvements reduce E(x)
-    </div>
+    <details>
+      <summary>Example Slurm batch script elements covered</summary>
+      <div>
+        Key directives such as job name, output logs, partition selection, node and task counts, time limits, project account, module loading, and executing a Python entry point were explained with an annotated script example.  [oai_citation:7‡0410_slides.pdf](sediment://file_00000000f328720694346f6be6006dc3)
+      </div>
+    </details>
 
     <!-- LABS -->
-    <h2>Hands on Labs</h2>
+    <h2>Example Notebooks</h2>
 
     <p class="muted">
-      Colab notebooks are typically not embeddable due to security headers. To enable reading on the website, each lab provides an embedded nbviewer view,
-      plus a button to open directly in Colab.
+      The following three notebooks are provided for on site reading and download. They are embedded as HTML viewers, and the original ipynb files are also available.
     </p>
 
     <div class="grid">
-      <!-- Lab 1 -->
+
       <div class="card span-12">
-        <h3>Lab 1: Build a QUBO and validate energy by brute force</h3>
+        <h3>Example 1: Knapsack Problem</h3>
         <p>
-          Fill in missing steps to construct Q, verify energies on small n, and interpret solutions.
+          QUBO formulation workflow and validation mindset using a compact combinatorial objective.
         </p>
+
         <div class="btnRow">
-          <!-- Replace placeholders with your real links -->
-          <a class="btn primary" href="YOUR_COLAB_LINK_LAB1" target="_blank" rel="noopener">Open in Colab</a>
-          <a class="btn" href="YOUR_NBVIEWER_LINK_LAB1" target="_blank" rel="noopener">Open nbviewer full screen</a>
-          <a class="btn" href="assets/workshop/lab1.ipynb" download>Download ipynb</a>
+          <a class="btn primary" href="assets/workshop/lab_knapsack.html" target="_blank" rel="noopener">Open full page</a>
+          <a class="btn" href="assets/workshop/reference_knapsack.ipynb" download>Download ipynb</a>
         </div>
 
         <details>
-          <summary>Read on this website (embedded nbviewer)</summary>
+          <summary>Read on this website</summary>
           <div class="viewer" style="margin-top:12px;">
-            <iframe class="viewerFrame" src="YOUR_NBVIEWER_EMBED_LAB1" title="Lab 1 nbviewer"></iframe>
+            <iframe class="viewerFrame" src="assets/workshop/lab_knapsack.html" title="Knapsack notebook HTML"></iframe>
           </div>
           <div class="muted" style="margin-top:10px;">
-            Tip: If the embedded view does not load, open nbviewer in a new tab using the button above.
+            If the embedded view does not load, use the Open full page button above.
           </div>
         </details>
       </div>
 
-      <!-- Lab 2 -->
       <div class="card span-12">
-        <h3>Lab 2: NP hard mini problem with QUBO constraints</h3>
+        <h3>Example 2: N Queen</h3>
         <p>
-          Story driven formulation, add penalties, then run an annealing solver loop and check feasibility.
+          Constraint encoding and penalty technique practice with clear feasibility checks.
         </p>
+
         <div class="btnRow">
-          <a class="btn primary" href="YOUR_COLAB_LINK_LAB2" target="_blank" rel="noopener">Open in Colab</a>
-          <a class="btn" href="YOUR_NBVIEWER_LINK_LAB2" target="_blank" rel="noopener">Open nbviewer full screen</a>
-          <a class="btn" href="assets/workshop/lab2.ipynb" download>Download ipynb</a>
+          <a class="btn primary" href="assets/workshop/lab_nqueen.html" target="_blank" rel="noopener">Open full page</a>
+          <a class="btn" href="assets/workshop/reference_N-queen.ipynb" download>Download ipynb</a>
         </div>
 
         <details>
-          <summary>Read on this website (embedded nbviewer)</summary>
+          <summary>Read on this website</summary>
           <div class="viewer" style="margin-top:12px;">
-            <iframe class="viewerFrame" src="YOUR_NBVIEWER_EMBED_LAB2" title="Lab 2 nbviewer"></iframe>
+            <iframe class="viewerFrame" src="assets/workshop/lab_nqueen.html" title="N Queen notebook HTML"></iframe>
           </div>
           <div class="muted" style="margin-top:10px;">
-            Tip: If the embedded view does not load, open nbviewer in a new tab using the button above.
+            If the embedded view does not load, use the Open full page button above.
           </div>
         </details>
       </div>
 
-      <!-- Lab 3 -->
       <div class="card span-12">
-        <h3>Lab 3: QUBO modeling, debugging, and interpretation</h3>
+        <h3>Example 3: Traveling Salesman Problem</h3>
         <p>
-          Focus on energy debugging and indexing correctness, then interpret results and failure cases.
+          Indexing discipline, energy interpretation, and the bridge toward routing extensions.
         </p>
+
         <div class="btnRow">
-          <a class="btn primary" href="YOUR_COLAB_LINK_LAB3" target="_blank" rel="noopener">Open in Colab</a>
-          <a class="btn" href="YOUR_NBVIEWER_LINK_LAB3" target="_blank" rel="noopener">Open nbviewer full screen</a>
-          <a class="btn" href="assets/workshop/lab3.ipynb" download>Download ipynb</a>
+          <a class="btn primary" href="assets/workshop/lab_tsp.html" target="_blank" rel="noopener">Open full page</a>
+          <a class="btn" href="assets/workshop/reference_tsp.ipynb" download>Download ipynb</a>
         </div>
 
         <details>
-          <summary>Read on this website (embedded nbviewer)</summary>
+          <summary>Read on this website</summary>
           <div class="viewer" style="margin-top:12px;">
-            <iframe class="viewerFrame" src="YOUR_NBVIEWER_EMBED_LAB3" title="Lab 3 nbviewer"></iframe>
+            <iframe class="viewerFrame" src="assets/workshop/lab_tsp.html" title="TSP notebook HTML"></iframe>
           </div>
           <div class="muted" style="margin-top:10px;">
-            Tip: If the embedded view does not load, open nbviewer in a new tab using the button above.
+            If the embedded view does not load, use the Open full page button above.
           </div>
         </details>
       </div>
-    </div>
 
-    <!-- CONTRIBUTIONS -->
-    <h2>My Contributions</h2>
-
-    <div class="grid">
-      <div class="card span-6">
-        <h3>Instructional Design</h3>
-        <p>
-          Designed a narrative learning path connecting classical optimization intuition to quantum annealing for interdisciplinary learners.
-        </p>
-      </div>
-      <div class="card span-6">
-        <h3>Materials and Exercises</h3>
-        <p>
-          Built the complete slide deck, prepared demo scripts, and created Colab labs with fill in coding tasks for active learning.
-        </p>
-      </div>
-      <div class="card span-6">
-        <h3>QUBO Modeling Guidance</h3>
-        <p>
-          Provided templates and debugging methods for constructing and validating QUBO models end to end.
-        </p>
-      </div>
-      <div class="card span-6">
-        <h3>Community Impact</h3>
-        <p>
-          Supported participants from different backgrounds to translate quantum optimization concepts into their own research contexts.
-        </p>
-      </div>
     </div>
 
     <!-- WHY IT MATTERS -->
     <h2>Why This Matters</h2>
 
     <p>
-      Teaching this workshop strengthened my ability to communicate technical ideas clearly, and reinforced a research ready workflow:
-      identify the core idea, formalize it, implement it, validate it, then explain it.
+      This workshop demonstrates my ability to translate an advanced optimization topic into an executable workflow. The emphasis is on building correct models, running controlled experiments, and scaling computation on a supercomputing platform while keeping results interpretable.
     </p>
 
     <div class="callout">
-      <b>IEOR relevance:</b> demonstrates technical depth in QUBO and annealing, reproducible experiment design, and the ability to teach and collaborate.
+      <b>IEOR relevance:</b>
+      This experience reflects model construction discipline, experimental reproducibility, and the ability to communicate and teach algorithmic workflows that connect theory, code, and compute infrastructure.
     </div>
 
     <footer>
