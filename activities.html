@@ -108,14 +108,22 @@
       gap: 16px;
     }
 
+    /* Default: keep your original look for most images (cover, uniform height) */
     .eventImages img {
       width: 100%;
       height: 250px;
-      object-fit: cover; /* 讓不同比例的照片整齊排列 */
+      object-fit: cover;
       display: block;
       border-radius: 14px;
       border: 1px solid var(--border);
       background: #fff;
+    }
+
+    /* For images that should NOT be cropped:
+       fixed width (100% of column), auto height */
+    .eventImages img.noCrop {
+      height: auto;
+      object-fit: contain;
     }
 
     footer {
@@ -177,11 +185,11 @@
         spatial indicators, and evidence-based urban design insights.
       </p>
       <ul>
-        <li><b>Role:</b> GIS & Spatial Analysis</li>
+        <li><b>Role:</b> GIS & Spatial Analysis (Team Leader)</li>
         <li><b>Focus:</b> Pedestrian safety & accessibility</li>
       </ul>
       <div class="eventImages">
-        <img src="images/hackathon" alt="Hackathon Event">
+        <img class="noCrop" src="images/hackathon.png" alt="Hackathon Event">
       </div>
     </div>
 
@@ -193,11 +201,11 @@
         computational methods, and real-world decision-making problems.
       </p>
       <ul>
-        <li><b>Role:</b> Attendee</li>
+        <li><b>Role:</b> Presenter</li>
         <li><b>Theme:</b> Optimization & spatial decision-making</li>
       </ul>
       <div class="eventImages">
-        <img src="images/informs.HEIC" alt="INFORMS Meeting">
+        <img class="noCrop" src="images/informs.HEIC" alt="INFORMS Meeting">
       </div>
     </div>
 
