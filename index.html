@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>TSUN-YUAN KU | Portfolio</title>
+  <title>TSUN-YUAN KU | Professional Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
@@ -46,11 +46,14 @@
     }
 
     .section-content { margin-bottom: 32px; }
-    .cv-item { margin-bottom: 20px; }
+    .cv-item { margin-bottom: 24px; }
     .cv-header { display: flex; justify-content: space-between; align-items: baseline; font-weight: 700; }
-    .cv-sub { color: var(--muted); font-size: 14px; margin-bottom: 6px; }
+    .cv-sub { color: var(--muted); font-size: 14px; margin-bottom: 6px; font-weight: 600; }
+    
     ul { padding-left: 20px; margin: 8px 0; }
-    li { margin-bottom: 4px; font-size: 15px; }
+    li { margin-bottom: 6px; font-size: 15px; }
+
+    .coursework { font-size: 14px; color: var(--muted); margin-top: 4px; }
 
     /* Horizontal Strip Links */
     .themes {
@@ -64,7 +67,7 @@
       background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 20px 24px;
+      padding: 22px 28px;
       text-decoration: none;
       color: inherit;
       display: flex;
@@ -75,13 +78,13 @@
 
     .theme-strip:hover {
       border-color: var(--accent);
-      transform: translateX(4px);
-      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+      transform: translateX(6px);
+      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08);
     }
 
-    .strip-content b { font-size: 17px; display: block; color: var(--accent); }
+    .strip-content b { font-size: 18px; display: block; color: var(--accent); margin-bottom: 4px; }
     .strip-content span { font-size: 14px; color: var(--muted); }
-    .arrow { color: var(--border); font-size: 20px; font-weight: bold; }
+    .arrow { color: var(--border); font-size: 24px; transition: color 0.2s ease; }
     .theme-strip:hover .arrow { color: var(--accent); }
 
     footer {
@@ -110,12 +113,12 @@
       <div class="cv-item">
         <div class="cv-header">
           <span>National Cheng Kung University (NCKU)</span>
-          <span>Expected Jan. 2026</span>
+          <span>Sep. 2021 – Expected Jan. 2026</span>
         </div>
         <div class="cv-sub">Bachelor of Geomatics</div>
-        <p style="font-size: 14px; color: var(--muted);">
-          Key Coursework: Supply Chain Optimization, Machine Learning, Spatial Information Integration[cite: 848].
-        </p>
+        <div class="coursework">
+          <b>Relevant Coursework:</b> Supply Chain Optimization, Spatial-temporal Social Science, Machine Learning, Robot Implementation, Spatial Information Integration, Thesis.
+        </div>
       </div>
     </section>
 
@@ -124,36 +127,37 @@
       <div class="cv-item">
         <div class="cv-header">
           <span>Spatial Social Science Laboratory, NCKU</span>
-          <span>2024 – Present</span>
+          <span>Oct. 2024 – Present</span>
         </div>
         <div class="cv-sub">Laboratory Assistant</div>
         <ul>
-          <li>Developed a Python-based <b>Simulated Quantum Annealing (SQA)</b> system on the Taiwania 3 HPC platform for large-scale spatial allocation[cite: 855].</li>
-          <li>Applied Genetic Algorithms and NSGA-II/III to evaluate trade-offs between efficiency and equity in public facility planning[cite: 856].</li>
-          <li>Utilized YOLO-based deep learning for automated pedestrian flow analysis and safety assessments[cite: 857].</li>
+          <li>Developed a Python-based <b>Simulated Quantum Annealing (SQA)</b> system on the Taiwania 3 HPC platform to solve large-scale spatial allocation problems.</li>
+          <li>Applied Genetic Algorithms, Tabu Search, and NSGA-II/III to evaluate alternative facility allocation strategies, focusing on the trade-offs between efficiency and spatial equity.</li>
+          <li>Implemented YOLO-based deep learning models for automated dynamic pedestrian flow analysis and safety assessments.</li>
+          <li>Quantified elderly activity hotspots and accessibility using regression analysis, Kriging interpolation, and ANOVA.</li>
         </ul>
       </div>
 
       <div class="cv-item">
         <div class="cv-header">
-          <span>INFORMS Annual Meeting 2025</span>
+          <span>INFORMS Annual Meeting 2025 (Atlanta, GA)</span>
           <span>Oct. 2025</span>
         </div>
-        <div class="cv-sub">Presenter & First Author (Atlanta, GA)</div>
+        <div class="cv-sub">Presenter & First Author</div>
         <ul>
-          <li>Presented research on multi-objective site selection for levee crossings comparing SQA and NSGA-III[cite: 862, 864].</li>
-          <li>Designed a GIS-integrated model addressing construction costs, population coverage, and spatial equity[cite: 865].</li>
+          <li>Presented "Integrated Multi-objective Optimization and Spatial Analysis for the Site Selection of Levee Crossing."</li>
+          <li>Compared SQA and NSGA-III performance in multi-objective facility location models addressing construction costs, population coverage, and spatial equity.</li>
         </ul>
       </div>
     </section>
 
     <section>
-      <h2>Key Projects & Engagements</h2>
+      <h2>Research & Projects</h2>
       <div class="themes">
         <a class="theme-strip" href="research.html">
           <div class="strip-content">
-            <b>Research Project</b>
-            <span>Quantum-Inspired Optimization for Spatial Facility Location</span>
+            <b>Advanced Research Project</b>
+            <span>Simulated Quantum Annealing & Multi-objective Optimization for Spatial Allocation</span>
           </div>
           <div class="arrow">→</div>
         </a>
@@ -161,7 +165,7 @@
         <a class="theme-strip" href="internship.html">
           <div class="strip-content">
             <b>Comprehensive Surveying Practicum</b>
-            <span>End-to-end Geomatics: GNSS, Terrestrial Surveying & Map Production</span>
+            <span>End-to-End Geomatics: GNSS, Terrestrial Surveying & Map Production (Project Cycle: 2 Months)</span>
           </div>
           <div class="arrow">→</div>
         </a>
@@ -169,7 +173,7 @@
         <a class="theme-strip" href="supplychain.html">
           <div class="strip-content">
             <b>Supply Chain Optimization</b>
-            <span>Modeling and Solving Complex Network & Logistics Problems</span>
+            <span>Modeling Logistics and Network Flows for Decision Support</span>
           </div>
           <div class="arrow">→</div>
         </a>
@@ -177,7 +181,7 @@
         <a class="theme-strip" href="workshops.html">
           <div class="strip-content">
             <b>Workshop Instruction</b>
-            <span>Teaching SQA, QUBO Modeling, and HPC Implementation</span>
+            <span>Lecturing on QUBO Modeling, Quantum-inspired Annealing, and HPC Implementation</span>
           </div>
           <div class="arrow">→</div>
         </a>
@@ -185,7 +189,7 @@
     </section>
 
     <footer>
-      © 2025 TSUN-YUAN KU | Built with Spatial Precision
+      © 2025 TSUN-YUAN KU | Engineered with Spatial Intelligence
     </footer>
   </div>
 </body>
